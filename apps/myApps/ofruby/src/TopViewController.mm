@@ -63,18 +63,18 @@
  */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-        NSString* fullFileName = [dataSource objectAtIndex:indexPath.row];
-        NSString* fileName = [[fullFileName lastPathComponent] stringByDeletingPathExtension];
-        NSString* extension = [fullFileName pathExtension];
-        NSString *filePath = [[NSBundle mainBundle] pathForResource:fileName ofType:extension];
+    NSString* fullFileName = [dataSource objectAtIndex:indexPath.row];
+    NSString* fileName = [[fullFileName lastPathComponent] stringByDeletingPathExtension];
+    NSString* extension = [fullFileName pathExtension];
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:fileName ofType:extension];
         
-        char* scriptPath = (char *)[filePath UTF8String];
+    char* scriptPath = (char *)[filePath UTF8String];
         
-        ScriptController* viewController = [[[ScriptController alloc] initWithFrame:[[UIScreen mainScreen] bounds]
-                                                                     app:new ScriptApp(scriptPath)] autorelease];
+    ScriptController* viewController = [[[ScriptController alloc] initWithFrame:[[UIScreen mainScreen] bounds]
+                                                                            app:new ScriptApp(scriptPath)] autorelease];
         
-        [self.navigationController pushViewController:viewController animated:YES];
-        self.navigationController.navigationBar.topItem.title = @"ScriptApp";
+    [self.navigationController pushViewController:viewController animated:YES];
+    self.navigationController.navigationBar.topItem.title = fullFileName;
 }
 
 @end
