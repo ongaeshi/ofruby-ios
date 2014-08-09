@@ -3,7 +3,7 @@
 //--------------------------------------------------------------
 ofApp::ofApp()
 {
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"hello" ofType:@"rb"];
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"line" ofType:@"rb"];
     NSLog(@"filePath = %@", filePath);
     char* scriptPath = (char *)[filePath UTF8String];
 
