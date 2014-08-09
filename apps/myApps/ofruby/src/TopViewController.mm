@@ -1,6 +1,7 @@
 #include "TopViewController.h"
 #include "ScriptController.h"
 #include "ScriptApp.h"
+#include "EditViewController.h"
 
 @interface TopViewController ()
 
@@ -51,10 +52,11 @@
         
     char* scriptPath = (char *)[filePath UTF8String];
     
-    ScriptController* viewController = [[[ScriptController alloc] initWithFrame:[[UIScreen mainScreen] bounds]
-                                                                     scriptName:scriptPath] autorelease];
-
+//    ScriptController* viewController = [[[ScriptController alloc] initWithFrame:[[UIScreen mainScreen] bounds]
+//                                                                     scriptName:scriptPath] autorelease];
     
+    EditViewController* viewController = [[[EditViewController alloc] init] autorelease];
+
     [self.navigationController pushViewController:viewController animated:YES];
     self.navigationController.navigationBar.topItem.title = fullFileName;
 }
