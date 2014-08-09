@@ -26,7 +26,7 @@
 {
     [super viewDidLoad];
     dataSource = [[NSArray alloc]initWithObjects:
-                  @"Snoopy", @"Spike", @"Olaf",@"Marbles", @"Belle", @"Andy", nil];
+                  @"hello.rb", @"Snoopy", @"Spike", @"Olaf",@"Marbles", @"Belle", @"Andy", nil];
 }
 
 /**
@@ -62,11 +62,17 @@
  */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    Class class = NSClassFromString(@"SecondViewController");
-    NSString *text = [[dataSource objectAtIndex:indexPath.row] stringByAppendingString:@"ffff"];
-    id viewController = [[class alloc]initWithTitle:text];
-    if (viewController) {
-        [self.navigationController pushViewController:viewController animated:YES];
+    NSLog(@"indexPath: %d", indexPath.row);
+
+    if (indexPath.row == 0) {
+        NSLog(@"Run %@", [dataSource objectAtIndex:indexPath.row]);
+    } else {
+        Class class = NSClassFromString(@"SecondViewController");
+        NSString *text = [[dataSource objectAtIndex:indexPath.row] stringByAppendingString:@"ffff"];
+        id viewController = [[class alloc]initWithTitle:text];
+        if (viewController) {
+            [self.navigationController pushViewController:viewController animated:YES];
+        }
     }
 }
 
