@@ -1,7 +1,7 @@
 #import <Foundation/Foundation.h>
 #import "TopViewController.h"
 
-@interface SampleAppDelegate : NSObject <UIApplicationDelegate> {
+@interface AppDelegate : NSObject <UIApplicationDelegate> {
     UINavigationController *naviController;
     TopViewController *topController;
 }

@@ -12,7 +12,7 @@
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		525E0DFA1995D05C00C18947 /* hello.rb in Resources */ = {isa = PBXBuildFile; fileRef = 525E0DF81995D05C00C18947 /* hello.rb */; };
 		525E0DFB1995D05C00C18947 /* line.rb in Resources */ = {isa = PBXBuildFile; fileRef = 525E0DF91995D05C00C18947 /* line.rb */; };
-		525E0DFE1995EF0C00C18947 /* SampleAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 525E0DFD1995EF0C00C18947 /* SampleAppDelegate.m */; };
+		525E0DFE1995EF0C00C18947 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 525E0DFD1995EF0C00C18947 /* AppDelegate.m */; };
 		525E0E021995EF7B00C18947 /* TopViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 525E0E011995EF7B00C18947 /* TopViewController.mm */; };
 		525E0E09199614A000C18947 /* ScriptController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 525E0E08199614A000C18947 /* ScriptController.mm */; };
 		525E0E0C1996369E00C18947 /* EditViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 525E0E0B1996369E00C18947 /* EditViewController.mm */; };
@@ -110,8 +110,8 @@
 		32CA4F630368D1EE00C91783 /* ofxiOS_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxiOS_Prefix.pch; sourceTree = "<group>"; };
 		525E0DF81995D05C00C18947 /* hello.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = hello.rb; sourceTree = "<group>"; };
 		525E0DF91995D05C00C18947 /* line.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = line.rb; sourceTree = "<group>"; };
-		525E0DFC1995EF0C00C18947 /* SampleAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleAppDelegate.h; sourceTree = "<group>"; };
-		525E0DFD1995EF0C00C18947 /* SampleAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleAppDelegate.m; sourceTree = "<group>"; };
+		525E0DFC1995EF0C00C18947 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		525E0DFD1995EF0C00C18947 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		525E0E001995EF7B00C18947 /* TopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopViewController.h; sourceTree = "<group>"; };
 		525E0E011995EF7B00C18947 /* TopViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TopViewController.mm; sourceTree = "<group>"; };
 		525E0E07199614A000C18947 /* ScriptController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScriptController.h; sourceTree = "<group>"; };
@@ -505,8 +505,8 @@
 				52C285941995C60B00A6BF47 /* mrubybind */,
 				52C2859A1995C60B00A6BF47 /* rubykokuban */,
 				E4D8936B11527B74007E1F53 /* main.mm */,
-				525E0DFC1995EF0C00C18947 /* SampleAppDelegate.h */,
-				525E0DFD1995EF0C00C18947 /* SampleAppDelegate.m */,
+				525E0DFC1995EF0C00C18947 /* AppDelegate.h */,
+				525E0DFD1995EF0C00C18947 /* AppDelegate.m */,
 				525E0E001995EF7B00C18947 /* TopViewController.h */,
 				525E0E011995EF7B00C18947 /* TopViewController.mm */,
 				525E0E0A1996369E00C18947 /* EditViewController.h */,
@@ -654,7 +654,7 @@
 				52C285DC1995C7AF00A6BF47 /* ScriptApp.mm in Sources */,
 				52C285B81995C60B00A6BF47 /* error.c in Sources */,
 				52C285B31995C60B00A6BF47 /* compar.c in Sources */,
-				525E0DFE1995EF0C00C18947 /* SampleAppDelegate.m in Sources */,
+				525E0DFE1995EF0C00C18947 /* AppDelegate.m in Sources */,
 				52C285AF1995C60B00A6BF47 /* array.c in Sources */,
 				52C285CF1995C60B00A6BF47 /* mrubybind.inc in Sources */,
 				52C285C21995C60B00A6BF47 /* numeric.c in Sources */,
