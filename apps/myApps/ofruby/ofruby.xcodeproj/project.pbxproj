@@ -10,6 +10,8 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
+		525E0DFA1995D05C00C18947 /* hello.rb in Resources */ = {isa = PBXBuildFile; fileRef = 525E0DF81995D05C00C18947 /* hello.rb */; };
+		525E0DFB1995D05C00C18947 /* line.rb in Resources */ = {isa = PBXBuildFile; fileRef = 525E0DF91995D05C00C18947 /* line.rb */; };
 		52C285AC1995C60B00A6BF47 /* mrblib.c in Sources */ = {isa = PBXBuildFile; fileRef = 52C285581995C60B00A6BF47 /* mrblib.c */; };
 		52C285AD1995C60B00A6BF47 /* y.tab.c in Sources */ = {isa = PBXBuildFile; fileRef = 52C285591995C60B00A6BF47 /* y.tab.c */; };
 		52C285AE1995C60B00A6BF47 /* lex.def in Resources */ = {isa = PBXBuildFile; fileRef = 52C2855B1995C60B00A6BF47 /* lex.def */; };
@@ -56,6 +58,7 @@
 		52C285D71995C60B00A6BF47 /* Input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 52C285A61995C60B00A6BF47 /* Input.cpp */; };
 		52C285D81995C60B00A6BF47 /* Mouse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 52C285A81995C60B00A6BF47 /* Mouse.cpp */; };
 		52C285D91995C60B00A6BF47 /* ScriptEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 52C285AA1995C60B00A6BF47 /* ScriptEngine.cpp */; };
+		52C285DC1995C7AF00A6BF47 /* ScriptApp.mm in Sources */ = {isa = PBXBuildFile; fileRef = 52C285DB1995C7AF00A6BF47 /* ScriptApp.mm */; };
 		5326AEA810A23A0500278DE6 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5326AEA710A23A0500278DE6 /* CoreLocation.framework */; };
 		53F323EB10A20EDB00E0DAE4 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53F323EA10A20EDB00E0DAE4 /* OpenAL.framework */; };
 		678E130817951530005B6D19 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 678E130717951530005B6D19 /* Icon@2x.png */; };
@@ -101,6 +104,8 @@
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		32CA4F630368D1EE00C91783 /* ofxiOS_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxiOS_Prefix.pch; sourceTree = "<group>"; };
+		525E0DF81995D05C00C18947 /* hello.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = hello.rb; sourceTree = "<group>"; };
+		525E0DF91995D05C00C18947 /* line.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = line.rb; sourceTree = "<group>"; };
 		52C285581995C60B00A6BF47 /* mrblib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mrblib.c; sourceTree = "<group>"; };
 		52C285591995C60B00A6BF47 /* y.tab.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = y.tab.c; sourceTree = "<group>"; };
 		52C2855B1995C60B00A6BF47 /* lex.def */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = lex.def; sourceTree = "<group>"; };
@@ -179,6 +184,8 @@
 		52C285A91995C60B00A6BF47 /* Mouse.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Mouse.hpp; sourceTree = "<group>"; };
 		52C285AA1995C60B00A6BF47 /* ScriptEngine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ScriptEngine.cpp; sourceTree = "<group>"; };
 		52C285AB1995C60B00A6BF47 /* ScriptEngine.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ScriptEngine.hpp; sourceTree = "<group>"; };
+		52C285DB1995C7AF00A6BF47 /* ScriptApp.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ScriptApp.mm; sourceTree = "<group>"; };
+		52C285DD1995C7FD00A6BF47 /* ScriptApp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScriptApp.h; sourceTree = "<group>"; };
 		5326AEA710A23A0500278DE6 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		53F323EA10A20EDB00E0DAE4 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		678E130717951530005B6D19 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "bin/data/Icon@2x.png"; sourceTree = "<group>"; };
@@ -239,12 +246,13 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				E4D8936A11527B74007E1F53 /* src */,
+				525E0DF61995D05C00C18947 /* resources */,
 				678E130917951536005B6D19 /* Icon.png */,
 				678E130717951530005B6D19 /* Icon@2x.png */,
 				678E130B1795153C005B6D19 /* Default.png */,
 				678E130D17951540005B6D19 /* Default@2x.png */,
 				678E130F17951549005B6D19 /* Default-568h@2x~iphone.png */,
-				E4D8936A11527B74007E1F53 /* src */,
 				BB24E1F710DAA51900E9C588 /* openFrameworks */,
 				BB16F26B0F2B646B00518274 /* addons */,
 				BB16E9930F2B1E5900518274 /* libs */,
@@ -271,6 +279,23 @@
 				5326AEA710A23A0500278DE6 /* CoreLocation.framework */,
 			);
 			name = "core frameworks";
+			sourceTree = "<group>";
+		};
+		525E0DF61995D05C00C18947 /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				525E0DF71995D05C00C18947 /* scripts */,
+			);
+			path = resources;
+			sourceTree = "<group>";
+		};
+		525E0DF71995D05C00C18947 /* scripts */ = {
+			isa = PBXGroup;
+			children = (
+				525E0DF81995D05C00C18947 /* hello.rb */,
+				525E0DF91995D05C00C18947 /* line.rb */,
+			);
+			path = scripts;
 			sourceTree = "<group>";
 		};
 		52C285561995C60B00A6BF47 /* mruby */ = {
@@ -458,6 +483,8 @@
 		E4D8936A11527B74007E1F53 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				52C285DD1995C7FD00A6BF47 /* ScriptApp.h */,
+				52C285DB1995C7AF00A6BF47 /* ScriptApp.mm */,
 				52C285561995C60B00A6BF47 /* mruby */,
 				52C285941995C60B00A6BF47 /* mrubybind */,
 				52C2859A1995C60B00A6BF47 /* rubykokuban */,
@@ -538,8 +565,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				525E0DFA1995D05C00C18947 /* hello.rb in Resources */,
 				E41D3ED713B38FB500A75A5D /* Project.xcconfig in Resources */,
 				E41D3EE613B3906D00A75A5D /* CoreOF.xcconfig in Resources */,
+				525E0DFB1995D05C00C18947 /* line.rb in Resources */,
 				678E130817951530005B6D19 /* Icon@2x.png in Resources */,
 				52C285BA1995C60B00A6BF47 /* .gitkeep in Resources */,
 				52C285CE1995C60B00A6BF47 /* mrubybind.dat in Resources */,
@@ -598,6 +627,7 @@
 				52C285CC1995C60B00A6BF47 /* vm.c in Sources */,
 				52C285BE1995C60B00A6BF47 /* kernel.c in Sources */,
 				52C285D61995C60B00A6BF47 /* BindMath.cpp in Sources */,
+				52C285DC1995C7AF00A6BF47 /* ScriptApp.mm in Sources */,
 				E4D8936F11527B74007E1F53 /* ofApp.mm in Sources */,
 				52C285B81995C60B00A6BF47 /* error.c in Sources */,
 				52C285B31995C60B00A6BF47 /* compar.c in Sources */,

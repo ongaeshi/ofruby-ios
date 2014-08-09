@@ -1,18 +1,29 @@
 #include "ofApp.h"
 
 //--------------------------------------------------------------
-void ofApp::setup(){	
+ofApp::ofApp()
+{
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"hello" ofType:@"rb"];
+    NSLog(@"filePath = %@", filePath);
+    char* scriptPath = (char *)[filePath UTF8String];
 
+    mScriptApp = new ScriptApp(scriptPath);
+}
+
+
+//--------------------------------------------------------------
+void ofApp::setup(){
+    mScriptApp->setup();
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-
+    mScriptApp->update();
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-	
+	mScriptApp->draw();
 }
 
 //--------------------------------------------------------------

@@ -3,10 +3,13 @@
 #include "ofMain.h"
 #include "ofxiOS.h"
 #include "ofxiOSExtras.h"
+#include "ScriptApp.h"
 
 class ofApp : public ofxiOSApp {
 	
     public:
+        ofApp();
+    
         void setup();
         void update();
         void draw();
@@ -22,6 +25,9 @@ class ofApp : public ofxiOSApp {
         void gotFocus();
         void gotMemoryWarning();
         void deviceOrientationChanged(int newOrientation);
+    
+private:
+    ScriptApp* mScriptApp;
 
 };
 
