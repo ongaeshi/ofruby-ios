@@ -13,8 +13,9 @@
 		525E0DFA1995D05C00C18947 /* hello.rb in Resources */ = {isa = PBXBuildFile; fileRef = 525E0DF81995D05C00C18947 /* hello.rb */; };
 		525E0DFB1995D05C00C18947 /* line.rb in Resources */ = {isa = PBXBuildFile; fileRef = 525E0DF91995D05C00C18947 /* line.rb */; };
 		525E0DFE1995EF0C00C18947 /* SampleAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 525E0DFD1995EF0C00C18947 /* SampleAppDelegate.m */; };
-		525E0E021995EF7B00C18947 /* TopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 525E0E011995EF7B00C18947 /* TopViewController.m */; };
+		525E0E021995EF7B00C18947 /* TopViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 525E0E011995EF7B00C18947 /* TopViewController.mm */; };
 		525E0E051995F00600C18947 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 525E0E041995F00600C18947 /* SecondViewController.m */; };
+		525E0E09199614A000C18947 /* ScriptController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 525E0E08199614A000C18947 /* ScriptController.mm */; };
 		52C285AC1995C60B00A6BF47 /* mrblib.c in Sources */ = {isa = PBXBuildFile; fileRef = 52C285581995C60B00A6BF47 /* mrblib.c */; };
 		52C285AD1995C60B00A6BF47 /* y.tab.c in Sources */ = {isa = PBXBuildFile; fileRef = 52C285591995C60B00A6BF47 /* y.tab.c */; };
 		52C285AE1995C60B00A6BF47 /* lex.def in Resources */ = {isa = PBXBuildFile; fileRef = 52C2855B1995C60B00A6BF47 /* lex.def */; };
@@ -112,9 +113,11 @@
 		525E0DFC1995EF0C00C18947 /* SampleAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleAppDelegate.h; sourceTree = "<group>"; };
 		525E0DFD1995EF0C00C18947 /* SampleAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleAppDelegate.m; sourceTree = "<group>"; };
 		525E0E001995EF7B00C18947 /* TopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopViewController.h; sourceTree = "<group>"; };
-		525E0E011995EF7B00C18947 /* TopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopViewController.m; sourceTree = "<group>"; };
+		525E0E011995EF7B00C18947 /* TopViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TopViewController.mm; sourceTree = "<group>"; };
 		525E0E031995F00600C18947 /* SecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
 		525E0E041995F00600C18947 /* SecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
+		525E0E07199614A000C18947 /* ScriptController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScriptController.h; sourceTree = "<group>"; };
+		525E0E08199614A000C18947 /* ScriptController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ScriptController.mm; sourceTree = "<group>"; };
 		52C285581995C60B00A6BF47 /* mrblib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mrblib.c; sourceTree = "<group>"; };
 		52C285591995C60B00A6BF47 /* y.tab.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = y.tab.c; sourceTree = "<group>"; };
 		52C2855B1995C60B00A6BF47 /* lex.def */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = lex.def; sourceTree = "<group>"; };
@@ -492,6 +495,8 @@
 		E4D8936A11527B74007E1F53 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				525E0E07199614A000C18947 /* ScriptController.h */,
+				525E0E08199614A000C18947 /* ScriptController.mm */,
 				52C285DD1995C7FD00A6BF47 /* ScriptApp.h */,
 				52C285DB1995C7AF00A6BF47 /* ScriptApp.mm */,
 				52C285561995C60B00A6BF47 /* mruby */,
@@ -503,7 +508,7 @@
 				525E0DFC1995EF0C00C18947 /* SampleAppDelegate.h */,
 				525E0DFD1995EF0C00C18947 /* SampleAppDelegate.m */,
 				525E0E001995EF7B00C18947 /* TopViewController.h */,
-				525E0E011995EF7B00C18947 /* TopViewController.m */,
+				525E0E011995EF7B00C18947 /* TopViewController.mm */,
 				525E0E031995F00600C18947 /* SecondViewController.h */,
 				525E0E041995F00600C18947 /* SecondViewController.m */,
 			);
@@ -630,7 +635,7 @@
 				E4D8936E11527B74007E1F53 /* main.mm in Sources */,
 				52C285C81995C60B00A6BF47 /* state.c in Sources */,
 				52C285B41995C60B00A6BF47 /* crc.c in Sources */,
-				525E0E021995EF7B00C18947 /* TopViewController.m in Sources */,
+				525E0E021995EF7B00C18947 /* TopViewController.mm in Sources */,
 				52C285C91995C60B00A6BF47 /* string.c in Sources */,
 				52C285B61995C60B00A6BF47 /* dump.c in Sources */,
 				52C285CD1995C60B00A6BF47 /* mrubybind.cc in Sources */,
@@ -643,6 +648,7 @@
 				52C285CC1995C60B00A6BF47 /* vm.c in Sources */,
 				52C285BE1995C60B00A6BF47 /* kernel.c in Sources */,
 				52C285D61995C60B00A6BF47 /* BindMath.cpp in Sources */,
+				525E0E09199614A000C18947 /* ScriptController.mm in Sources */,
 				52C285DC1995C7AF00A6BF47 /* ScriptApp.mm in Sources */,
 				E4D8936F11527B74007E1F53 /* ofApp.mm in Sources */,
 				52C285B81995C60B00A6BF47 /* error.c in Sources */,
