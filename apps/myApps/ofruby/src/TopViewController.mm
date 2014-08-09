@@ -1,6 +1,4 @@
-#import <Foundation/Foundation.h>
 #include "TopViewController.h"
-#include "SecondViewController.h"
 #include "ScriptController.h"
 #include "ScriptApp.h"
 
@@ -29,8 +27,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    dataSource = [[NSArray alloc]initWithObjects:
-                  @"hello.rb", @"line.rb", @"Snoopy", @"Spike", @"Olaf",@"Marbles", @"Belle", @"Andy", nil];
+    dataSource = [[NSArray alloc]initWithObjects: @"hello.rb", @"line.rb", nil];
 }
 
 /**
@@ -66,16 +63,11 @@
  */
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // NSLog(@"indexPath: %d", indexPath.row);
-
-    if (indexPath.row == 0 || indexPath.row == 1) {
-//        NSLog(@"Run %@", [dataSource objectAtIndex:indexPath.row]);
         NSString* fullFileName = [dataSource objectAtIndex:indexPath.row];
         NSString* fileName = [[fullFileName lastPathComponent] stringByDeletingPathExtension];
         NSString* extension = [fullFileName pathExtension];
         NSString *filePath = [[NSBundle mainBundle] pathForResource:fileName ofType:extension];
         
-//        NSLog(@"filePath = %@", filePath);
         char* scriptPath = (char *)[filePath UTF8String];
         
         ScriptController* viewController = [[[ScriptController alloc] initWithFrame:[[UIScreen mainScreen] bounds]
@@ -83,15 +75,6 @@
         
         [self.navigationController pushViewController:viewController animated:YES];
         self.navigationController.navigationBar.topItem.title = @"ScriptApp";
-        
-        
-    } else {
-        NSString *text = [[dataSource objectAtIndex:indexPath.row] stringByAppendingString:@" clicked"];
-        SecondViewController* viewController = [[SecondViewController alloc]initWithTitle:text];
-        if (viewController) {
-            [self.navigationController pushViewController:viewController animated:YES];
-        }
-    }
 }
 
 @end
