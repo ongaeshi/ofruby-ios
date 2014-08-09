@@ -1,5 +1,5 @@
 #include "ofMain.h"
-#include "ofApp.h"
+#include "ofAppiOSWindow.h"
 
 int main(int argc, char *argv[]) {
     ofAppiOSWindow *window = new ofAppiOSWindow();
