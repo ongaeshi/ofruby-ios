@@ -14,7 +14,6 @@
 		525E0DFB1995D05C00C18947 /* line.rb in Resources */ = {isa = PBXBuildFile; fileRef = 525E0DF91995D05C00C18947 /* line.rb */; };
 		525E0DFE1995EF0C00C18947 /* SampleAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 525E0DFD1995EF0C00C18947 /* SampleAppDelegate.m */; };
 		525E0E021995EF7B00C18947 /* TopViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 525E0E011995EF7B00C18947 /* TopViewController.mm */; };
-		525E0E051995F00600C18947 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 525E0E041995F00600C18947 /* SecondViewController.m */; };
 		525E0E09199614A000C18947 /* ScriptController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 525E0E08199614A000C18947 /* ScriptController.mm */; };
 		525E0E0C1996369E00C18947 /* EditViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 525E0E0B1996369E00C18947 /* EditViewController.mm */; };
 		525E0E0F199660AE00C18947 /* FCFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 525E0E0E199660AE00C18947 /* FCFileManager.m */; };
@@ -116,8 +115,6 @@
 		525E0DFD1995EF0C00C18947 /* SampleAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SampleAppDelegate.m; sourceTree = "<group>"; };
 		525E0E001995EF7B00C18947 /* TopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopViewController.h; sourceTree = "<group>"; };
 		525E0E011995EF7B00C18947 /* TopViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TopViewController.mm; sourceTree = "<group>"; };
-		525E0E031995F00600C18947 /* SecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
-		525E0E041995F00600C18947 /* SecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
 		525E0E07199614A000C18947 /* ScriptController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScriptController.h; sourceTree = "<group>"; };
 		525E0E08199614A000C18947 /* ScriptController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ScriptController.mm; sourceTree = "<group>"; };
 		525E0E0A1996369E00C18947 /* EditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditViewController.h; sourceTree = "<group>"; };
@@ -517,8 +514,6 @@
 				525E0DFD1995EF0C00C18947 /* SampleAppDelegate.m */,
 				525E0E001995EF7B00C18947 /* TopViewController.h */,
 				525E0E011995EF7B00C18947 /* TopViewController.mm */,
-				525E0E031995F00600C18947 /* SecondViewController.h */,
-				525E0E041995F00600C18947 /* SecondViewController.m */,
 				525E0E0A1996369E00C18947 /* EditViewController.h */,
 				525E0E0B1996369E00C18947 /* EditViewController.mm */,
 			);
@@ -674,7 +669,6 @@
 				52C285C01995C60B00A6BF47 /* load.c in Sources */,
 				52C285D11995C60B00A6BF47 /* BindApplication.cpp in Sources */,
 				52C285BC1995C60B00A6BF47 /* hash.c in Sources */,
-				525E0E051995F00600C18947 /* SecondViewController.m in Sources */,
 				52C285D71995C60B00A6BF47 /* Input.cpp in Sources */,
 				52C285D81995C60B00A6BF47 /* Mouse.cpp in Sources */,
 				52C285C61995C60B00A6BF47 /* proc.c in Sources */,
