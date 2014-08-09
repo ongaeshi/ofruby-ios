@@ -8,11 +8,19 @@
 
 #import "EditViewController.h"
 
+#include "FCFileManager.h"
+
 @interface EditViewController ()
 
 @end
 
 @implementation EditViewController
+
+- (id) initWithFileName:(NSString*)fileName
+{
+    self = [super init];
+    mFileName = fileName;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -35,7 +43,7 @@
     //textView.font = [UIFont fontWithName:@"Helvetica" size:14];
     textView.backgroundColor = [UIColor whiteColor];
 
-    textView.text = @"def draw\n  rect 150, 0, 20, 480\nend\n";
+    textView.text = [FCFileManager readFileAtPath:mFileName];
 
     [self.view addSubview:textView];
 }

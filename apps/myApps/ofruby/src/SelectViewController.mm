@@ -1,8 +1,9 @@
 #include "SelectViewController.h"
-#include "ScriptController.h"
-#include "ScriptApp.h"
+
 #include "EditViewController.h"
 #include "FCFileManager.h"
+#include "ScriptApp.h"
+#include "ScriptController.h"
 
 @interface SelectViewController ()
 
@@ -54,11 +55,11 @@
         [FCFileManager createFileAtPath:path withContent:@"def draw\n  rect 150, 0, 40, 480\nend\n"];
     }
     
-    // EditViewController* viewController = [[[EditViewController alloc] init] autorelease];
+    EditViewController* viewController = [[[EditViewController alloc] initWithFileName:path] autorelease];
 
-    char* scriptPath = (char *)[path UTF8String];
-    ScriptController* viewController = [[[ScriptController alloc] initWithFrame:[[UIScreen mainScreen] bounds]
-                                                                    scriptName:scriptPath] autorelease];
+    // char* scriptPath = (char *)[path UTF8String];
+    // ScriptController* viewController = [[[ScriptController alloc] initWithFrame:[[UIScreen mainScreen] bounds]
+    //                                                                 scriptName:scriptPath] autorelease];
 
     [self.navigationController pushViewController:viewController animated:YES];
     self.navigationController.navigationBar.topItem.title = tableCellName;

@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface EditViewController : UIViewController
+@interface EditViewController : UIViewController {
+    NSString *mFileName;
+}
+
+- (id) initWithFileName:(NSString*)fileName;
 
 @end
