@@ -6,5 +6,5 @@
 #import "ofxiOSViewController.h"
 
 @interface ScriptController : ofxiOSViewController
-
+- (id) initWithFrame:(CGRect)frame scriptName:(char*)scriptPath;
 @end

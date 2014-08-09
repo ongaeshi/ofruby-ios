@@ -4,15 +4,14 @@
 //
 
 #import "ScriptController.h"
+#import "ScriptApp.h"
 #import "ofxiOSExtras.h"
 
 @implementation ScriptController
 
-- (id) initWithFrame:(CGRect)frame app:(ofxiOSApp *)app {
-    
+- (id) initWithFrame:(CGRect)frame scriptName:(char*)scriptPath {
     ofxiOSGetOFWindow()->setOrientation( OF_ORIENTATION_DEFAULT );   //-- default portait orientation.
-    
-    return self = [super initWithFrame:frame app:app];
+    return self = [super initWithFrame:frame app:new ScriptApp(scriptPath)];
 }
 
 - (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
