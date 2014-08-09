@@ -1,9 +1,9 @@
 #import <Foundation/Foundation.h>
-#import "TopViewController.h"
+#import "SelectViewController.h"
 
 @interface AppDelegate : NSObject <UIApplicationDelegate> {
     UINavigationController *naviController;
-    TopViewController *topController;
+    SelectViewController *rootController;
 }
 
 @property (nonatomic, retain) UIWindow *window;

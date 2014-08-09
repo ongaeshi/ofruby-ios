@@ -8,9 +8,9 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen]bounds]];
 
-    topController = [[TopViewController alloc]init];
+    rootController = [[SelectViewController alloc]init];
     naviController = [[UINavigationController alloc]
-                      initWithRootViewController:topController];
+                      initWithRootViewController:rootController];
 
     [self.window addSubview:naviController.view];
     [self.window makeKeyAndVisible];
