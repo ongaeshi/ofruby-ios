@@ -61,10 +61,19 @@
 
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
+    // Shrink TextView size because appear the software keyboard
+    static const CGFloat kKeyboardHeight = 216.0; //TODO: To the constant
+    CGRect frame = mTextView.frame;
+    frame.size.height = self.view.bounds.size.height - kKeyboardHeight;
+    mTextView.frame = frame;
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
+    // Restore TextView size
+    mTextView.frame = self.view.bounds;
+
+    // Save file
     [FCFileManager writeFileAtPath:mFileName content:textView.text];
 }
 
