@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface EditViewController : UIViewController {
+@private
     NSString *mFileName;
 }
 
