@@ -55,11 +55,11 @@
         [FCFileManager createFileAtPath:path withContent:@"def draw\n  rect 150, 0, 40, 480\nend\n"];
     }
     
-    EditViewController* viewController = [[[EditViewController alloc] initWithFileName:path] autorelease];
+    // EditViewController* viewController = [[EditViewController alloc] initWithFileName:path];
 
-    // char* scriptPath = (char *)[path UTF8String];
-    // ScriptController* viewController = [[[ScriptController alloc] initWithFrame:[[UIScreen mainScreen] bounds]
-    //                                                                 scriptName:scriptPath] autorelease];
+    char* scriptPath = (char *)[path UTF8String];
+    ScriptController* viewController = [[ScriptController alloc] initWithFrame:[[UIScreen mainScreen] bounds]
+                                                                    scriptName:scriptPath];
 
     [self.navigationController pushViewController:viewController animated:YES];
     self.navigationController.navigationBar.topItem.title = tableCellName;
