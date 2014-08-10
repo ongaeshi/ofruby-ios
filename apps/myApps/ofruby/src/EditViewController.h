@@ -12,6 +12,7 @@
     NSString *mFileName;
 }
 
-- (id) initWithFileName:(NSString*)fileName;
+- (id) initWithFileName:(NSString*)aFileName;
 
 @end
+;

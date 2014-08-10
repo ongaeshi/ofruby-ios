@@ -16,10 +16,11 @@
 
 @implementation EditViewController
 
-- (id) initWithFileName:(NSString*)fileName
+- (id) initWithFileName:(NSString*)aFileName
 {
     self = [super init];
-    mFileName = fileName;
+    mFileName = aFileName;
+    return self;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
