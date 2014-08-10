@@ -9,6 +9,7 @@
 #import "EditViewController.h"
 
 #import "FCFileManager.h"
+#import "ScriptController.h"
 
 @implementation EditViewController
 
@@ -23,6 +24,13 @@
 {
     [super viewDidLoad];
 
+    // NavButton
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Run"
+                                                                              style:UIBarButtonSystemItemDone
+                                                                             target:self
+                                                                             action:@selector(doneDidPush)];
+
+    // TextView
     CGRect rect = self.view.bounds;
     mTextView = [[UITextView alloc]initWithFrame:rect];
 
@@ -40,7 +48,14 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [mTextView becomeFirstResponder];
+    // [mTextView becomeFirstResponder];
+}
+
+- (void)doneDidPush {
+    char* scriptPath = (char *)[mFileName UTF8String];
+    ScriptController* viewController = [[ScriptController alloc] initWithFrame:[[UIScreen mainScreen] bounds]
+                                                                    scriptName:scriptPath];
+    [self.navigationController pushViewController:viewController animated:YES];
 }
 
 - (void)textViewDidBeginEditing:(UITextView *)textView
