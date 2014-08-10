@@ -24,17 +24,23 @@
     [super viewDidLoad];
 
     CGRect rect = self.view.bounds;
-    UITextView *textView = [[UITextView alloc]initWithFrame:rect];
+    mTextView = [[UITextView alloc]initWithFrame:rect];
 
-    textView.editable = YES;
-    textView.textAlignment = UITextAlignmentLeft;
+    mTextView.editable = YES;
+    mTextView.textAlignment = UITextAlignmentLeft;
     //textView.font = [UIFont fontWithName:@"Helvetica" size:14];
-    textView.backgroundColor = [UIColor whiteColor];
-    textView.delegate = self;
+    mTextView.backgroundColor = [UIColor whiteColor];
+    mTextView.delegate = self;
 
-    textView.text = [FCFileManager readFileAtPath:mFileName];
+    mTextView.text = [FCFileManager readFileAtPath:mFileName];
 
-    [self.view addSubview:textView];
+    [self.view addSubview:mTextView];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [mTextView becomeFirstResponder];
 }
 
 - (void)textViewDidBeginEditing:(UITextView *)textView

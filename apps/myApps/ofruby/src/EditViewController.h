@@ -10,7 +10,8 @@
 
 @interface EditViewController : UIViewController<UITextViewDelegate> {
 @private
-    NSString *mFileName;
+    NSString* mFileName;
+    UITextView* mTextView;
 }
 
 - (id) initWithFileName:(NSString*)aFileName;
