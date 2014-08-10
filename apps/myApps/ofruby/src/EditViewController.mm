@@ -30,10 +30,20 @@
     textView.textAlignment = UITextAlignmentLeft;
     //textView.font = [UIFont fontWithName:@"Helvetica" size:14];
     textView.backgroundColor = [UIColor whiteColor];
+    textView.delegate = self;
 
     textView.text = [FCFileManager readFileAtPath:mFileName];
 
     [self.view addSubview:textView];
+}
+
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView
+{
+    [FCFileManager writeFileAtPath:mFileName content:textView.text];
 }
 
 - (void)didReceiveMemoryWarning

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface EditViewController : UIViewController {
+@interface EditViewController : UIViewController<UITextViewDelegate> {
 @private
     NSString *mFileName;
 }
