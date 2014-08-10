@@ -37,7 +37,8 @@
     mTextView.editable = YES;
     mTextView.textAlignment = UITextAlignmentLeft;
     //textView.font = [UIFont fontWithName:@"Helvetica" size:14];
-    mTextView.backgroundColor = [UIColor whiteColor];
+    //mTextView.backgroundColor = [UIColor whiteColor];
+    mTextView.autocapitalizationType = UITextAutocapitalizationTypeNone;
     mTextView.delegate = self;
 
     mTextView.text = [FCFileManager readFileAtPath:mFileName];
