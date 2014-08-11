@@ -15,7 +15,7 @@
 {
     self = [super init];
     if (self) {
-        self.title = @"ofruby";
+        self.title = @"Home";
     }
     return self;
 }
@@ -56,13 +56,7 @@
     }
     
     EditViewController* viewController = [[EditViewController alloc] initWithFileName:path];
-
-    // char* scriptPath = (char *)[path UTF8String];
-    // ScriptController* viewController = [[ScriptController alloc] initWithFrame:[[UIScreen mainScreen] bounds]
-    //                                                                 scriptName:scriptPath];
-
     [self.navigationController pushViewController:viewController animated:YES];
-    self.navigationController.navigationBar.topItem.title = tableCellName;
 }
 
 @end

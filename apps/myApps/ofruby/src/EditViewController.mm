@@ -52,7 +52,8 @@
     // [mTextView becomeFirstResponder];
 }
 
-- (void)doneDidPush {
+- (void)doneDidPush
+{
     char* scriptPath = (char *)[mFileName UTF8String];
     ScriptController* viewController = [[ScriptController alloc] initWithFrame:[[UIScreen mainScreen] bounds]
                                                                     scriptName:scriptPath];
