@@ -27,10 +27,15 @@
     [super viewDidLoad];
 
     // NavButton
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Run"
-                                                                              style:UIBarButtonSystemItemDone
-                                                                             target:self
-                                                                             action:@selector(doneDidPush)];
+    UIBarButtonItem* runButton = [[UIBarButtonItem alloc] initWithTitle:@"Run"
+                                                                  style:UIBarButtonSystemItemDone
+                                                                 target:self
+                                                                 action:@selector(tapRunButton)];
+    UIBarButtonItem* helpButton = [[UIBarButtonItem alloc] initWithTitle:@"[?]"
+                                                                  style:UIBarButtonSystemItemDone
+                                                                 target:self
+                                                                 action:@selector(tapHelpButton)];
+    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:runButton, helpButton, nil];
 
     // TextView
     CGRect rect = self.view.bounds;
@@ -65,12 +70,17 @@
     // [mTextView becomeFirstResponder];
 }
 
-- (void)doneDidPush
+- (void)tapRunButton
 {
     char* scriptPath = (char *)[mFileName UTF8String];
     ScriptController* viewController = [[ScriptController alloc] initWithFrame:[[UIScreen mainScreen] bounds]
                                                                     scriptName:scriptPath];
     [self.navigationController pushViewController:viewController animated:YES];
+}
+
+- (void)tapHelpButton
+{
+    NSLog(@"Go to help");
 }
 
 - (void)textViewDidBeginEditing:(UITextView *)textView
