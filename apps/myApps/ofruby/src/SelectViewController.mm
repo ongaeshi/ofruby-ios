@@ -36,7 +36,12 @@
 
 - (void)tapAddButton
 {
-    NSLog(@"Add");
+    UIAlertView* alert = [[UIAlertView alloc] init];
+    alert.title = @"New File";
+    //alert.message = @"Enter file name.";
+    [alert addButtonWithTitle:@"No"];
+    [alert addButtonWithTitle:@"Yes"];
+    [alert show];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
