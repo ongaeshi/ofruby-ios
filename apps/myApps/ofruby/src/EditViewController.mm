@@ -16,7 +16,10 @@
 - (id) initWithFileName:(NSString*)aFileName
 {
     self = [super init];
-    mFileName = aFileName;
+    if (self) {
+        mFileName = aFileName;
+        self.title = [mFileName lastPathComponent];
+    }
     return self;
 }
 
