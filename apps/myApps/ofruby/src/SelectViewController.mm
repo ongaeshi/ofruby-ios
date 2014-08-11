@@ -95,7 +95,18 @@
 
     // Create a file if not exists
     if (![FCFileManager existsItemAtPath:path]) {
-        [FCFileManager createFileAtPath:path withContent:@"def setup\nend\n\ndef update\nend\n\ndef draw\n  rect 160, 240, 80, 40\nend\n"];
+        [FCFileManager createFileAtPath:path
+                            withContent:@"def setup\n"
+                                         "end\n"
+                                         "\n"
+                                         "def update\n"
+                                         "end\n"
+                                         "\n"
+                                         "def draw\n"
+                                         "  # set_color 204, 52, 45\n"
+                                         "  rect 120, 220, 80, 40\n"
+                                         "end\n"
+            ];
     }
     
     EditViewController* viewController = [[EditViewController alloc] initWithFileName:path];
