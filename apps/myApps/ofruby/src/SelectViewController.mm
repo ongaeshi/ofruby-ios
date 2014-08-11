@@ -56,6 +56,9 @@
     if (buttonIndex != alertView.cancelButtonIndex) {
         NSString* text = [[alertView textFieldAtIndex:0] text];
 
+        // Remove a directory path and Add the ".rb" extension.
+        text = [[[text lastPathComponent] stringByDeletingPathExtension] stringByAppendingString:@".rb"];
+
         // Insert new file
         [mDataSource insertObject:text atIndex:0];
         NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
