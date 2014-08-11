@@ -59,12 +59,47 @@
         // Remove a directory path and Add the ".rb" extension.
         text = [[[text lastPathComponent] stringByDeletingPathExtension] stringByAppendingString:@".rb"];
 
-        // Insert new file
+        //  File name is illegal
+        if ([text isEqualToString:@".rb"]) {
+            UIAlertView* alert = [[UIAlertView alloc] init];
+            alert.title = @"Invalid file name";
+            [alert addButtonWithTitle:@"OK"];
+            [alert show];
+            return;
+        }
+
+        // Create path
+        NSString* path = [FCFileManager pathForDocumentsDirectoryWithPath:text];
+
+        // Alert if file already exists
+        if ([FCFileManager existsItemAtPath:path]) {
+            UIAlertView* alert = [[UIAlertView alloc] init];
+            alert.title = @"Already exists";
+            [alert addButtonWithTitle:@"OK"];
+            [alert show];
+            return;
+        }
+
+        // Create a new file
+        [FCFileManager createFileAtPath:path
+                            withContent:@"def setup\n"
+                                         "end\n"
+                                         "\n"
+                                         "def update\n"
+                                         "end\n"
+                                         "\n"
+                                         "def draw\n"
+                                         "  # set_color 204, 52, 45\n"
+                                         "  rect 120, 220, 80, 40\n"
+                                         "end\n"
+            ];
+
+        // Insert dataSource
         [mDataSource insertObject:text atIndex:0];
         NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
         [defaults setObject:mDataSource forKey:@"SelectViewControllerDataSource"];
 
-        // Update table view
+        // Update the table view
         NSUInteger newIndex[] = {0, 0}; // section, row
         NSIndexPath* newPath = [[NSIndexPath alloc] initWithIndexes:newIndex length:2];
         [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newPath]
@@ -81,13 +116,13 @@
 {
     NSString *cellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    
+
     if (!cell) {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     }
-    
+
     cell.textLabel.text = [mDataSource objectAtIndex:indexPath.row];
-    
+
     return cell;
 }
 
@@ -95,23 +130,6 @@
 {
     NSString* tableCellName = [mDataSource objectAtIndex:indexPath.row];
     NSString* path = [FCFileManager pathForDocumentsDirectoryWithPath:tableCellName];
-
-    // Create a file if not exists
-    if (![FCFileManager existsItemAtPath:path]) {
-        [FCFileManager createFileAtPath:path
-                            withContent:@"def setup\n"
-                                         "end\n"
-                                         "\n"
-                                         "def update\n"
-                                         "end\n"
-                                         "\n"
-                                         "def draw\n"
-                                         "  # set_color 204, 52, 45\n"
-                                         "  rect 120, 220, 80, 40\n"
-                                         "end\n"
-            ];
-    }
-    
     EditViewController* viewController = [[EditViewController alloc] initWithFileName:path];
     [self.navigationController pushViewController:viewController animated:YES];
 }
