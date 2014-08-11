@@ -39,9 +39,20 @@
     UIAlertView* alert = [[UIAlertView alloc] init];
     alert.title = @"New File";
     //alert.message = @"Enter file name.";
+    alert.delegate = self;
     [alert addButtonWithTitle:@"No"];
     [alert addButtonWithTitle:@"Yes"];
+    [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
+    alert.cancelButtonIndex = 0;
     [alert show];
+}
+
+- (void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex != alertView.cancelButtonIndex) {
+        NSString* text = [[alertView textFieldAtIndex:0] text];
+        NSLog(@"Click: %@", text);
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
