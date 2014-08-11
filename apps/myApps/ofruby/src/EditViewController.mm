@@ -18,7 +18,6 @@
     self = [super init];
     if (self) {
         mFileName = aFileName;
-        self.title = [mFileName lastPathComponent];
     }
     return self;
 }
@@ -36,17 +35,28 @@
     // TextView
     CGRect rect = self.view.bounds;
     mTextView = [[UITextView alloc]initWithFrame:rect];
-
     mTextView.editable = YES;
     mTextView.textAlignment = UITextAlignmentLeft;
     //textView.font = [UIFont fontWithName:@"Helvetica" size:14];
     //mTextView.backgroundColor = [UIColor whiteColor];
     mTextView.autocapitalizationType = UITextAutocapitalizationTypeNone;
     mTextView.delegate = self;
-
     mTextView.text = [FCFileManager readFileAtPath:mFileName];
-
     [self.view addSubview:mTextView];
+
+    // Tap title
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.backgroundColor = [UIColor clearColor];
+    // button.titleLabel.font =[UIFont boldSystemFontOfSize:16.0];
+    [button setTitle:[mFileName lastPathComponent] forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    button.frame = CGRectMake(0.0, 0.0, 120.0, self.navigationController.navigationBar.frame.size.height);
+    [button addTarget:self action:@selector(tapTitleButton) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.titleView = button;
+}
+
+- (void)tapTitleButton {
+    [mTextView resignFirstResponder];
 }
 
 - (void)viewDidAppear:(BOOL)animated
