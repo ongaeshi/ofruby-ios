@@ -10,6 +10,7 @@
 
 #import "FCFileManager.h"
 #import "ScriptController.h"
+#import "HelpViewController.h"
 
 @implementation EditViewController
 
@@ -80,7 +81,8 @@
 
 - (void)tapHelpButton
 {
-    NSLog(@"Go to help");
+    HelpViewController* viewController = [[HelpViewController alloc] init];
+    [self.navigationController pushViewController:viewController animated:YES];
 }
 
 - (void)textViewDidBeginEditing:(UITextView *)textView
