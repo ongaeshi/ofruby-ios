@@ -31,7 +31,11 @@
     self.navigationItem.rightBarButtonItem = addButton;
 
     // TableView
-    dataSource = [[NSArray alloc]initWithObjects: @"hello.rb", @"line.rb", nil];
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    dataSource = [defaults objectForKey:@"SelectViewControllerDataSource"];
+    if (dataSource == nil) {
+        dataSource = [[NSArray alloc]initWithObjects: nil];
+    }
 }
 
 - (void)tapAddButton
@@ -40,8 +44,8 @@
     alert.title = @"New File";
     //alert.message = @"Enter file name.";
     alert.delegate = self;
-    [alert addButtonWithTitle:@"No"];
-    [alert addButtonWithTitle:@"Yes"];
+    [alert addButtonWithTitle:@"Cancel"];
+    [alert addButtonWithTitle:@"OK"];
     [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
     alert.cancelButtonIndex = 0;
     [alert show];
