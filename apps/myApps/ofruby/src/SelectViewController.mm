@@ -23,7 +23,20 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    // NavButton
+    UIBarButtonItem* addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+                                                                               target:self
+                                                                               action:@selector(tapAddButton)];
+    self.navigationItem.rightBarButtonItem = addButton;
+
+    // TableView
     dataSource = [[NSArray alloc]initWithObjects: @"hello.rb", @"line.rb", nil];
+}
+
+- (void)tapAddButton
+{
+    NSLog(@"Add");
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
