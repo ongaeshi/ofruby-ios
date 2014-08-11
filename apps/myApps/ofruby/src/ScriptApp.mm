@@ -19,7 +19,10 @@ void ScriptApp::setup()
 	//If you want a landscape oreintation
 	//iPhoneSetOrientation(OFXIPHONE_ORIENTATION_LANDSCAPE_RIGHT);
 	
-	ofBackground(127,127,127);
+    ofSetColor(0, 0, 0);
+
+	// ofBackground(127,127,127);
+	ofBackground(255, 255, 255);
     
     // bind & call function
     mScriptEngine.setup();
