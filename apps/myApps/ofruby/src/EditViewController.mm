@@ -61,7 +61,8 @@
     self.navigationItem.titleView = button;
 }
 
-- (void)tapTitleButton {
+- (void)tapTitleButton 
+{
     [mTextView resignFirstResponder];
 }
 
@@ -73,6 +74,10 @@
 
 - (void)tapRunButton
 {
+    // Save file (For iOS <= 6.1)
+    [FCFileManager writeFileAtPath:mFileName content:mTextView.text];
+
+    // Run
     char* scriptPath = (char *)[mFileName UTF8String];
     ScriptController* viewController = [[ScriptController alloc] initWithFrame:[[UIScreen mainScreen] bounds]
                                                                     scriptName:scriptPath];
