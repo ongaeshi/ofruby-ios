@@ -349,6 +349,14 @@ void ScriptEngine::closeOnException()
         mrb_value str = mrb_funcall(mMrb, mrb_obj_value(mMrb->exc), "inspect", 0);
         mErrorMsg = mrb_string_value_cstr(mMrb, &str);
 
+        // Insert a line break at the 40 digits each
+        static const int COLUMN = 40;
+        int insertPos = COLUMN;
+        while  (mErrorMsg.length() > insertPos) {
+            mErrorMsg.insert(insertPos, "\n");
+            insertPos += COLUMN + 1;
+        }
+
         // Close mrb
         mrb_close(mMrb);
         mMrb = NULL;
