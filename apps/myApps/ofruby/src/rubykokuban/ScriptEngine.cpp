@@ -202,6 +202,7 @@ const uint8_t BuiltIn[] = {
 ScriptEngine::ScriptEngine(const char* aScriptPath)
 : mScriptPath(aScriptPath)
 , mMrb(NULL)
+, mErroredMrb(NULL)
 , mErrorMsg()
 , mConsoleModule(NULL)
 {
@@ -324,6 +325,11 @@ void ScriptEngine::load()
 //----------------------------------------------------------
 void ScriptEngine::close()
 {
+    if (mErroredMrb) {
+        mrb_close(mErroredMrb);
+        mErroredMrb = NULL;
+    }
+
     if (mMrb) {
         mrb_close(mMrb);
         mMrb = NULL;
@@ -358,7 +364,7 @@ void ScriptEngine::closeOnException()
         }
 
         // Close mrb
-        mrb_close(mMrb);
+        mErroredMrb = mMrb;
         mMrb = NULL;
     }
 }

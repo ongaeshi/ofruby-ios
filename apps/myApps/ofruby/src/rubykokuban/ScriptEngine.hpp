@@ -37,6 +37,7 @@ private:
 
     const char* mScriptPath;            // Need full path
     mrb_state*  mMrb;
+    mrb_state*  mErroredMrb;
     std::string mErrorMsg;
     struct RClass* mConsoleModule;
 };
