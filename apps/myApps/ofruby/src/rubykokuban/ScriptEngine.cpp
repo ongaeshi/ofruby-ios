@@ -296,7 +296,7 @@ void ScriptEngine::draw()
     } else {
         ofSetColor(0, 0, 0);
         ofBackground(255, 255, 255);
-        ofDrawBitmapString(mErrorMsg, 20, 20);
+        ofDrawBitmapString(mErrorMsg, 0, 60); // Shift the y pos for iOS7
     }
 }
 
