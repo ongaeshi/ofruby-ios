@@ -9,8 +9,12 @@ ofruby = openFrameworks + mruby. openFrameworks is an open source C++ toolkit fo
 To get started, check out [ofruby](http://ofruby.ongaeshi.me/).
 
 ## ScreenShot
-
-Comming soon.
+<img src="https://raw.githubusercontent.com/ongaeshi/ofruby-ios/gh-pages/images/ofruby-01.png" width="320" height="480">
+<img src="https://raw.githubusercontent.com/ongaeshi/ofruby-ios/gh-pages/images/ofruby-02.png" width="320" height="480">
+<img src="https://raw.githubusercontent.com/ongaeshi/ofruby-ios/gh-pages/images/ofruby-03.png" width="320" height="480">
+<img src="https://raw.githubusercontent.com/ongaeshi/ofruby-ios/gh-pages/images/ofruby-04.png" width="320" height="480">
+<img src="https://raw.githubusercontent.com/ongaeshi/ofruby-ios/gh-pages/images/ofruby-05.png" width="320" height="480">
+<img src="https://raw.githubusercontent.com/ongaeshi/ofruby-ios/gh-pages/images/ofruby-06.png" width="320" height="480">
 
 ## Build
 ### Environment
