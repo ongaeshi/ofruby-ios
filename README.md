@@ -18,10 +18,12 @@ Comming soon.
 My build environment.
 
 - OSX 10.9.4 (Mavericks)
+- Xcode 5.1.1
 - 3.06 GHz Intel Core 2 Duo
 - 8GB RAM
 
-- Xcode 5.1.1
+Requirements.
+
 - iOS >= 5.0
 - ARC enabled
 
