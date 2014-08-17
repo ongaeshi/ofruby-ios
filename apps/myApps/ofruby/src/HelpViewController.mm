@@ -48,7 +48,11 @@
         "window_width()\n"
         "window_height()\n"
         "screen_width()\n"
-        "screen_height()\n";
+        "screen_height()\n"
+        "\n"
+        "srand()\n"
+        "srand(seed)\n"
+        "rand(max = 1.0)\n";
 
     [self.view addSubview:textView];
 }

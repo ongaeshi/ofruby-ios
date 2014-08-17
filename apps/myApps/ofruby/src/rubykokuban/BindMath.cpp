@@ -36,8 +36,8 @@ namespace {
 void BindMath(mrb_state* mrb)
 {
     // Use mruby-random now. (Thinking in...)
-    // mrb_define_method(mrb, mrb->kernel_module, "srand", srand, MRB_ARGS_REQ(0));
-    // mrb_define_method(mrb, mrb->kernel_module, "rand", rand, MRB_ARGS_OPT(1));
+    mrb_define_method(mrb, mrb->kernel_module, "srand", srand, MRB_ARGS_REQ(0));
+    mrb_define_method(mrb, mrb->kernel_module, "rand", rand, MRB_ARGS_OPT(1));
 }
 
 }
