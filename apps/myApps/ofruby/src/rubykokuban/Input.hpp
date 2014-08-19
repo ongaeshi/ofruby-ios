@@ -1,6 +1,7 @@
 #pragma once
 
 #include "rubykokuban/Mouse.hpp"
+#include "rubykokuban/Touch.hpp"
 
 //------------------------------------------------------------
 namespace rubykokuban {
@@ -31,6 +32,7 @@ private:
     Mouse    mMouse;
     // Keyboard mKeyboard;
     // Pad      mPad;
+    Touch    mTouch;
 };
 
 }
