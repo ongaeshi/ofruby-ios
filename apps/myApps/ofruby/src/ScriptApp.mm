@@ -52,16 +52,19 @@ void ScriptApp::exit()
 //--------------------------------------------------------------
 void ScriptApp::touchDown(ofTouchEventArgs & touch)
 {
+    mInput.touch().touchDown(touch);
 }
 
 //--------------------------------------------------------------
 void ScriptApp::touchMoved(ofTouchEventArgs & touch)
 {
+    mInput.touch().touchMoved(touch);
 }
 
 //--------------------------------------------------------------
 void ScriptApp::touchUp(ofTouchEventArgs & touch)
 {
+    mInput.touch().touchUp(touch);
 }
 
 //--------------------------------------------------------------
