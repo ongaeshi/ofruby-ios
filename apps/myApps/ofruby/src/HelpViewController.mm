@@ -1,11 +1,3 @@
-//
-//  HelpViewController.m
-//  ofruby
-//
-//  Created by ongaeshi on 2014/08/11.
-//
-//
-
 #import "HelpViewController.h"
 
 @interface HelpViewController ()
@@ -35,6 +27,7 @@
         "text(str, x, y)\n"
         "triangle(x1, y1, x2, y2, x3, y3)\n"
         "\n"
+        "set_circle_resolution(res)\n"
         "set_fill(enable = true)\n"
         "set_no_fill()\n"
         "is_fill()\n"
@@ -43,8 +36,11 @@
         "set_color_hex(hex, a = 255)\n"
         "set_background(r, g, b)\n"
         "set_background_hex(hex)\n"
+        "set_background_auto(flag)\n"
         "\n"
         "get_frame_rate()\n"
+        "width()\n"
+        "height()\n"
         "window_width()\n"
         "window_height()\n"
         "screen_width()\n"
