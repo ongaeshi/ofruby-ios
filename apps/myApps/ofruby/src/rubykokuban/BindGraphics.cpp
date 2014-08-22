@@ -150,6 +150,11 @@ mrb_value set_background_hex(mrb_state *mrb, mrb_value self)
     return mrb_nil_value();
 }
 
+void set_background_auto(bool flag)
+{
+    ofSetBackgroundAuto(flag);
+}
+
 void triangle(float x1, float y1, float x2, float y2, float x3, float y3)
 {
     ofTriangle(x1, y1, x2, y2, x3, y3);
@@ -211,6 +216,7 @@ void BindGraphics(mrb_state* mrb)
     mrb_define_method(mrb, cc, "set_color_hex",       set_color_hex     , MRB_ARGS_ARG(1, 1));
     mrb_define_method(mrb, cc, "set_background",      set_background    , MRB_ARGS_ARG(1, 3));
     mrb_define_method(mrb, cc, "set_background_hex",  set_background_hex, MRB_ARGS_ARG(1, 1));
+    b.bind(                    "set_background_auto", set_background_auto);
     b.bind(                    "triangle",            triangle          );
     b.bind(                    "circle",              circle            );
     b.bind(                    "ellipse",             ellipse           );
