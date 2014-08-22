@@ -10,6 +10,11 @@ namespace rubykokuban {
 namespace {
 float LIMIT = 255.0f;
 
+void set_circle_resolution(int res)
+{
+    ofSetCircleResolution(res);
+}
+
 mrb_value set_fill(mrb_state *mrb, mrb_value self)
 {
     mrb_bool is_fill;
@@ -208,6 +213,7 @@ void BindGraphics(mrb_state* mrb)
     struct RClass *cc = mrb->kernel_module;
     mrubybind::MrubyBind b(mrb);
 
+    b.bind(                    "set_circle_resolution", set_circle_resolution);
     mrb_define_method(mrb, cc, "set_fill",            set_fill          , MRB_ARGS_OPT(1));
     b.bind(                    "set_no_fill",         set_no_fill       );
     b.bind(                    "is_fill",             is_fill           );

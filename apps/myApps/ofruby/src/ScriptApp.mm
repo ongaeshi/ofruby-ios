@@ -23,6 +23,8 @@ void ScriptApp::setup()
 
 	// ofBackground(127,127,127);
 	ofBackground(255, 255, 255);
+
+    ofSetCircleResolution(32);
     
     // bind & call function
     mScriptEngine.setup();
