@@ -203,6 +203,8 @@ mrb_value text(mrb_state *mrb, mrb_value self)
     mrb_get_args(mrb, "oii", &str, &x, &y);
     ofDrawBitmapString(mrb_str_to_cstr(mrb, mrb_obj_as_string(mrb, str)), x, y);
 #endif 
+
+    return mrb_nil_value();
 }
 
 }
