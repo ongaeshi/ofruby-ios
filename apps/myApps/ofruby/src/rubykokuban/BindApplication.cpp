@@ -18,6 +18,8 @@ namespace {
     int window_height() { return ofGetWindowHeight(); }
     int screen_width() { return ofGetScreenWidth(); }
     int screen_height() { return ofGetScreenHeight(); }
+    int width() { return ofGetWidth(); }
+    int height() { return ofGetHeight(); }
 }
 
 //----------------------------------------------------------
@@ -34,6 +36,8 @@ void BindApplication(mrb_state* mrb)
     b.bind("window_height", window_height);
     b.bind("screen_width", screen_width);
     b.bind("screen_height", screen_height);
+    b.bind("width", width);
+    b.bind("height", height);
 }
 
 }
