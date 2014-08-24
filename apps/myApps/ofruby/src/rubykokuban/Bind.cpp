@@ -6,9 +6,10 @@ namespace rubykokuban {
     extern void BindMath(mrb_state* mrb);
 }
 
-#include "rubykokuban/BindInput.hpp"
 #include "rubykokuban/BindColor.hpp"
 #include "rubykokuban/BindImage.hpp"
+#include "rubykokuban/BindInput.hpp"
+#include "rubykokuban/BindTouchPoint.hpp"
 
 namespace rubykokuban {
 
@@ -21,6 +22,7 @@ void Bind::All(mrb_state* mrb)
     BindImage::Bind(mrb);
     BindInput::Bind(mrb);
     BindMath(mrb);
+    BindTouchPoint::Bind(mrb);
 }
 
 }

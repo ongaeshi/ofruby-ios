@@ -1,0 +1,11 @@
+class TouchPoint
+  attr_reader :x
+  attr_reader :y
+
+  def valid?
+  end
+  
+  def inspect
+  end
+end
+
