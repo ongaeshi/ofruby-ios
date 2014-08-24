@@ -8,9 +8,14 @@ Touch::Touch()
 }
 
 //------------------------------------------------------------
+TouchPoint& Touch::point(int aIndex)
+{
+    return mPoints[aIndex];
+}
+
+//------------------------------------------------------------
 const TouchPoint& Touch::point(int aIndex) const
 {
-    // TODO: assert
     return mPoints[aIndex];
 }
 

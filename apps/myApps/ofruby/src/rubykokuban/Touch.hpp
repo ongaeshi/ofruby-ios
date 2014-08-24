@@ -8,8 +8,11 @@ namespace rubykokuban {
 
 class Touch {
 public:
+    static const int TOUCH_POINT_MAX = 5;
+    
     Touch();
 
+    TouchPoint& point(int aIndex);
     const TouchPoint& point(int aIndex) const;
 
     void touchDown(ofTouchEventArgs & touch);
@@ -17,8 +20,6 @@ public:
     void touchUp(ofTouchEventArgs & touch);
         
 private:
-    static const int TOUCH_POINT_MAX = 5;
-    
     TouchPoint mPoints[TOUCH_POINT_MAX];
 };
 
