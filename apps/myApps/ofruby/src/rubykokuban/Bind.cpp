@@ -22,7 +22,6 @@ void Bind::All(mrb_state* mrb)
     BindImage::Bind(mrb);
     BindInput::Bind(mrb);
     BindMath(mrb);
-    BindTouchPoint::Bind(mrb);
 }
 
 }
