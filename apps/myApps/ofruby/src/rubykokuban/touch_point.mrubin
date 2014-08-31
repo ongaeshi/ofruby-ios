@@ -5,7 +5,13 @@ class TouchPoint
   def valid?
   end
   
-  def inspect
+  def press?
+  end
+
+  def down?
+  end
+
+  def release?
   end
 end
 

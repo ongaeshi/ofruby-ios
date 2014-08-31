@@ -18,6 +18,10 @@ public:
     float x() const { return mX; }
     float y() const { return mY; }
 
+    bool isPress() const   { return false; }
+    bool isDown() const    { return true; }
+    bool isRelease() const { return false; }
+
 private:
     bool mIsValid;
     float mX;

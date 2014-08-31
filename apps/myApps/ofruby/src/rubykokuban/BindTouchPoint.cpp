@@ -32,6 +32,21 @@ mrb_value valid_p(mrb_state *mrb, mrb_value self)
     return mrb_bool_value(obj(self).isValid());
 }
 
+mrb_value press_p(mrb_state *mrb, mrb_value self)
+{
+    return mrb_bool_value(obj(self).isPress());
+}
+
+mrb_value down_p(mrb_state *mrb, mrb_value self)
+{
+    return mrb_bool_value(obj(self).isDown());
+}
+
+mrb_value release_p(mrb_state *mrb, mrb_value self)
+{
+    return mrb_bool_value(obj(self).isRelease());
+}
+
 }
 
 //----------------------------------------------------------
@@ -55,6 +70,9 @@ void BindTouchPoint::Bind(mrb_state* mrb)
     mrb_define_method(mrb, cc,       "x"                 , x                   , MRB_ARGS_NONE());
     mrb_define_method(mrb, cc,       "y"                 , y                   , MRB_ARGS_NONE());
     mrb_define_method(mrb, cc,       "valid?"            , valid_p             , MRB_ARGS_NONE());
+    mrb_define_method(mrb, cc,       "press?"            , press_p             , MRB_ARGS_NONE());
+    mrb_define_method(mrb, cc,       "down?"             , down_p              , MRB_ARGS_NONE());
+    mrb_define_method(mrb, cc,       "release?"          , release_p           , MRB_ARGS_NONE());
 }
 
 }
