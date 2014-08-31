@@ -6,26 +6,59 @@ namespace rubykokuban {
 class TouchPoint {
 public:
     TouchPoint()
-    : mIsValid(false)
+    : mInternal()
+    , mPrev(false)
+    , mIsValid(false)
     , mX(0.0f)
     , mY(0.0f)
     {}
   
-    void update(float aX, float aY) { mIsValid = true; mX = aX; mY = aY; }
-    void clear() { mIsValid = false; }
+    void internalUpdate(float aX, float aY)
+    {
+        mInternal.isValid = true;
+        mInternal.x = aX;
+        mInternal.y = aY;
+    }
+
+    void internalClear()
+    {
+        mInternal.isValid = false;
+    }
+
+    void update()
+    {
+        mPrev    = mIsValid;
+        mIsValid = mInternal.isValid;
+        mX       = mInternal.x;
+        mY       = mInternal.y;
+    }
 
     bool isValid() const { return mIsValid; }
     float x() const { return mX; }
     float y() const { return mY; }
 
-    bool isPress() const   { return false; }
-    bool isDown() const    { return true; }
-    bool isRelease() const { return false; }
+    bool isPress() const   { return !mPrev && mIsValid; }
+    bool isDown() const    { return mIsValid; }
+    bool isRelease() const { return mPrev && !mIsValid; }
 
 private:
-    bool mIsValid;
-    float mX;
-    float mY;
+    struct Internal {
+        Internal()
+        : isValid()
+        , x(0)
+        , y(0)
+        {}
+
+        bool isValid;
+        int x;
+        int y;
+    };
+
+    Internal  mInternal;
+    bool      mPrev;
+    bool      mIsValid;
+    float     mX;
+    float     mY;
 };
 
 }

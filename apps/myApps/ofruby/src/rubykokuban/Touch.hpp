@@ -15,6 +15,7 @@ public:
     TouchPoint& point(int aIndex);
     const TouchPoint& point(int aIndex) const;
 
+    void update();
     void touchDown(ofTouchEventArgs & touch);
     void touchMoved(ofTouchEventArgs & touch);
     void touchUp(ofTouchEventArgs & touch);
