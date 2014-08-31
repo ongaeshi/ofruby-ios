@@ -47,8 +47,13 @@ mrb_value touch(mrb_state *mrb, mrb_value self)
 {
     mrb_int index;
     mrb_get_args(mrb, "i", &index);
-    mrb_value array = mrb_cv_get(mrb, self, mrb_intern(mrb, "touch"));
+    mrb_value array = mrb_cv_get(mrb, self, mrb_intern(mrb, "touches"));
     return mrb_ary_ref(mrb, array, index);
+}
+
+mrb_value touches(mrb_state *mrb, mrb_value self)
+{
+    return mrb_cv_get(mrb, self, mrb_intern(mrb, "touches"));
 }
 
 }
@@ -74,13 +79,14 @@ void BindInput::Bind(mrb_state* mrb)
     mrb_define_module_function(mrb, c, "mouse_down?",  input_mouse_is_down,  ARGS_REQ(1));
     mrb_define_module_function(mrb, c, "mouse_release?",  input_mouse_is_release,  ARGS_REQ(1));
     mrb_define_module_function(mrb, c, "touch", touch, ARGS_REQ(1));
+    mrb_define_module_function(mrb, c, "touches", touches, MRB_ARGS_NONE());
 
-    // @@touch
+    // @@touches
     mrb_value array = mrb_ary_new(mrb);
     for (int i = 0; i < Touch::TOUCH_POINT_MAX; i++) {
         mrb_ary_push(mrb, array, BindTouchPoint::ToMrb(mrb, &sInput->touch().point(i)));
     }
-    mrb_mod_cv_set(mrb, c, mrb_intern(mrb, "touch"), array);
+    mrb_mod_cv_set(mrb, c, mrb_intern(mrb, "touches"), array);
 }
 
 }
