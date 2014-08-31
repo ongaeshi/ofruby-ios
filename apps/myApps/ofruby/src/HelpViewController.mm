@@ -38,7 +38,7 @@
         "set_background_hex(hex)\n"
         "set_background_auto(flag)\n"
         "\n"
-        "get_frame_rate\n"
+        "frame_rate\n"
         "width\n"
         "height\n"
         "window_width\n"

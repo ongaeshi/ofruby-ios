@@ -7,7 +7,7 @@
 namespace rubykokuban {
 
 namespace {
-    float get_frame_rate() { return ofGetFrameRate(); }
+    float frame_rate() { return ofGetFrameRate(); }
     void set_window_pos(int x, int y) { ofSetWindowPosition(x, y); }
     void set_window_size(int width, int height) { ofSetWindowShape(width, height); }
     int window_pos_x() { return ofGetWindowPositionX(); }
@@ -27,7 +27,7 @@ void BindApplication(mrb_state* mrb)
 {
     mrubybind::MrubyBind b(mrb);
 
-    b.bind("get_frame_rate", get_frame_rate);
+    b.bind("frame_rate", frame_rate);
     b.bind("set_window_pos", set_window_pos);
     b.bind("set_window_size", set_window_size);
     b.bind("window_pos_x", window_pos_x);
