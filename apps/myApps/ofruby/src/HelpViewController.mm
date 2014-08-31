@@ -48,7 +48,20 @@
         "\n"
         "srand()\n"
         "srand(seed)\n"
-        "rand(max = 1.0)\n";
+        "rand(max = 1.0)\n"
+        "\n"
+        "Input\n"
+        "  Input.touch(idx)\n"
+        "  Input.touches()\n"
+        "\n"
+        "TouchPoint\n"
+        "  valid?\n"
+        "  x\n"
+        "  y\n"
+        "  press?\n"
+        "  down?\n"
+        "  release?\n"
+        ;
 
     [self.view addSubview:textView];
 }

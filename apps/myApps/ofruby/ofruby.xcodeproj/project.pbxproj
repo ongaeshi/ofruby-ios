@@ -18,6 +18,7 @@
 		525E0E09199614A000C18947 /* ScriptController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 525E0E08199614A000C18947 /* ScriptController.mm */; };
 		525E0E0C1996369E00C18947 /* EditViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 525E0E0B1996369E00C18947 /* EditViewController.mm */; };
 		525E0E0F199660AE00C18947 /* FCFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 525E0E0E199660AE00C18947 /* FCFileManager.m */; };
+		527EB38919AA0D4A003224BC /* BindTouchPoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 527EB38719AA0D4A003224BC /* BindTouchPoint.cpp */; };
 		52C285AC1995C60B00A6BF47 /* mrblib.c in Sources */ = {isa = PBXBuildFile; fileRef = 52C285581995C60B00A6BF47 /* mrblib.c */; };
 		52C285AD1995C60B00A6BF47 /* y.tab.c in Sources */ = {isa = PBXBuildFile; fileRef = 52C285591995C60B00A6BF47 /* y.tab.c */; };
 		52C285AE1995C60B00A6BF47 /* lex.def in Resources */ = {isa = PBXBuildFile; fileRef = 52C2855B1995C60B00A6BF47 /* lex.def */; };
@@ -65,6 +66,7 @@
 		52C285D81995C60B00A6BF47 /* Mouse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 52C285A81995C60B00A6BF47 /* Mouse.cpp */; };
 		52C285D91995C60B00A6BF47 /* ScriptEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 52C285AA1995C60B00A6BF47 /* ScriptEngine.cpp */; };
 		52C285DC1995C7AF00A6BF47 /* ScriptApp.mm in Sources */ = {isa = PBXBuildFile; fileRef = 52C285DB1995C7AF00A6BF47 /* ScriptApp.mm */; };
+		52DB1C0319A3C06500D43F2A /* Touch.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 52DB1C0019A3C06500D43F2A /* Touch.cpp */; };
 		52E087771998AF1700F3A293 /* HelpViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 52E087761998AF1700F3A293 /* HelpViewController.mm */; };
 		5326AEA810A23A0500278DE6 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5326AEA710A23A0500278DE6 /* CoreLocation.framework */; };
 		53F323EB10A20EDB00E0DAE4 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53F323EA10A20EDB00E0DAE4 /* OpenAL.framework */; };
@@ -118,6 +120,8 @@
 		525E0E0B1996369E00C18947 /* EditViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EditViewController.mm; sourceTree = "<group>"; };
 		525E0E0D199660AE00C18947 /* FCFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FCFileManager.h; sourceTree = "<group>"; };
 		525E0E0E199660AE00C18947 /* FCFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCFileManager.m; sourceTree = "<group>"; };
+		527EB38719AA0D4A003224BC /* BindTouchPoint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BindTouchPoint.cpp; sourceTree = "<group>"; };
+		527EB38819AA0D4A003224BC /* BindTouchPoint.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BindTouchPoint.hpp; sourceTree = "<group>"; };
 		52C285581995C60B00A6BF47 /* mrblib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mrblib.c; sourceTree = "<group>"; };
 		52C285591995C60B00A6BF47 /* y.tab.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = y.tab.c; sourceTree = "<group>"; };
 		52C2855B1995C60B00A6BF47 /* lex.def */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = lex.def; sourceTree = "<group>"; };
@@ -198,6 +202,9 @@
 		52C285AB1995C60B00A6BF47 /* ScriptEngine.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ScriptEngine.hpp; sourceTree = "<group>"; };
 		52C285DB1995C7AF00A6BF47 /* ScriptApp.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ScriptApp.mm; sourceTree = "<group>"; };
 		52C285DD1995C7FD00A6BF47 /* ScriptApp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScriptApp.h; sourceTree = "<group>"; };
+		52DB1C0019A3C06500D43F2A /* Touch.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Touch.cpp; path = rubykokuban/Touch.cpp; sourceTree = "<group>"; };
+		52DB1C0119A3C06500D43F2A /* Touch.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Touch.hpp; path = rubykokuban/Touch.hpp; sourceTree = "<group>"; };
+		52DB1C0219A3C06500D43F2A /* TouchPoint.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = TouchPoint.hpp; path = rubykokuban/TouchPoint.hpp; sourceTree = "<group>"; };
 		52E087751998AF1700F3A293 /* HelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpViewController.h; sourceTree = "<group>"; };
 		52E087761998AF1700F3A293 /* HelpViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = HelpViewController.mm; sourceTree = "<group>"; };
 		5326AEA710A23A0500278DE6 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -419,6 +426,8 @@
 		52C2859A1995C60B00A6BF47 /* rubykokuban */ = {
 			isa = PBXGroup;
 			children = (
+				527EB38719AA0D4A003224BC /* BindTouchPoint.cpp */,
+				527EB38819AA0D4A003224BC /* BindTouchPoint.hpp */,
 				52C2859B1995C60B00A6BF47 /* Bind.cpp */,
 				52C2859C1995C60B00A6BF47 /* Bind.hpp */,
 				52C2859D1995C60B00A6BF47 /* BindApplication.cpp */,
@@ -486,6 +495,9 @@
 		E4D8936A11527B74007E1F53 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				52DB1C0019A3C06500D43F2A /* Touch.cpp */,
+				52DB1C0119A3C06500D43F2A /* Touch.hpp */,
+				52DB1C0219A3C06500D43F2A /* TouchPoint.hpp */,
 				525E0E0D199660AE00C18947 /* FCFileManager.h */,
 				525E0E0E199660AE00C18947 /* FCFileManager.m */,
 				525E0E07199614A000C18947 /* ScriptController.h */,
@@ -622,6 +634,7 @@
 				52C285B71995C60B00A6BF47 /* enum.c in Sources */,
 				52C285CA1995C60B00A6BF47 /* symbol.c in Sources */,
 				52C285B01995C60B00A6BF47 /* backtrace.c in Sources */,
+				52DB1C0319A3C06500D43F2A /* Touch.cpp in Sources */,
 				52C285CB1995C60B00A6BF47 /* variable.c in Sources */,
 				52C285AC1995C60B00A6BF47 /* mrblib.c in Sources */,
 				52C285B91995C60B00A6BF47 /* etc.c in Sources */,
@@ -661,6 +674,7 @@
 				52C285D81995C60B00A6BF47 /* Mouse.cpp in Sources */,
 				52C285C61995C60B00A6BF47 /* proc.c in Sources */,
 				52C285BD1995C60B00A6BF47 /* init.c in Sources */,
+				527EB38919AA0D4A003224BC /* BindTouchPoint.cpp in Sources */,
 				52C285D41995C60B00A6BF47 /* BindImage.cpp in Sources */,
 				52C285C51995C60B00A6BF47 /* print.c in Sources */,
 				52C285D01995C60B00A6BF47 /* Bind.cpp in Sources */,

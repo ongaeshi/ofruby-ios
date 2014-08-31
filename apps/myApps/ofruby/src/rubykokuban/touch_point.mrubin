@@ -1,0 +1,17 @@
+class TouchPoint
+  attr_reader :x
+  attr_reader :y
+
+  def valid?
+  end
+  
+  def press?
+  end
+
+  def down?
+  end
+
+  def release?
+  end
+end
+

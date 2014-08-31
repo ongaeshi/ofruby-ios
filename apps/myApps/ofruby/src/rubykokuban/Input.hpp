@@ -1,6 +1,7 @@
 #pragma once
 
 #include "rubykokuban/Mouse.hpp"
+#include "rubykokuban/Touch.hpp"
 
 //------------------------------------------------------------
 namespace rubykokuban {
@@ -26,11 +27,18 @@ public:
     const Mouse& mouse() const { return mMouse; }
     //@}
 
+    /// @name Touch
+    //@{
+    Touch& touch() { return mTouch; }
+    const Touch& touch() const { return mTouch; }
+    //@}
+
 private:
     // BasicPad mBasicPad;
     Mouse    mMouse;
     // Keyboard mKeyboard;
     // Pad      mPad;
+    Touch    mTouch;
 };
 
 }

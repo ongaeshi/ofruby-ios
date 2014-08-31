@@ -40,6 +40,16 @@ void ScriptApp::update()
 //--------------------------------------------------------------
 void ScriptApp::draw()
 {
+    // for (int i = 0; i < 5; i++) {
+    //     const rubykokuban::TouchPoint& tp = mInput.touch().point(i);
+
+    //     if (tp.isValid()) {
+    //         char buff[100];
+    //         sprintf(buff, "i: %d, touch: x: %f, y: %f", i, tp.x(), tp.y());
+    //         ofDrawBitmapString(buff, 0, 100 + i * 15);
+    //     }
+    // }
+
     mScriptEngine.draw();
     // ofSetColor(255, 255, 255);
 }
@@ -52,16 +62,19 @@ void ScriptApp::exit()
 //--------------------------------------------------------------
 void ScriptApp::touchDown(ofTouchEventArgs & touch)
 {
+    mInput.touch().touchDown(touch);
 }
 
 //--------------------------------------------------------------
 void ScriptApp::touchMoved(ofTouchEventArgs & touch)
 {
+    mInput.touch().touchMoved(touch);
 }
 
 //--------------------------------------------------------------
 void ScriptApp::touchUp(ofTouchEventArgs & touch)
 {
+    mInput.touch().touchUp(touch);
 }
 
 //--------------------------------------------------------------

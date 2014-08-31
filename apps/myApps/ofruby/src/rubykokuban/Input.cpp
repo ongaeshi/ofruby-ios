@@ -4,6 +4,7 @@ namespace rubykokuban {
 //------------------------------------------------------------
 Input::Input()
 : mMouse()
+, mTouch()
 {
 }
 
@@ -11,6 +12,7 @@ Input::Input()
 void Input::update()
 {
     mMouse.update();
+    mTouch.update();
 }
 
 }
