@@ -10,46 +10,47 @@
 
 namespace rubykokuban {
 namespace {
-    Input* sInput = NULL;
+Input* sInput = NULL;
 
-    static mrb_value input_mouse_x(mrb_state *mrb, mrb_value self)
-    {
-        return mrb_fixnum_value(sInput->mouse().x());
-    }
+mrb_value input_mouse_x(mrb_state *mrb, mrb_value self)
+{
+    return mrb_fixnum_value(sInput->mouse().x());
+}
 
-    static mrb_value input_mouse_y(mrb_state *mrb, mrb_value self)
-    {
-        return mrb_fixnum_value(sInput->mouse().y());
-    }
+mrb_value input_mouse_y(mrb_state *mrb, mrb_value self)
+{
+    return mrb_fixnum_value(sInput->mouse().y());
+}
 
-    static mrb_value input_mouse_is_press(mrb_state *mrb, mrb_value self)
-    {
-        mrb_int code;
-        mrb_get_args(mrb, "i", &code);
-        return mrb_bool_value(sInput->mouse().isPress(code));
-    }
+mrb_value input_mouse_is_press(mrb_state *mrb, mrb_value self)
+{
+    mrb_int code;
+    mrb_get_args(mrb, "i", &code);
+    return mrb_bool_value(sInput->mouse().isPress(code));
+}
 
-    static mrb_value input_mouse_is_down(mrb_state *mrb, mrb_value self)
-    {
-        mrb_int code;
-        mrb_get_args(mrb, "i", &code);
-        return mrb_bool_value(sInput->mouse().isDown(code));
-    }
+mrb_value input_mouse_is_down(mrb_state *mrb, mrb_value self)
+{
+    mrb_int code;
+    mrb_get_args(mrb, "i", &code);
+    return mrb_bool_value(sInput->mouse().isDown(code));
+}
 
-    static mrb_value input_mouse_is_release(mrb_state *mrb, mrb_value self)
-    {
-        mrb_int code;
-        mrb_get_args(mrb, "i", &code);
-        return mrb_bool_value(sInput->mouse().isRelease(code));
-    }
+mrb_value input_mouse_is_release(mrb_state *mrb, mrb_value self)
+{
+    mrb_int code;
+    mrb_get_args(mrb, "i", &code);
+    return mrb_bool_value(sInput->mouse().isRelease(code));
+}
 
-static mrb_value touch(mrb_state *mrb, mrb_value self)
+mrb_value touch(mrb_state *mrb, mrb_value self)
 {
     mrb_int index;
     mrb_get_args(mrb, "i", &index);
     mrb_value array = mrb_cv_get(mrb, self, mrb_intern(mrb, "touch"));
     return mrb_ary_ref(mrb, array, index);
 }
+
 }
 
 //--------------------------------------------------------------------------------
