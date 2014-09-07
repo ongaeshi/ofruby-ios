@@ -1,6 +1,22 @@
 def setup
+  test_dist
+  test_dist_squared
   test_deg_to_rad
   test_rad_to_deg
+end
+
+def test_dist
+  assert_in_delta 0, dist(0, 0, 0, 0)
+  assert_in_delta 100, dist(0, 0, 100, 0), 0.01
+  assert_in_delta 100, dist(0, 0, 0, 100), 0.01
+  assert_in_delta 23.32, dist(30, 20, 50, 8), 0.01
+end
+
+def test_dist_squared
+  assert_in_delta 0, dist_squared(0, 0, 0, 0)
+  assert_in_delta 10000, dist_squared(0, 0, 100, 0), 0.01
+  assert_in_delta 10000, dist_squared(0, 0, 0, 100), 0.01
+  assert_in_delta 544, dist_squared(30, 20, 50, 8), 0.01
 end
 
 def test_deg_to_rad
