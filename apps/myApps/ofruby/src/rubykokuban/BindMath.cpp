@@ -69,12 +69,12 @@ mrb_value clamp(mrb_state *mrb, mrb_value self)
     return mrb_float_value(mrb, ofClamp(value, min, max));
 }
 
-mrb_value normalize(mrb_state *mrb, mrb_value self)
-{
-    mrb_float value, min, max;
-    mrb_get_args(mrb, "fff", &value, &min, &max);
-    return mrb_float_value(mrb, ofNormalize(value, min, max));
-}
+// mrb_value normalize(mrb_state *mrb, mrb_value self)
+// {
+//     mrb_float value, min, max;
+//     mrb_get_args(mrb, "fff", &value, &min, &max);
+//     return mrb_float_value(mrb, ofNormalize(value, min, max));
+// }
 
 mrb_value rad_to_deg(mrb_state *mrb, mrb_value self)
 {
@@ -108,7 +108,7 @@ void BindMath(mrb_state* mrb)
     mrb_define_module_function(mrb, mrb->kernel_module, "dist"              , dist                , MRB_ARGS_REQ(4));
     mrb_define_module_function(mrb, mrb->kernel_module, "dist_squared"      , dist_squared        , MRB_ARGS_REQ(4));
     mrb_define_module_function(mrb, mrb->kernel_module, "clamp"             , clamp               , MRB_ARGS_REQ(3));
-    mrb_define_module_function(mrb, mrb->kernel_module, "normalize"         , normalize           , MRB_ARGS_REQ(3));
+    // mrb_define_module_function(mrb, mrb->kernel_module, "normalize"         , normalize           , MRB_ARGS_REQ(3));
     mrb_define_module_function(mrb, mrb->kernel_module, "rad_to_deg"        , rad_to_deg          , MRB_ARGS_REQ(1));
     mrb_define_module_function(mrb, mrb->kernel_module, "deg_to_rad"        , deg_to_rad          , MRB_ARGS_REQ(1));
     mrb_define_module_function(mrb, mrb->kernel_module, "lerp"              , lerp                , MRB_ARGS_REQ(3));
