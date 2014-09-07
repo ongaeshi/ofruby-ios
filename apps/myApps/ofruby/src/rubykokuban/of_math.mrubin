@@ -1,0 +1,5 @@
+class OfMath
+  def noise(x, y = nil, z = nil)
+  end
+end
+
