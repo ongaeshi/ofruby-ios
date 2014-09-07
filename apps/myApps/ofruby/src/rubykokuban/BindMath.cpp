@@ -65,14 +65,14 @@ mrb_value dist_squared(mrb_state *mrb, mrb_value self)
 mrb_value clamp(mrb_state *mrb, mrb_value self)
 {
     mrb_float value, min, max;
-    mrb_get_args(mrb, "fff", &value, min, max);
+    mrb_get_args(mrb, "fff", &value, &min, &max);
     return mrb_float_value(mrb, ofClamp(value, min, max));
 }
 
 mrb_value normalize(mrb_state *mrb, mrb_value self)
 {
     mrb_float value, min, max;
-    mrb_get_args(mrb, "fff", &value, min, max);
+    mrb_get_args(mrb, "fff", &value, &min, &max);
     return mrb_float_value(mrb, ofNoise(value, min, max));
 }
 
@@ -93,7 +93,7 @@ mrb_value deg_to_rad(mrb_state *mrb, mrb_value self)
 mrb_value lerp(mrb_state *mrb, mrb_value self)
 {
     mrb_float start, stop, amt;
-    mrb_get_args(mrb, "fff", &start, stop, amt);
+    mrb_get_args(mrb, "fff", &start, &stop, &amt);
     return mrb_float_value(mrb, ofLerp(start, stop, amt));
 }
 
