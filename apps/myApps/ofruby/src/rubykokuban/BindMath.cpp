@@ -53,10 +53,9 @@ mrb_value noise(mrb_state *mrb, mrb_value self)
 //--------------------------------------------------------------------------------
 void BindMath(mrb_state* mrb)
 {
-    // Use mruby-random now. (Thinking in...)
-    mrb_define_method(mrb, mrb->kernel_module, "srand"             , srand               , MRB_ARGS_REQ(0));
-    mrb_define_method(mrb, mrb->kernel_module, "rand"              , rand                , MRB_ARGS_OPT(1));
-    mrb_define_method(mrb, mrb->kernel_module, "noise"             , noise               , MRB_ARGS_ARG(1, 2));
+    mrb_define_module_function(mrb, mrb->kernel_module, "srand"             , srand               , MRB_ARGS_REQ(0));
+    mrb_define_module_function(mrb, mrb->kernel_module, "rand"              , rand                , MRB_ARGS_OPT(1));
+    mrb_define_module_function(mrb, mrb->kernel_module, "noise"             , noise               , MRB_ARGS_ARG(1, 2));
 
 }
 
