@@ -1,18 +1,18 @@
 class OfMath
-  def self.noise(x, y = nil, z = nil) ; end
+  # def self.normalize(value, min, max) ; end
+
+  def self.clamp(value, min, max) ; end
+
+  def self.lerp(start, stop, amt) ; end
 
   def self.dist(x, y, x2, y2) ; end
   
   def self.dist_squared(x, y, x2, y2) ; end
   
-  def self.clamp(value, min, max) ; end
-
-  def self.normalize(value, min, max) ; end
-
   def self.rad_to_deg(radians) ; end
 
   def self.deg_to_rad(degrees) ; end
 
-  def self.lerp(start, stop, amt) ; end
+  def self.noise(x, y = nil, z = nil) ; end
 end
 
