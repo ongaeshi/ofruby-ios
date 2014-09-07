@@ -73,7 +73,7 @@ mrb_value normalize(mrb_state *mrb, mrb_value self)
 {
     mrb_float value, min, max;
     mrb_get_args(mrb, "fff", &value, &min, &max);
-    return mrb_float_value(mrb, ofNoise(value, min, max));
+    return mrb_float_value(mrb, ofNormalize(value, min, max));
 }
 
 mrb_value rad_to_deg(mrb_state *mrb, mrb_value self)

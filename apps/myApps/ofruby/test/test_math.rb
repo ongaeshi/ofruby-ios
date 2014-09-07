@@ -4,6 +4,7 @@ def setup
   test_clamp
   test_deg_to_rad
   test_rad_to_deg
+  test_normalize
 end
 
 def test_dist
@@ -25,6 +26,13 @@ def test_clamp
   assert_in_delta 10, clamp(0, 10, 20)
   assert_in_delta 15, clamp(15, 10, 20)
   assert_in_delta 20, clamp(30, 10, 20)
+end
+
+def test_normalize
+  # assert_in_delta 0, normalize(0, 0, 0)  # Zero divide. Want to raise exception.
+  assert_in_delta 0, normalize(0, 10, 20)
+  assert_in_delta 0.5, normalize(15, 10, 20)
+  assert_in_delta 1, normalize(30, 10, 20)
 end
 
 def test_deg_to_rad
