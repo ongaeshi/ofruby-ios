@@ -2,9 +2,10 @@ def setup
   test_dist
   test_dist_squared
   test_clamp
+  test_normalize
   test_deg_to_rad
   test_rad_to_deg
-  test_normalize
+  test_lerp
 end
 
 def test_dist
@@ -52,6 +53,16 @@ def test_rad_to_deg
   assert_in_delta 180, rad_to_deg(Math::PI)
   assert_in_delta 280, rad_to_deg(Math::PI / 180.0 * 280.0)
 end
+
+def test_lerp
+  assert_in_delta 0, lerp(0, 0, 0)
+  assert_in_delta 10, lerp(10, 20, 0)
+  assert_in_delta 15, lerp(10, 20, 0.5)
+  assert_in_delta 20, lerp(10, 20, 1)
+  assert_in_delta 22, lerp(10, 20, 1.2)
+end
+
+# ---
 
 def assert_in_delta(expected, actual, delta = 0.001)
   unless (expected - actual).abs < delta
