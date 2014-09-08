@@ -38,6 +38,7 @@ def draw_push_matrix_with_block
         translate(50, 10)
         rotate(40)
         rect(0, 0, 30, 10)
+        scale(1, 2)
       end
     end
   end

@@ -8,6 +8,9 @@ class OfGraphic
   def self.translate(x, y)
   end
 
+  def self.scale(x, y)
+  end
+
   def self.rotate(degrees)
   end
 end
