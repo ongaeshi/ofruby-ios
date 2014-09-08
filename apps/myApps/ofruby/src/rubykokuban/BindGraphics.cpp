@@ -12,7 +12,16 @@ float LIMIT = 255.0f;
 
 mrb_value push_matrix(mrb_state *mrb, mrb_value self)
 {
+    mrb_value block = mrb_nil_value();
+    mrb_get_args(mrb, "|&", &block);
+
     ofPushMatrix();
+
+    if (!mrb_nil_p(block)) {
+        mrb_yield_argv(mrb, block, 0, NULL);
+        ofPopMatrix();
+    }
+
     return mrb_nil_value();
 }
 
