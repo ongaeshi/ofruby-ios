@@ -1,0 +1,14 @@
+class OfGraphic
+  def self.push_matrix
+  end
+
+  def self.pop_matrix
+  end
+
+  def self.translate(x, y)
+  end
+
+  def self.rotate(degrees)
+  end
+end
+

@@ -10,6 +10,34 @@ namespace rubykokuban {
 namespace {
 float LIMIT = 255.0f;
 
+mrb_value push_matrix(mrb_state *mrb, mrb_value self)
+{
+    ofPushMatrix();
+    return mrb_nil_value();
+}
+
+mrb_value pop_matrix(mrb_state *mrb, mrb_value self)
+{
+    ofPopMatrix();
+    return mrb_nil_value();
+}
+
+mrb_value translate(mrb_state *mrb, mrb_value self)
+{
+    mrb_float x, y;
+    mrb_get_args(mrb, "ff", &x, &y);
+    ofTranslate(x, y);
+    return mrb_nil_value();
+}
+
+mrb_value rotate(mrb_state *mrb, mrb_value self)
+{
+    mrb_float degrees;
+    mrb_get_args(mrb, "f", &degrees);
+    ofRotate(degrees);
+    return mrb_nil_value();
+}
+
 void set_circle_resolution(int res)
 {
     ofSetCircleResolution(res);
@@ -215,6 +243,10 @@ void BindGraphics(mrb_state* mrb)
     struct RClass *cc = mrb->kernel_module;
     mrubybind::MrubyBind b(mrb);
 
+    mrb_define_method(mrb, cc, "push_matrix"       , push_matrix         , MRB_ARGS_OPT(1));
+    mrb_define_method(mrb, cc, "pop_matrix"        , pop_matrix          , MRB_ARGS_NONE());
+    mrb_define_method(mrb, cc, "translate"         , translate           , MRB_ARGS_REQ(2));
+    mrb_define_method(mrb, cc, "rotate"            , rotate              , MRB_ARGS_REQ(1));
     b.bind(                    "set_circle_resolution", set_circle_resolution);
     mrb_define_method(mrb, cc, "set_fill",            set_fill          , MRB_ARGS_OPT(1));
     b.bind(                    "set_no_fill",         set_no_fill       );
