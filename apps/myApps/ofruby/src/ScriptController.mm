@@ -19,8 +19,29 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    //  [super viewWillAppear:animated];
-    //[self.navigationController setNavigationBarHidden:YES animated:YES];
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES];
+}
+
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.navigationController setNavigationBarHidden:NO];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+
+    UIButton* button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [button setTitle:@"Back" forState:UIControlStateNormal];
+    [button sizeToFit];
+    button.frame = CGRectMake(280, 5, 40, 20);
+    [button addTarget:self action:@selector(backButton) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:button];
+}
+
+- (void)backButton {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end
