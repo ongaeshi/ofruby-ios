@@ -41,6 +41,7 @@
     // TextView
     CGRect rect = self.view.bounds;
     mTextView = [[UITextView alloc]initWithFrame:rect];
+    mTextView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     mTextView.editable = YES;
     mTextView.textAlignment = UITextAlignmentLeft;
     //textView.font = [UIFont fontWithName:@"Helvetica" size:14];
