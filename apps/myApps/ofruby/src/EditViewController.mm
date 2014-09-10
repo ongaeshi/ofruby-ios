@@ -61,6 +61,24 @@
     self.navigationItem.titleView = button;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+
+    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+    [notificationCenter addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [notificationCenter addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+}
+ 
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+
+    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+    [notificationCenter removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [notificationCenter removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+}
+
 - (void)tapTitleButton 
 {
     [mTextView resignFirstResponder];
@@ -92,20 +110,29 @@
 
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
-    // Shrink TextView size because appear the software keyboard
-    static const CGFloat kKeyboardHeight = 216.0; //TODO: To the constant
-    CGRect frame = mTextView.frame;
-    frame.size.height = self.view.bounds.size.height - kKeyboardHeight;
-    mTextView.frame = frame;
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
-    // Restore TextView size
-    mTextView.frame = self.view.bounds;
-
     // Save file
     [FCFileManager writeFileAtPath:mFileName content:textView.text];
+}
+
+
+- (void)keyboardWillShow:(NSNotification *)aNotification
+{
+    // Shrink TextView size because appear the software keyboard
+    NSDictionary *info = [aNotification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+    CGRect frame = mTextView.frame;
+    frame.size.height = self.view.bounds.size.height - kbSize.height;
+    mTextView.frame = frame;
+}
+
+- (void)keyboardWillHide:(NSNotification*)aNotification
+{
+    // Restore TextView size
+    mTextView.frame = self.view.bounds;
 }
 
 - (void)didReceiveMemoryWarning
