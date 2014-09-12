@@ -1,5 +1,15 @@
 # HISTORY - ofruby-ios
 
+## 0.3 - 2014/09/13
+
+* Hide the navigationBar at executing script
+* noise(x), noise(x, y), noise(x, y, z)
+* Ruby's Math module (sin, cos ..)
+* rad_to_deg, deg_to_rad
+* push_matrix, pop_matrix, translate, rotate
+* dist, dist_squared, clamp, lerp
+* Support a hardware keyboard
+
 ## 0.2 - 2014/09/01
 
 * width, height
