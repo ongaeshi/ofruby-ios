@@ -125,14 +125,52 @@
 
 - (NSMutableArray *) updateDataSourceFromFiles
 {
-    NSMutableArray* array = [[NSMutableArray alloc]initWithObjects: nil];
+    NSError *error = nil;
 
+    // Collect files
     NSString* path = [FCFileManager pathForDocumentsDirectory];
     NSArray*  files = [FCFileManager listFilesInDirectoryAtPath:path];
 
-    for (NSString* str in files) {
-        [array addObject:[str lastPathComponent]];
+    // Create array adding ModDate
+    NSMutableArray* filesAndModDates = [NSMutableArray arrayWithCapacity:[files count]];
+
+    for (NSString* file in files) {
+        NSDictionary* attributes = [[NSFileManager defaultManager] attributesOfItemAtPath:file error:&error];
+        NSDate* modDate = [attributes objectForKey:NSFileModificationDate];
+
+        if (error == nil) {
+            [filesAndModDates addObject:[NSDictionary dictionaryWithObjectsAndKeys:
+                                         file, @"Path",
+                                         modDate, @"ModDate",
+                                         nil]];
+        }
     }
+
+    // Sort by ModDate
+    NSArray* sortedFiles = [filesAndModDates sortedArrayUsingComparator:
+                            ^(id path1, id path2)
+                            {
+                                NSComparisonResult comp = [[path1 objectForKey:@"ModDate"] compare:
+                                                           [path2 objectForKey:@"ModDate"]];
+
+                                // Invert ordering
+                                if (comp == NSOrderedDescending) {
+                                    comp = NSOrderedAscending;
+                                }
+                                else if(comp == NSOrderedAscending){
+                                    comp = NSOrderedDescending;
+                                }
+
+                                return comp;
+                            }];
+
+    // Map file
+    NSMutableArray* array = [[NSMutableArray alloc]initWithObjects: nil];
+
+    for (NSDictionary* dict in sortedFiles) {
+        [array addObject:[[dict objectForKey:@"Path"] lastPathComponent]];
+    }
+
 
     return array;
 }
