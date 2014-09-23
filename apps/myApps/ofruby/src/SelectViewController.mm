@@ -31,11 +31,7 @@
     self.navigationItem.rightBarButtonItem = addButton;
 
     // TableView
-    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    mDataSource = [defaults objectForKey:@"SelectViewControllerDataSource"];
-    if (mDataSource == nil) {
-        mDataSource = [[NSMutableArray alloc]initWithObjects: nil];
-    }
+    mDataSource = [self updateDataSourceFromFiles];
 }
 
 - (void)tapAddButton
@@ -95,9 +91,7 @@
             ];
 
         // Insert dataSource
-        [mDataSource insertObject:text atIndex:0];
-        NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-        [defaults setObject:mDataSource forKey:@"SelectViewControllerDataSource"];
+        mDataSource = [self updateDataSourceFromFiles];
 
         // Update the table view
         NSUInteger newIndex[] = {0, 0}; // section, row
@@ -132,6 +126,13 @@
     NSString* path = [FCFileManager pathForDocumentsDirectoryWithPath:tableCellName];
     EditViewController* viewController = [[EditViewController alloc] initWithFileName:path];
     [self.navigationController pushViewController:viewController animated:YES];
+}
+
+- (NSMutableArray *) updateDataSourceFromFiles
+{
+    // NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    // return [defaults objectForKey:@"SelectViewControllerDataSource"];
+    return [[NSMutableArray alloc]initWithObjects: nil];
 }
 
 @end
