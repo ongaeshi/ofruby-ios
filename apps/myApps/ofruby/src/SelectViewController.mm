@@ -90,14 +90,9 @@
                                          "end\n"
             ];
 
-        // Insert dataSource
+        // Update data source
         mDataSource = [self updateDataSourceFromFiles];
-
-        // Update the table view
-        NSUInteger newIndex[] = {0, 0}; // section, row
-        NSIndexPath* newPath = [[NSIndexPath alloc] initWithIndexes:newIndex length:2];
-        [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newPath]
-                              withRowAnimation:UITableViewRowAnimationTop];
+        [self.tableView reloadData];
     }
 }
 
@@ -130,9 +125,16 @@
 
 - (NSMutableArray *) updateDataSourceFromFiles
 {
-    // NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-    // return [defaults objectForKey:@"SelectViewControllerDataSource"];
-    return [[NSMutableArray alloc]initWithObjects: nil];
+    NSMutableArray* array = [[NSMutableArray alloc]initWithObjects: nil];
+
+    NSString* path = [FCFileManager pathForDocumentsDirectory];
+    NSArray*  files = [FCFileManager listFilesInDirectoryAtPath:path];
+
+    for (NSString* str in files) {
+        [array addObject:[str lastPathComponent]];
+    }
+
+    return array;
 }
 
 @end
