@@ -137,6 +137,24 @@
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
+- (void)tableView:(UITableView*)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        // File
+        NSString* tableCellName = [mDataSource objectAtIndex:indexPath.row];
+        NSString* path = [FCFileManager pathForDocumentsDirectoryWithPath:tableCellName];
+        [FCFileManager removeItemAtPath:path];
+
+        // Data Source
+        [mDataSource removeObjectAtIndex:indexPath.row];
+
+        // Table Row
+        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+                         withRowAnimation:UITableViewRowAnimationFade];
+
+    }
+}
+
 - (NSMutableArray *) updateDataSourceFromFiles
 {
     NSError *error = nil;
