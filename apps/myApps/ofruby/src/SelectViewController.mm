@@ -24,11 +24,17 @@
 {
     [super viewDidLoad];
 
-    // NavButton
+    // Add Button
     UIBarButtonItem* addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
                                                                                target:self
                                                                                action:@selector(tapAddButton)];
     self.navigationItem.rightBarButtonItem = addButton;
+
+    // Trash button
+    UIBarButtonItem* trashButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash
+                                                                                  target:self
+                                                                                  action:@selector(tapTrashButton)];
+    self.navigationItem.leftBarButtonItem = trashButton;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -42,6 +48,8 @@
 
 - (void)tapAddButton
 {
+    [self.tableView setEditing:NO animated:NO];
+
     UIAlertView* alert = [[UIAlertView alloc] init];
     alert.title = @"New File";
     //alert.message = @"Enter file name.";
@@ -51,6 +59,15 @@
     [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
     alert.cancelButtonIndex = 0;
     [alert show];
+}
+
+- (void)tapTrashButton
+{
+    if (!self.tableView.editing) {
+        [self.tableView setEditing:YES animated:YES];
+    } else {
+        [self.tableView setEditing:NO animated:YES];
+    }
 }
 
 - (void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
