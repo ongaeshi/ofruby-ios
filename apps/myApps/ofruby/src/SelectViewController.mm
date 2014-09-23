@@ -29,9 +29,15 @@
                                                                                target:self
                                                                                action:@selector(tapAddButton)];
     self.navigationItem.rightBarButtonItem = addButton;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
 
     // TableView
     mDataSource = [self updateDataSourceFromFiles];
+    [self.tableView reloadData];
 }
 
 - (void)tapAddButton
