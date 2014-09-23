@@ -92,7 +92,15 @@
 
         // Update data source
         mDataSource = [self updateDataSourceFromFiles];
-        [self.tableView reloadData];
+
+        // Insert table view
+        NSUInteger newIndex[] = {0, 0}; // section, row
+        NSIndexPath* newPath = [[NSIndexPath alloc] initWithIndexes:newIndex length:2];
+        [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newPath]
+                              withRowAnimation:UITableViewRowAnimationTop];
+
+        // Reload all
+        // [self.tableView reloadData];
     }
 }
 
