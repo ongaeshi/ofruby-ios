@@ -12,6 +12,7 @@
 @private
     NSString* mFileName;
     UITextView* mTextView;
+    bool mTouched;
 }
 
 - (id) initWithFileName:(NSString*)aFileName;

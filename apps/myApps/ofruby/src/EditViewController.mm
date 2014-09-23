@@ -19,6 +19,7 @@
     self = [super init];
     if (self) {
         mFileName = aFileName;
+        mTouched = NO;
     }
     return self;
 }
@@ -94,7 +95,7 @@
 - (void)tapRunButton
 {
     // Save file (For iOS <= 6.1)
-    [FCFileManager writeFileAtPath:mFileName content:mTextView.text];
+    [self saveFileIfTouched];
 
     // Run
     char* scriptPath = (char *)[mFileName UTF8String];
@@ -111,14 +112,13 @@
 
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
+    mTouched = YES;
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
-    // Save file
-    [FCFileManager writeFileAtPath:mFileName content:textView.text];
+    [self saveFileIfTouched];
 }
-
 
 - (void)keyboardWillShow:(NSNotification *)aNotification
 {
@@ -140,6 +140,14 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)saveFileIfTouched
+{
+    if (mTouched) {
+        [FCFileManager writeFileAtPath:mFileName content:mTextView.text];
+        mTouched = NO;
+    }
 }
 
 @end
