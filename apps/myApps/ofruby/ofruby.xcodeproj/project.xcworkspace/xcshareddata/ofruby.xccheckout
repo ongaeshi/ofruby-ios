@@ -10,29 +10,29 @@
 	<string>ofruby</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>6498CC9B-474F-45D8-AA52-0DCA27F7E52C</key>
-		<string>ssh://github.com/ongaeshi/ofruby-ios.git</string>
+		<key>C4A12F477FE01F256E5E0275E9F4F4C250F83F3C</key>
+		<string>github.com:ongaeshi/ofruby-ios.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>apps/myApps/ofruby/ofruby.xcodeproj/project.xcworkspace</string>
+	<string>apps/myApps/ofruby/ofruby.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>6498CC9B-474F-45D8-AA52-0DCA27F7E52C</key>
+		<key>C4A12F477FE01F256E5E0275E9F4F4C250F83F3C</key>
 		<string>../../../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>ssh://github.com/ongaeshi/ofruby-ios.git</string>
+	<string>github.com:ongaeshi/ofruby-ios.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>6498CC9B-474F-45D8-AA52-0DCA27F7E52C</string>
+	<string>C4A12F477FE01F256E5E0275E9F4F4C250F83F3C</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>6498CC9B-474F-45D8-AA52-0DCA27F7E52C</string>
+			<string>C4A12F477FE01F256E5E0275E9F4F4C250F83F3C</string>
 			<key>IDESourceControlWCCName</key>
 			<string>ofruby-ios</string>
 		</dict>
