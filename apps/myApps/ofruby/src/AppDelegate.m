@@ -16,4 +16,10 @@
     [self.window makeKeyAndVisible];
 }
 
+- (void)applicationDidEnterBackground:(UIApplication *)application
+{
+　　NSNotification* n = [NSNotification notificationWithName:@"applicationDidEnterBackground" object:self];
+　　[[NSNotificationCenter defaultCenter] postNotification:n];
+}
+
 @end

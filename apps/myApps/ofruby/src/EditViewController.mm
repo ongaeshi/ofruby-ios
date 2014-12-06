@@ -70,6 +70,7 @@
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
     [notificationCenter addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [notificationCenter addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    [notificationCenter addObserver:self selector:@selector(applicationDidEnterBackground) name:@"applicationDidEnterBackground" object:nil];
 }
  
 - (void)viewDidDisappear:(BOOL)animated
@@ -79,6 +80,7 @@
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
     [notificationCenter removeObserver:self name:UIKeyboardWillShowNotification object:nil];
     [notificationCenter removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+    [notificationCenter removeObserver:self name:@"applicationDidEnterBackground" object:nil];
 }
 
 - (void)tapTitleButton 
@@ -148,6 +150,11 @@
         [FCFileManager writeFileAtPath:mFileName content:mTextView.text];
         mTouched = NO;
     }
+}
+
+- (void)applicationDidEnterBackground
+{
+    [self saveFileIfTouched];
 }
 
 @end
