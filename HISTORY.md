@@ -1,5 +1,13 @@
 # HISTORY - ofruby-ios
 
+## 0.4 - 2014/12/06
+
+* Support iOS8
+* Add trash button
+* Sort a files by the last modification date
+* Enable the "Fast App Switching"
+* Save file when home button is pushed
+
 ## 0.3 - 2014/09/13
 
 * Hide the navigationBar at executing script

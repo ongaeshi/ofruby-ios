@@ -749,7 +749,7 @@
 				INFOPLIST_FILE = "ofxiOS-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "${TARGET_NAME}";
-				PROVISIONING_PROFILE = "6feee01d-6226-4782-8068-ffe786ca65bc";
+				PROVISIONING_PROFILE = "";
 				VALID_ARCHS = "armv6 armv7";
 			};
 			name = Release;
