@@ -1,4 +1,6 @@
 #import "AppDelegate.h"
+#import "SelectViewController.h"
+#import "HelpViewController.h"
 
 @implementation AppDelegate
 
@@ -8,9 +10,18 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen]bounds]];
 
-    rootController = [[SelectViewController alloc]init];
+    tabBarController = [[UITabBarController alloc] init];
+    tabBarController.title = @"Home";
+
+    UIViewController* tab1 = [[SelectViewController alloc]init];
+    tab1.title = @"Files";
+    UIViewController* tab2 = [[HelpViewController alloc]init];
+    tab2.title = @"Help";
+    NSArray* tabs = [NSArray arrayWithObjects:tab1, tab2, nil];
+    [tabBarController setViewControllers:tabs animated:NO];
+
     naviController = [[UINavigationController alloc]
-                      initWithRootViewController:rootController];
+                      initWithRootViewController:tabBarController];
 
     [self.window addSubview:naviController.view];
     [self.window makeKeyAndVisible];
