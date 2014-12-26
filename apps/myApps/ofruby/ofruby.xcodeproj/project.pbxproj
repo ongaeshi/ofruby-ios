@@ -20,6 +20,8 @@
 		525E0E0C1996369E00C18947 /* EditViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 525E0E0B1996369E00C18947 /* EditViewController.mm */; };
 		525E0E0F199660AE00C18947 /* FCFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 525E0E0E199660AE00C18947 /* FCFileManager.m */; };
 		527EB38919AA0D4A003224BC /* BindTouchPoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 527EB38719AA0D4A003224BC /* BindTouchPoint.cpp */; };
+		52BBFAA81A4DB29B00D31C5E /* tabbar_files.png in Resources */ = {isa = PBXBuildFile; fileRef = 52BBFAA71A4DB29B00D31C5E /* tabbar_files.png */; };
+		52BBFAAA1A4DB6F500D31C5E /* tabbar_samples.png in Resources */ = {isa = PBXBuildFile; fileRef = 52BBFAA91A4DB6F500D31C5E /* tabbar_samples.png */; };
 		52C285AC1995C60B00A6BF47 /* mrblib.c in Sources */ = {isa = PBXBuildFile; fileRef = 52C285581995C60B00A6BF47 /* mrblib.c */; };
 		52C285AD1995C60B00A6BF47 /* y.tab.c in Sources */ = {isa = PBXBuildFile; fileRef = 52C285591995C60B00A6BF47 /* y.tab.c */; };
 		52C285AE1995C60B00A6BF47 /* lex.def in Resources */ = {isa = PBXBuildFile; fileRef = 52C2855B1995C60B00A6BF47 /* lex.def */; };
@@ -124,6 +126,8 @@
 		525E0E0E199660AE00C18947 /* FCFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCFileManager.m; sourceTree = "<group>"; };
 		527EB38719AA0D4A003224BC /* BindTouchPoint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BindTouchPoint.cpp; sourceTree = "<group>"; };
 		527EB38819AA0D4A003224BC /* BindTouchPoint.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BindTouchPoint.hpp; sourceTree = "<group>"; };
+		52BBFAA71A4DB29B00D31C5E /* tabbar_files.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar_files.png; sourceTree = "<group>"; };
+		52BBFAA91A4DB6F500D31C5E /* tabbar_samples.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar_samples.png; sourceTree = "<group>"; };
 		52C285581995C60B00A6BF47 /* mrblib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mrblib.c; sourceTree = "<group>"; };
 		52C285591995C60B00A6BF47 /* y.tab.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = y.tab.c; sourceTree = "<group>"; };
 		52C2855B1995C60B00A6BF47 /* lex.def */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = lex.def; sourceTree = "<group>"; };
@@ -304,6 +308,7 @@
 		525E0DF61995D05C00C18947 /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				52BBFAA61A4DB29B00D31C5E /* images */,
 				525E0DF71995D05C00C18947 /* scripts */,
 			);
 			path = resources;
@@ -316,6 +321,15 @@
 				525E0DF91995D05C00C18947 /* line.rb */,
 			);
 			path = scripts;
+			sourceTree = "<group>";
+		};
+		52BBFAA61A4DB29B00D31C5E /* images */ = {
+			isa = PBXGroup;
+			children = (
+				52BBFAA91A4DB6F500D31C5E /* tabbar_samples.png */,
+				52BBFAA71A4DB29B00D31C5E /* tabbar_files.png */,
+			);
+			path = images;
 			sourceTree = "<group>";
 		};
 		52C285561995C60B00A6BF47 /* mruby */ = {
@@ -612,8 +626,10 @@
 				525E0DFB1995D05C00C18947 /* line.rb in Resources */,
 				52C285BA1995C60B00A6BF47 /* .gitkeep in Resources */,
 				52C285CE1995C60B00A6BF47 /* mrubybind.dat in Resources */,
+				52BBFAA81A4DB29B00D31C5E /* tabbar_files.png in Resources */,
 				52C285C11995C60B00A6BF47 /* mruby_core.rake in Resources */,
 				52C285BF1995C60B00A6BF47 /* keywords in Resources */,
+				52BBFAAA1A4DB6F500D31C5E /* tabbar_samples.png in Resources */,
 				5205E7E219A1A73F00C09DC5 /* Images-2.xcassets in Resources */,
 				52C285AE1995C60B00A6BF47 /* lex.def in Resources */,
 			);

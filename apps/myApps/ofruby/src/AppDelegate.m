@@ -14,9 +14,13 @@
     tabBarController.title = @"Home";
 
     UIViewController* tab1 = [[SelectViewController alloc]init];
-    tab1.title = @"Files";
+    UIImage* icon1 = [UIImage imageNamed:@"tabbar_files.png"];
+    tab1.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Files" image:icon1 tag:0];
+
     UIViewController* tab2 = [[HelpViewController alloc]init];
-    tab2.title = @"Help";
+    UIImage* icon2 = [UIImage imageNamed:@"tabbar_samples.png"];
+    tab2.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Samples" image:icon2 tag:0];
+
     NSArray* tabs = [NSArray arrayWithObjects:tab1, tab2, nil];
     [tabBarController setViewControllers:tabs animated:NO];
 
