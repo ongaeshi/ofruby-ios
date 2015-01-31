@@ -14,27 +14,27 @@
 - (id)init
 {
     self = [super init];
-    if (self) {
-        self.title = @"Home";
-    }
     return self;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // Title
+    self.tabBarController.title = @"Files";
 
     // Add Button
     UIBarButtonItem* addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
                                                                                target:self
                                                                                action:@selector(tapAddButton)];
-    self.navigationItem.rightBarButtonItem = addButton;
+    self.tabBarController.navigationItem.rightBarButtonItem = addButton;
 
     // Trash button
     UIBarButtonItem* trashButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash
                                                                                   target:self
                                                                                   action:@selector(tapTrashButton)];
-    self.navigationItem.leftBarButtonItem = trashButton;
+    self.tabBarController.navigationItem.leftBarButtonItem = trashButton;
 }
 
 - (void)viewWillAppear:(BOOL)animated

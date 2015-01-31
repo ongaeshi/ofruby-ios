@@ -11,7 +11,7 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen]bounds]];
 
     tabBarController = [[UITabBarController alloc] init];
-    tabBarController.title = @"Home";
+    tabBarController.title = @"";
 
     UIViewController* tab1 = [[SelectViewController alloc]init];
     UIImage* icon1 = [UIImage imageNamed:@"tabbar_files.png"];
