@@ -21,6 +21,7 @@
 		525E0E0F199660AE00C18947 /* FCFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 525E0E0E199660AE00C18947 /* FCFileManager.m */; };
 		527EB38919AA0D4A003224BC /* BindTouchPoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 527EB38719AA0D4A003224BC /* BindTouchPoint.cpp */; };
 		52B87B121A7C92590067183F /* SampleViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 52B87B111A7C92590067183F /* SampleViewController.mm */; };
+		52B87B141A7C98790067183F /* sample in Resources */ = {isa = PBXBuildFile; fileRef = 52B87B131A7C98790067183F /* sample */; };
 		52BBFAA81A4DB29B00D31C5E /* tabbar_files.png in Resources */ = {isa = PBXBuildFile; fileRef = 52BBFAA71A4DB29B00D31C5E /* tabbar_files.png */; };
 		52BBFAAA1A4DB6F500D31C5E /* tabbar_samples.png in Resources */ = {isa = PBXBuildFile; fileRef = 52BBFAA91A4DB6F500D31C5E /* tabbar_samples.png */; };
 		52C285AC1995C60B00A6BF47 /* mrblib.c in Sources */ = {isa = PBXBuildFile; fileRef = 52C285581995C60B00A6BF47 /* mrblib.c */; };
@@ -129,6 +130,7 @@
 		527EB38819AA0D4A003224BC /* BindTouchPoint.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BindTouchPoint.hpp; sourceTree = "<group>"; };
 		52B87B101A7C92590067183F /* SampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleViewController.h; sourceTree = "<group>"; };
 		52B87B111A7C92590067183F /* SampleViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SampleViewController.mm; sourceTree = "<group>"; };
+		52B87B131A7C98790067183F /* sample */ = {isa = PBXFileReference; lastKnownFileType = folder; path = sample; sourceTree = "<group>"; };
 		52BBFAA71A4DB29B00D31C5E /* tabbar_files.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar_files.png; sourceTree = "<group>"; };
 		52BBFAA91A4DB6F500D31C5E /* tabbar_samples.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar_samples.png; sourceTree = "<group>"; };
 		52C285581995C60B00A6BF47 /* mrblib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mrblib.c; sourceTree = "<group>"; };
@@ -311,6 +313,7 @@
 		525E0DF61995D05C00C18947 /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				52B87B131A7C98790067183F /* sample */,
 				52BBFAA61A4DB29B00D31C5E /* images */,
 				525E0DF71995D05C00C18947 /* scripts */,
 			);
@@ -625,6 +628,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				52B87B141A7C98790067183F /* sample in Resources */,
 				525E0DFA1995D05C00C18947 /* hello.rb in Resources */,
 				E41D3ED713B38FB500A75A5D /* Project.xcconfig in Resources */,
 				E41D3EE613B3906D00A75A5D /* CoreOF.xcconfig in Resources */,
