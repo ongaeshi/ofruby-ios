@@ -20,6 +20,7 @@
 		525E0E0C1996369E00C18947 /* EditViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 525E0E0B1996369E00C18947 /* EditViewController.mm */; };
 		525E0E0F199660AE00C18947 /* FCFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 525E0E0E199660AE00C18947 /* FCFileManager.m */; };
 		527EB38919AA0D4A003224BC /* BindTouchPoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 527EB38719AA0D4A003224BC /* BindTouchPoint.cpp */; };
+		52B87B121A7C92590067183F /* SampleViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 52B87B111A7C92590067183F /* SampleViewController.mm */; };
 		52BBFAA81A4DB29B00D31C5E /* tabbar_files.png in Resources */ = {isa = PBXBuildFile; fileRef = 52BBFAA71A4DB29B00D31C5E /* tabbar_files.png */; };
 		52BBFAAA1A4DB6F500D31C5E /* tabbar_samples.png in Resources */ = {isa = PBXBuildFile; fileRef = 52BBFAA91A4DB6F500D31C5E /* tabbar_samples.png */; };
 		52C285AC1995C60B00A6BF47 /* mrblib.c in Sources */ = {isa = PBXBuildFile; fileRef = 52C285581995C60B00A6BF47 /* mrblib.c */; };
@@ -126,6 +127,8 @@
 		525E0E0E199660AE00C18947 /* FCFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FCFileManager.m; sourceTree = "<group>"; };
 		527EB38719AA0D4A003224BC /* BindTouchPoint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BindTouchPoint.cpp; sourceTree = "<group>"; };
 		527EB38819AA0D4A003224BC /* BindTouchPoint.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BindTouchPoint.hpp; sourceTree = "<group>"; };
+		52B87B101A7C92590067183F /* SampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleViewController.h; sourceTree = "<group>"; };
+		52B87B111A7C92590067183F /* SampleViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SampleViewController.mm; sourceTree = "<group>"; };
 		52BBFAA71A4DB29B00D31C5E /* tabbar_files.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar_files.png; sourceTree = "<group>"; };
 		52BBFAA91A4DB6F500D31C5E /* tabbar_samples.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar_samples.png; sourceTree = "<group>"; };
 		52C285581995C60B00A6BF47 /* mrblib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mrblib.c; sourceTree = "<group>"; };
@@ -537,6 +540,8 @@
 				525E0DFD1995EF0C00C18947 /* AppDelegate.m */,
 				525E0E001995EF7B00C18947 /* SelectViewController.h */,
 				525E0E011995EF7B00C18947 /* SelectViewController.mm */,
+				52B87B101A7C92590067183F /* SampleViewController.h */,
+				52B87B111A7C92590067183F /* SampleViewController.mm */,
 				525E0E0A1996369E00C18947 /* EditViewController.h */,
 				525E0E0B1996369E00C18947 /* EditViewController.mm */,
 				52E087751998AF1700F3A293 /* HelpViewController.h */,
@@ -659,6 +664,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				52C285B71995C60B00A6BF47 /* enum.c in Sources */,
+				52B87B121A7C92590067183F /* SampleViewController.mm in Sources */,
 				52C285CA1995C60B00A6BF47 /* symbol.c in Sources */,
 				52C285B01995C60B00A6BF47 /* backtrace.c in Sources */,
 				52DB1C0319A3C06500D43F2A /* Touch.cpp in Sources */,

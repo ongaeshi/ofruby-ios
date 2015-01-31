@@ -1,15 +1,15 @@
-#include "SelectViewController.h"
+#include "SampleViewController.h"
 
 #include "EditViewController.h"
 #include "FCFileManager.h"
 #include "ScriptApp.h"
 #include "ScriptController.h"
 
-@interface SelectViewController ()
+@interface SampleViewController ()
 
 @end
 
-@implementation SelectViewController
+@implementation SampleViewController
 
 - (id)init
 {
@@ -27,47 +27,15 @@
     [super viewWillAppear:animated];
 
     // Title
-    self.tabBarController.title = @"File";
+    self.tabBarController.title = @"Sample";
 
     // Add Button
-    UIBarButtonItem* addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
-                                                                               target:self
-                                                                               action:@selector(tapAddButton)];
-    self.tabBarController.navigationItem.rightBarButtonItem = addButton;
-
-    // Trash button
-    UIBarButtonItem* trashButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash
-                                                                                  target:self
-                                                                                  action:@selector(tapTrashButton)];
-    self.tabBarController.navigationItem.leftBarButtonItem = trashButton;
+    self.tabBarController.navigationItem.rightBarButtonItem = NULL;
+    self.tabBarController.navigationItem.leftBarButtonItem = NULL;
 
     // TableView
     mDataSource = [self updateDataSourceFromFiles];
     [self.tableView reloadData];
-}
-
-- (void)tapAddButton
-{
-    [self.tableView setEditing:NO animated:NO];
-
-    UIAlertView* alert = [[UIAlertView alloc] init];
-    alert.title = @"New File";
-    //alert.message = @"Enter file name.";
-    alert.delegate = self;
-    [alert addButtonWithTitle:@"Cancel"];
-    [alert addButtonWithTitle:@"OK"];
-    [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
-    alert.cancelButtonIndex = 0;
-    [alert show];
-}
-
-- (void)tapTrashButton
-{
-    if (!self.tableView.editing) {
-        [self.tableView setEditing:YES animated:YES];
-    } else {
-        [self.tableView setEditing:NO animated:YES];
-    }
 }
 
 - (void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex

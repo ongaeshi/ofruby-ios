@@ -1,6 +1,6 @@
 #import "AppDelegate.h"
 #import "SelectViewController.h"
-#import "HelpViewController.h"
+#import "SampleViewController.h"
 
 @implementation AppDelegate
 
@@ -15,11 +15,11 @@
 
     UIViewController* tab1 = [[SelectViewController alloc]init];
     UIImage* icon1 = [UIImage imageNamed:@"tabbar_files.png"];
-    tab1.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Files" image:icon1 tag:0];
+    tab1.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"File" image:icon1 tag:0];
 
-    UIViewController* tab2 = [[HelpViewController alloc]init];
+    UIViewController* tab2 = [[SampleViewController alloc]init];
     UIImage* icon2 = [UIImage imageNamed:@"tabbar_samples.png"];
-    tab2.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Samples" image:icon2 tag:0];
+    tab2.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Sample" image:icon2 tag:0];
 
     NSArray* tabs = [NSArray arrayWithObjects:tab1, tab2, nil];
     [tabBarController setViewControllers:tabs animated:NO];
