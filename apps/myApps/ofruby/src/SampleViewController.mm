@@ -117,7 +117,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString* tableCellName = [mDataSource objectAtIndex:indexPath.row];
-    NSString* path = [FCFileManager pathForDocumentsDirectoryWithPath:tableCellName];
+    // NSString* path = [FCFileManager pathForDocumentsDirectoryWithPath:tableCellName];
+    NSString* path = [FCFileManager pathForMainBundleDirectoryWithPath:@"sample"];
+    path = [path stringByAppendingPathComponent:tableCellName];
     EditViewController* viewController = [[EditViewController alloc] initWithFileName:path];
     [self.navigationController pushViewController:viewController animated:YES];
 }
@@ -146,7 +148,16 @@
 
     // Collect files
     NSString* path = [FCFileManager pathForDocumentsDirectory];
-    NSArray*  files = [FCFileManager listFilesInDirectoryAtPath:path];
+    // NSArray*  files = [FCFileManager listFilesInDirectoryAtPath:path];
+
+    NSBundle *mainBundle = [NSBundle mainBundle];
+    NSString *filePath = [mainBundle pathForResource:@"hello" ofType:@"rb" inDirectory:@"sample"];
+    NSLog(@"resourcePath: %@", filePath);
+
+    NSString *resourcePath = [mainBundle resourcePath];
+    NSString *samplePath = [resourcePath stringByAppendingPathComponent:@"sample"];
+    NSLog(@"samplePath: %@", samplePath);
+    NSArray* files = [FCFileManager listFilesInDirectoryAtPath:samplePath];
 
     // Create array adding ModDate
     NSMutableArray* filesAndModDates = [NSMutableArray arrayWithCapacity:[files count]];
