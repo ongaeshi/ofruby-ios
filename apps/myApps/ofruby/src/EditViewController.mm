@@ -14,10 +14,11 @@
 
 @implementation EditViewController
 
-- (id) initWithFileName:(NSString*)aFileName
+- (id) initWithFileName:(NSString*)aFileName edit:(BOOL)aEditable;
 {
     self = [super init];
     if (self) {
+        mEditable = aEditable;
         mFileName = aFileName;
         mTouched = NO;
     }
@@ -43,7 +44,7 @@
     CGRect rect = self.view.bounds;
     mTextView = [[UITextView alloc]initWithFrame:rect];
     mTextView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    mTextView.editable = YES;
+    mTextView.editable = mEditable;
     mTextView.textAlignment = UITextAlignmentLeft;
     //textView.font = [UIFont fontWithName:@"Helvetica" size:14];
     //mTextView.backgroundColor = [UIColor whiteColor];
