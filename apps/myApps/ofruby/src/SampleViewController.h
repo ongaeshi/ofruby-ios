@@ -1,7 +1,5 @@
-#import <UIKit/UIKit.h>
+#import "SelectViewController.h"
 
-@interface SampleViewController : UITableViewController {
-    NSMutableArray *mDataSource;
-}
+@interface SampleViewController : SelectViewController
 
 @end

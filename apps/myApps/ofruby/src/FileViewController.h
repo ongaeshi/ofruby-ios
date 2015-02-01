@@ -1,6 +1,5 @@
 #import "SelectViewController.h"
 
-@interface FileViewController : SelectViewController {
-}
+@interface FileViewController : SelectViewController
 
 @end
