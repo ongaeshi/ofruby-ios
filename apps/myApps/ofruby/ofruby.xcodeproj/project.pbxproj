@@ -20,6 +20,7 @@
 		527EB38919AA0D4A003224BC /* BindTouchPoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 527EB38719AA0D4A003224BC /* BindTouchPoint.cpp */; };
 		52B87B121A7C92590067183F /* SampleViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 52B87B111A7C92590067183F /* SampleViewController.mm */; };
 		52B87B141A7C98790067183F /* sample in Resources */ = {isa = PBXBuildFile; fileRef = 52B87B131A7C98790067183F /* sample */; };
+		52B87B171A7DDA340067183F /* FileViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 52B87B161A7DDA340067183F /* FileViewController.mm */; };
 		52BBFAA81A4DB29B00D31C5E /* tabbar_files.png in Resources */ = {isa = PBXBuildFile; fileRef = 52BBFAA71A4DB29B00D31C5E /* tabbar_files.png */; };
 		52BBFAAA1A4DB6F500D31C5E /* tabbar_samples.png in Resources */ = {isa = PBXBuildFile; fileRef = 52BBFAA91A4DB6F500D31C5E /* tabbar_samples.png */; };
 		52C285AC1995C60B00A6BF47 /* mrblib.c in Sources */ = {isa = PBXBuildFile; fileRef = 52C285581995C60B00A6BF47 /* mrblib.c */; };
@@ -127,6 +128,8 @@
 		52B87B101A7C92590067183F /* SampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SampleViewController.h; sourceTree = "<group>"; };
 		52B87B111A7C92590067183F /* SampleViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SampleViewController.mm; sourceTree = "<group>"; };
 		52B87B131A7C98790067183F /* sample */ = {isa = PBXFileReference; lastKnownFileType = folder; path = sample; sourceTree = "<group>"; };
+		52B87B151A7DDA340067183F /* FileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileViewController.h; sourceTree = "<group>"; };
+		52B87B161A7DDA340067183F /* FileViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FileViewController.mm; sourceTree = "<group>"; };
 		52BBFAA71A4DB29B00D31C5E /* tabbar_files.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar_files.png; sourceTree = "<group>"; };
 		52BBFAA91A4DB6F500D31C5E /* tabbar_samples.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar_samples.png; sourceTree = "<group>"; };
 		52C285581995C60B00A6BF47 /* mrblib.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mrblib.c; sourceTree = "<group>"; };
@@ -529,6 +532,8 @@
 				525E0DFD1995EF0C00C18947 /* AppDelegate.m */,
 				525E0E001995EF7B00C18947 /* SelectViewController.h */,
 				525E0E011995EF7B00C18947 /* SelectViewController.mm */,
+				52B87B151A7DDA340067183F /* FileViewController.h */,
+				52B87B161A7DDA340067183F /* FileViewController.mm */,
 				52B87B101A7C92590067183F /* SampleViewController.h */,
 				52B87B111A7C92590067183F /* SampleViewController.mm */,
 				525E0E0A1996369E00C18947 /* EditViewController.h */,
@@ -675,6 +680,7 @@
 				52C285C41995C60B00A6BF47 /* pool.c in Sources */,
 				52C285D51995C60B00A6BF47 /* BindInput.cpp in Sources */,
 				52C285B51995C60B00A6BF47 /* debug.c in Sources */,
+				52B87B171A7DDA340067183F /* FileViewController.mm in Sources */,
 				52C285D91995C60B00A6BF47 /* ScriptEngine.cpp in Sources */,
 				52C285CC1995C60B00A6BF47 /* vm.c in Sources */,
 				52C285BE1995C60B00A6BF47 /* kernel.c in Sources */,

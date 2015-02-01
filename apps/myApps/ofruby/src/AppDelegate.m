@@ -1,5 +1,5 @@
 #import "AppDelegate.h"
-#import "SelectViewController.h"
+#import "FileViewController.h"
 #import "SampleViewController.h"
 
 @implementation AppDelegate
@@ -13,7 +13,7 @@
     tabBarController = [[UITabBarController alloc] init];
     tabBarController.title = @"";
 
-    UIViewController* tab1 = [[SelectViewController alloc]init];
+    UIViewController* tab1 = [[FileViewController alloc]init];
     UIImage* icon1 = [UIImage imageNamed:@"tabbar_files.png"];
     tab1.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"File" image:icon1 tag:0];
 
