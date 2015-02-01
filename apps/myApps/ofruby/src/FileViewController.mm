@@ -10,7 +10,10 @@
 
 - (id)init
 {
-    self = [super initWithFileDirectory: [FCFileManager pathForDocumentsDirectory] title:@"File"];
+    self = [super initWithFileDirectory: [FCFileManager pathForDocumentsDirectory]
+                                  title: @"File"
+                                   edit: true
+        ];
     return self;
 }
 

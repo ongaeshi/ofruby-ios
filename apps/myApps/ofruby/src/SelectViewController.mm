@@ -17,11 +17,12 @@
     return self;
 }
 
-- (id)initWithFileDirectory:(NSString*)directory title:(NSString*)title
+- (id)initWithFileDirectory:(NSString*)directory title:(NSString*)title edit:(BOOL)editable
 {
     self = [super init];
     mFileDirectory = directory;
     mTitle = title;
+    mEditable = editable;
     return self;
 }
 
@@ -37,17 +38,24 @@
     // Title
     self.tabBarController.title = mTitle;
 
-    // Add Button
-    UIBarButtonItem* addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
-                                                                               target:self
-                                                                               action:@selector(tapAddButton)];
-    self.tabBarController.navigationItem.rightBarButtonItem = addButton;
+    // BarButton
+    if (mEditable) {
+        // Add Button
+        UIBarButtonItem* addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+                                                                                   target:self
+                                                                                   action:@selector(tapAddButton)];
+        self.tabBarController.navigationItem.rightBarButtonItem = addButton;
 
-    // Trash button
-    UIBarButtonItem* trashButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash
-                                                                                  target:self
-                                                                                  action:@selector(tapTrashButton)];
-    self.tabBarController.navigationItem.leftBarButtonItem = trashButton;
+        // Trash button
+        UIBarButtonItem* trashButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash
+                                                                                     target:self
+                                                                                     action:@selector(tapTrashButton)];
+        self.tabBarController.navigationItem.leftBarButtonItem = trashButton;
+        
+    } else {
+        self.tabBarController.navigationItem.rightBarButtonItem = NULL;
+        self.tabBarController.navigationItem.leftBarButtonItem = NULL;
+    }
 
     // TableView
     mDataSource = [self updateDataSourceFromFiles];

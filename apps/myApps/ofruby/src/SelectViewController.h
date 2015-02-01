@@ -5,8 +5,9 @@
     NSMutableArray* mDataSource;
     NSString* mFileDirectory;
     NSString* mTitle;
+    BOOL mEditable;
 }
 
-- (id)initWithFileDirectory:(NSString*)directory title:(NSString*)title;
+- (id)initWithFileDirectory:(NSString*)directory title:(NSString*)title edit:(BOOL)editable;
 
 @end
