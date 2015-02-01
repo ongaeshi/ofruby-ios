@@ -17,10 +17,11 @@
     return self;
 }
 
-- (id)initWithFileDirectory:(NSString*)directory
+- (id)initWithFileDirectory:(NSString*)directory title:(NSString*)title
 {
     self = [super init];
     mFileDirectory = directory;
+    mTitle = title;
     return self;
 }
 
@@ -34,7 +35,7 @@
     [super viewWillAppear:animated];
 
     // Title
-    self.tabBarController.title = @"File";
+    self.tabBarController.title = mTitle;
 
     // Add Button
     UIBarButtonItem* addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd

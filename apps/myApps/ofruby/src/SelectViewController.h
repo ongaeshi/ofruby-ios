@@ -4,8 +4,9 @@
 {
     NSMutableArray* mDataSource;
     NSString* mFileDirectory;
+    NSString* mTitle;
 }
 
-- (id)initWithFileDirectory:(NSString*)directory;
+- (id)initWithFileDirectory:(NSString*)directory title:(NSString*)title;
 
 @end
