@@ -12,8 +12,6 @@
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		5205E7E219A1A73F00C09DC5 /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5205E7E119A1A73F00C09DC5 /* Images-2.xcassets */; };
 		52118CF719B7559E004C1C0B /* math.c in Sources */ = {isa = PBXBuildFile; fileRef = 52118CF619B7559E004C1C0B /* math.c */; };
-		525E0DFA1995D05C00C18947 /* hello.rb in Resources */ = {isa = PBXBuildFile; fileRef = 525E0DF81995D05C00C18947 /* hello.rb */; };
-		525E0DFB1995D05C00C18947 /* line.rb in Resources */ = {isa = PBXBuildFile; fileRef = 525E0DF91995D05C00C18947 /* line.rb */; };
 		525E0DFE1995EF0C00C18947 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 525E0DFD1995EF0C00C18947 /* AppDelegate.m */; };
 		525E0E021995EF7B00C18947 /* SelectViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 525E0E011995EF7B00C18947 /* SelectViewController.mm */; };
 		525E0E09199614A000C18947 /* ScriptController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 525E0E08199614A000C18947 /* ScriptController.mm */; };
@@ -114,8 +112,6 @@
 		32CA4F630368D1EE00C91783 /* ofxiOS_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxiOS_Prefix.pch; sourceTree = "<group>"; };
 		5205E7E119A1A73F00C09DC5 /* Images-2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = "Images-2.xcassets"; path = "ofruby/Images-2.xcassets"; sourceTree = "<group>"; };
 		52118CF619B7559E004C1C0B /* math.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = math.c; sourceTree = "<group>"; };
-		525E0DF81995D05C00C18947 /* hello.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = hello.rb; sourceTree = "<group>"; };
-		525E0DF91995D05C00C18947 /* line.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = line.rb; sourceTree = "<group>"; };
 		525E0DFC1995EF0C00C18947 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		525E0DFD1995EF0C00C18947 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		525E0E001995EF7B00C18947 /* SelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectViewController.h; sourceTree = "<group>"; };
@@ -315,18 +311,8 @@
 			children = (
 				52B87B131A7C98790067183F /* sample */,
 				52BBFAA61A4DB29B00D31C5E /* images */,
-				525E0DF71995D05C00C18947 /* scripts */,
 			);
 			path = resources;
-			sourceTree = "<group>";
-		};
-		525E0DF71995D05C00C18947 /* scripts */ = {
-			isa = PBXGroup;
-			children = (
-				525E0DF81995D05C00C18947 /* hello.rb */,
-				525E0DF91995D05C00C18947 /* line.rb */,
-			);
-			path = scripts;
 			sourceTree = "<group>";
 		};
 		52BBFAA61A4DB29B00D31C5E /* images */ = {
@@ -629,10 +615,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				52B87B141A7C98790067183F /* sample in Resources */,
-				525E0DFA1995D05C00C18947 /* hello.rb in Resources */,
 				E41D3ED713B38FB500A75A5D /* Project.xcconfig in Resources */,
 				E41D3EE613B3906D00A75A5D /* CoreOF.xcconfig in Resources */,
-				525E0DFB1995D05C00C18947 /* line.rb in Resources */,
 				52C285BA1995C60B00A6BF47 /* .gitkeep in Resources */,
 				52C285CE1995C60B00A6BF47 /* mrubybind.dat in Resources */,
 				52BBFAA81A4DB29B00D31C5E /* tabbar_files.png in Resources */,
