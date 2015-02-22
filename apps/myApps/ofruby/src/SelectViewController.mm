@@ -14,32 +14,48 @@
 - (id)init
 {
     self = [super init];
-    if (self) {
-        self.title = @"Home";
-    }
+    return self;
+}
+
+- (id)initWithFileDirectory:(NSString*)directory title:(NSString*)title edit:(BOOL)editable
+{
+    self = [super init];
+    mFileDirectory = directory;
+    mTitle = title;
+    mEditable = editable;
     return self;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    // Add Button
-    UIBarButtonItem* addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
-                                                                               target:self
-                                                                               action:@selector(tapAddButton)];
-    self.navigationItem.rightBarButtonItem = addButton;
-
-    // Trash button
-    UIBarButtonItem* trashButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash
-                                                                                  target:self
-                                                                                  action:@selector(tapTrashButton)];
-    self.navigationItem.leftBarButtonItem = trashButton;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+
+    // Title
+    self.navigationItem.title = mTitle;
+
+    // BarButton
+    if (mEditable) {
+        // Add Button
+        UIBarButtonItem* addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+                                                                                   target:self
+                                                                                   action:@selector(tapAddButton)];
+        self.tabBarController.navigationItem.rightBarButtonItem = addButton;
+
+        // Trash button
+        UIBarButtonItem* trashButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash
+                                                                                     target:self
+                                                                                     action:@selector(tapTrashButton)];
+        self.tabBarController.navigationItem.leftBarButtonItem = trashButton;
+        
+    } else {
+        self.tabBarController.navigationItem.rightBarButtonItem = NULL;
+        self.tabBarController.navigationItem.leftBarButtonItem = NULL;
+    }
 
     // TableView
     mDataSource = [self updateDataSourceFromFiles];
@@ -88,7 +104,7 @@
         }
 
         // Create path
-        NSString* path = [FCFileManager pathForDocumentsDirectoryWithPath:text];
+        NSString* path = [mFileDirectory stringByAppendingPathComponent:text];
 
         // Alert if file already exists
         if ([FCFileManager existsItemAtPath:path]) {
@@ -149,8 +165,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString* tableCellName = [mDataSource objectAtIndex:indexPath.row];
-    NSString* path = [FCFileManager pathForDocumentsDirectoryWithPath:tableCellName];
-    EditViewController* viewController = [[EditViewController alloc] initWithFileName:path];
+    NSString* path = [mFileDirectory stringByAppendingPathComponent:tableCellName];
+    EditViewController* viewController = [[EditViewController alloc] initWithFileName:path edit:mEditable];
+    viewController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
@@ -159,7 +176,7 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         // File
         NSString* tableCellName = [mDataSource objectAtIndex:indexPath.row];
-        NSString* path = [FCFileManager pathForDocumentsDirectoryWithPath:tableCellName];
+        NSString* path = [mFileDirectory stringByAppendingPathComponent:tableCellName];
         [FCFileManager removeItemAtPath:path];
 
         // Data Source
@@ -177,8 +194,7 @@
     NSError *error = nil;
 
     // Collect files
-    NSString* path = [FCFileManager pathForDocumentsDirectory];
-    NSArray*  files = [FCFileManager listFilesInDirectoryAtPath:path];
+    NSArray*  files = [FCFileManager listFilesInDirectoryAtPath:mFileDirectory];
 
     // Create array adding ModDate
     NSMutableArray* filesAndModDates = [NSMutableArray arrayWithCapacity:[files count]];

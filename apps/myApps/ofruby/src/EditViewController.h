@@ -8,14 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
-@interface EditViewController : UIViewController<UITextViewDelegate> {
+@interface EditViewController : UIViewController<UITextViewDelegate>
+{
+    BOOL mEditable;
 @private
     NSString* mFileName;
     UITextView* mTextView;
-    bool mTouched;
+    BOOL mTouched;
 }
 
-- (id) initWithFileName:(NSString*)aFileName;
+- (id) initWithFileName:(NSString*)aFileName edit:(BOOL)aEditable;
 
 @end
 ;
