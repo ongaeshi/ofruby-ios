@@ -13,21 +13,20 @@
     tabBarController = [[UITabBarController alloc] init];
     tabBarController.title = @"";
 
-    UIViewController* tab1 = [[FileViewController alloc]init];
+    UIViewController* view1 = [[FileViewController alloc]init];
     UIImage* icon1 = [UIImage imageNamed:@"tabbar_files.png"];
-    tab1.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"File" image:icon1 tag:0];
+    view1.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"File" image:icon1 tag:0];
+    UINavigationController *tab1 = [[UINavigationController alloc] initWithRootViewController:view1];
 
-    UIViewController* tab2 = [[SampleViewController alloc]init];
+    UIViewController* view2 = [[SampleViewController alloc]init];
     UIImage* icon2 = [UIImage imageNamed:@"tabbar_samples.png"];
-    tab2.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Sample" image:icon2 tag:0];
+    view2.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Sample" image:icon2 tag:0];
+    UINavigationController *tab2 = [[UINavigationController alloc] initWithRootViewController:view2];
 
     NSArray* tabs = [NSArray arrayWithObjects:tab1, tab2, nil];
     [tabBarController setViewControllers:tabs animated:NO];
 
-    naviController = [[UINavigationController alloc]
-                      initWithRootViewController:tabBarController];
-
-    [self.window addSubview:naviController.view];
+    [self.window addSubview:tabBarController.view];
     [self.window makeKeyAndVisible];
 }
 

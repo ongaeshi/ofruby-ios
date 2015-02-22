@@ -36,7 +36,7 @@
     [super viewWillAppear:animated];
 
     // Title
-    self.tabBarController.title = mTitle;
+    self.navigationItem.title = mTitle;
 
     // BarButton
     if (mEditable) {

@@ -1,7 +1,6 @@
 #import <Foundation/Foundation.h>
 
 @interface AppDelegate : NSObject <UIApplicationDelegate> {
-    UINavigationController *naviController;
     UITabBarController *tabBarController;
 }
 
