@@ -44,17 +44,17 @@
         UIBarButtonItem* addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
                                                                                    target:self
                                                                                    action:@selector(tapAddButton)];
-        self.tabBarController.navigationItem.rightBarButtonItem = addButton;
+        self.navigationItem.rightBarButtonItem = addButton;
 
         // Trash button
         UIBarButtonItem* trashButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash
                                                                                      target:self
                                                                                      action:@selector(tapTrashButton)];
-        self.tabBarController.navigationItem.leftBarButtonItem = trashButton;
+        self.navigationItem.leftBarButtonItem = trashButton;
         
     } else {
-        self.tabBarController.navigationItem.rightBarButtonItem = NULL;
-        self.tabBarController.navigationItem.leftBarButtonItem = NULL;
+        self.navigationItem.rightBarButtonItem = NULL;
+        self.navigationItem.leftBarButtonItem = NULL;
     }
 
     // TableView
