@@ -1,5 +1,9 @@
 # HISTORY - ofruby-ios
 
+## 0.5 - 2015/02/22
+
+* Add sample tab
+
 ## 0.4 - 2014/12/06
 
 * Support iOS8
