@@ -167,7 +167,8 @@
     NSString* tableCellName = [mDataSource objectAtIndex:indexPath.row];
     NSString* path = [mFileDirectory stringByAppendingPathComponent:tableCellName];
     EditViewController* viewController = [[EditViewController alloc] initWithFileName:path edit:mEditable];
-        [self.navigationController pushViewController:viewController animated:YES];
+    viewController.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:viewController animated:YES];
 }
 
 - (void)tableView:(UITableView*)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
