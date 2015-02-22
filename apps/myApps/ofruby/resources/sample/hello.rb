@@ -1,5 +1,6 @@
 def setup
-  set_background 128, 128, 128
+  set_background 255, 255, 255
+  @x = 180
   @y = 0
 end
 
@@ -12,7 +13,8 @@ def draw
   circle 160, 200, 100
 
   set_color 200, 50, 50
-  circle 200, @y, 50
+  @x = Input.touch(0).x if Input.touch(0).valid?
+  rect @x, @y, 100, 80
 
   set_color 0, 0, 0
   text "Hello world!", 120, 160
