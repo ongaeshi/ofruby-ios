@@ -7,6 +7,7 @@
 #include "ofAppRunner.h"
 #include "ofImage.h"
 #include "rubykokuban/BindColor.hpp"
+#import "FCFileManager.h"
 
 namespace rubykokuban {
 
@@ -32,7 +33,10 @@ mrb_value load(mrb_state *mrb, mrb_value self)
     mrb_value str;
     mrb_get_args(mrb, "S", &str);
 
-    string filename(mrb_string_value_ptr(mrb, str));
+    const char* path = mrb_string_value_ptr(mrb, str);
+    NSString *npath = [[NSString alloc] initWithUTF8String:path];
+    string filename([[FCFileManager pathForMainBundleDirectoryWithPath: npath] UTF8String]);
+
     bool isSuccess = obj->loadImage(filename);
 
     if (!isSuccess) {
