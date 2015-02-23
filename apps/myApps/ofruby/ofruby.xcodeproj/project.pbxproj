@@ -63,7 +63,7 @@
 		52C285D11995C60B00A6BF47 /* BindApplication.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 52C2859D1995C60B00A6BF47 /* BindApplication.cpp */; };
 		52C285D21995C60B00A6BF47 /* BindColor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 52C2859E1995C60B00A6BF47 /* BindColor.cpp */; };
 		52C285D31995C60B00A6BF47 /* BindGraphics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 52C285A01995C60B00A6BF47 /* BindGraphics.cpp */; };
-		52C285D41995C60B00A6BF47 /* BindImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 52C285A11995C60B00A6BF47 /* BindImage.cpp */; };
+		52C285D41995C60B00A6BF47 /* BindImage.mm in Sources */ = {isa = PBXBuildFile; fileRef = 52C285A11995C60B00A6BF47 /* BindImage.mm */; };
 		52C285D51995C60B00A6BF47 /* BindInput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 52C285A31995C60B00A6BF47 /* BindInput.cpp */; };
 		52C285D61995C60B00A6BF47 /* BindMath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 52C285A51995C60B00A6BF47 /* BindMath.cpp */; };
 		52C285D71995C60B00A6BF47 /* Input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 52C285A61995C60B00A6BF47 /* Input.cpp */; };
@@ -199,7 +199,7 @@
 		52C2859E1995C60B00A6BF47 /* BindColor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BindColor.cpp; sourceTree = "<group>"; };
 		52C2859F1995C60B00A6BF47 /* BindColor.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BindColor.hpp; sourceTree = "<group>"; };
 		52C285A01995C60B00A6BF47 /* BindGraphics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BindGraphics.cpp; sourceTree = "<group>"; };
-		52C285A11995C60B00A6BF47 /* BindImage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BindImage.cpp; sourceTree = "<group>"; };
+		52C285A11995C60B00A6BF47 /* BindImage.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BindImage.mm; sourceTree = "<group>"; };
 		52C285A21995C60B00A6BF47 /* BindImage.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BindImage.hpp; sourceTree = "<group>"; };
 		52C285A31995C60B00A6BF47 /* BindInput.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BindInput.cpp; sourceTree = "<group>"; };
 		52C285A41995C60B00A6BF47 /* BindInput.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BindInput.hpp; sourceTree = "<group>"; };
@@ -454,7 +454,7 @@
 				52C2859E1995C60B00A6BF47 /* BindColor.cpp */,
 				52C2859F1995C60B00A6BF47 /* BindColor.hpp */,
 				52C285A01995C60B00A6BF47 /* BindGraphics.cpp */,
-				52C285A11995C60B00A6BF47 /* BindImage.cpp */,
+				52C285A11995C60B00A6BF47 /* BindImage.mm */,
 				52C285A21995C60B00A6BF47 /* BindImage.hpp */,
 				52C285A31995C60B00A6BF47 /* BindInput.cpp */,
 				52C285A41995C60B00A6BF47 /* BindInput.hpp */,
@@ -703,7 +703,7 @@
 				52C285C61995C60B00A6BF47 /* proc.c in Sources */,
 				52C285BD1995C60B00A6BF47 /* init.c in Sources */,
 				527EB38919AA0D4A003224BC /* BindTouchPoint.cpp in Sources */,
-				52C285D41995C60B00A6BF47 /* BindImage.cpp in Sources */,
+				52C285D41995C60B00A6BF47 /* BindImage.mm in Sources */,
 				52C285C51995C60B00A6BF47 /* print.c in Sources */,
 				52C285D01995C60B00A6BF47 /* Bind.cpp in Sources */,
 				52C285C71995C60B00A6BF47 /* range.c in Sources */,
