@@ -7,6 +7,7 @@
 #include "ofAppRunner.h"
 #include "ofImage.h"
 #include "rubykokuban/BindColor.hpp"
+#import "FCFileManager.h"
 
 namespace rubykokuban {
 
@@ -25,22 +26,44 @@ void free(mrb_state *mrb, void *p)
 
 struct mrb_data_type data_type = { "rubykokuban_image", free };
 
-mrb_value load(mrb_state *mrb, mrb_value self)
+mrb_value loadIN(mrb_state *mrb, mrb_value self, string filename, string subpath)
 {
     ofImage* obj = new ofImage();
 
-    mrb_value str;
-    mrb_get_args(mrb, "S", &str);
-
-    string filename(mrb_string_value_ptr(mrb, str));
     bool isSuccess = obj->loadImage(filename);
 
     if (!isSuccess) {
-        string message = "not found " + filename;
+        string message = "not found " + subpath;
         mrb_raise(mrb, E_ARGUMENT_ERROR, message.c_str());
     }
 
     return BindImage::ToMrb(mrb, mrb_class_ptr(self), obj);
+}
+
+mrb_value load(mrb_state *mrb, mrb_value self)
+{
+    mrb_value str;
+    mrb_get_args(mrb, "S", &str);
+
+    const char* path = mrb_string_value_ptr(mrb, str);
+    NSString *npath = [[NSString alloc] initWithUTF8String:path];
+    // DOCUMENTS/image/path/to/test.png
+    string filename([[[FCFileManager pathForDocumentsDirectoryWithPath: @"image"] stringByAppendingPathComponent: npath] UTF8String]);
+
+    return loadIN(mrb, self, filename, [npath UTF8String]);
+}
+
+mrb_value sample(mrb_state *mrb, mrb_value self)
+{
+    mrb_value str;
+    mrb_get_args(mrb, "S", &str);
+
+    const char* path = mrb_string_value_ptr(mrb, str);
+    NSString *npath = [[NSString alloc] initWithUTF8String:path];
+    // RESOURCES/sample/image/path/to/test.png
+    string filename([[[FCFileManager pathForMainBundleDirectoryWithPath: @"sample/image"] stringByAppendingPathComponent: npath] UTF8String]);
+
+    return loadIN(mrb, self, filename, [npath UTF8String]);
 }
 
 mrb_value grab_screen(mrb_state *mrb, mrb_value self)
@@ -317,10 +340,11 @@ void BindImage::Bind(mrb_state* mrb)
     struct RClass *cc = mrb_define_class(mrb, "Image", mrb->object_class);
 
     mrb_define_class_method(mrb , cc, "load",               load,               MRB_ARGS_REQ(1));
+    mrb_define_class_method(mrb , cc, "sample",             sample,             MRB_ARGS_REQ(1));
     mrb_define_class_method(mrb , cc, "grab_screen",        grab_screen,        MRB_ARGS_OPT(4));
                                                              
     mrb_define_method(mrb, cc,        "clone",              clone,              MRB_ARGS_NONE());
-    mrb_define_method(mrb, cc,        "save",               save,               MRB_ARGS_ARG(2, 1));
+    // mrb_define_method(mrb, cc,        "save",               save,               MRB_ARGS_ARG(2, 1));
     mrb_define_method(mrb, cc,        "color",              color,              MRB_ARGS_REQ(2));
     mrb_define_method(mrb, cc,        "set_color",          set_color,          MRB_ARGS_REQ(3));
     mrb_define_method(mrb, cc,        "resize",             resize,             MRB_ARGS_REQ(2));
