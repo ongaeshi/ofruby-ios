@@ -20,8 +20,8 @@ void ScriptApp::setup()
 	//iPhoneSetOrientation(OFXIPHONE_ORIENTATION_LANDSCAPE_RIGHT);
 
     // Set default settings
-    ofSetColor(0, 0, 0);
-	ofBackground(255, 255, 255);
+    ofSetColor(255, 255, 255);   // Draw ofImage in the color of the original image.
+    ofBackground(200, 200, 200); // When ofSetColor(255, 255, 255), as ofCircle (ofTriangle, ofEllipse ..) is displayed on the screen.
     ofSetCircleResolution(32);
     ofSetBackgroundAuto(true);
     
