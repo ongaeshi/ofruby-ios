@@ -194,7 +194,7 @@
     NSError *error = nil;
 
     // Collect files
-    NSArray*  files = [FCFileManager listFilesInDirectoryAtPath:mFileDirectory];
+    NSArray* files = [FCFileManager listFilesInDirectoryAtPath:mFileDirectory];
 
     // Create array adding ModDate
     NSMutableArray* filesAndModDates = [NSMutableArray arrayWithCapacity:[files count]];
