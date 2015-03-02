@@ -47,8 +47,8 @@ mrb_value load(mrb_state *mrb, mrb_value self)
 
     const char* path = mrb_string_value_ptr(mrb, str);
     NSString *npath = [[NSString alloc] initWithUTF8String:path];
-    // DOCUMENTS/path/to/test.png
-    string filename([[FCFileManager pathForDocumentsDirectoryWithPath: npath] UTF8String]);
+    // DOCUMENTS/image/path/to/test.png
+    string filename([[[FCFileManager pathForDocumentsDirectoryWithPath: @"image"] stringByAppendingPathComponent: npath] UTF8String]);
 
     return loadIN(mrb, self, filename);
 }
@@ -60,7 +60,7 @@ mrb_value sample(mrb_state *mrb, mrb_value self)
 
     const char* path = mrb_string_value_ptr(mrb, str);
     NSString *npath = [[NSString alloc] initWithUTF8String:path];
-    // RESOURCES/sample/path/to/test.png
+    // RESOURCES/sample/image/path/to/test.png
     string filename([[[FCFileManager pathForMainBundleDirectoryWithPath: @"sample/image"] stringByAppendingPathComponent: npath] UTF8String]);
 
     return loadIN(mrb, self, filename);
