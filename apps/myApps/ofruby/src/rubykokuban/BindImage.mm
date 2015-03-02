@@ -26,14 +26,14 @@ void free(mrb_state *mrb, void *p)
 
 struct mrb_data_type data_type = { "rubykokuban_image", free };
 
-mrb_value loadIN(mrb_state *mrb, mrb_value self, string filename)
+mrb_value loadIN(mrb_state *mrb, mrb_value self, string filename, string subpath)
 {
     ofImage* obj = new ofImage();
 
     bool isSuccess = obj->loadImage(filename);
 
     if (!isSuccess) {
-        string message = "not found " + filename;
+        string message = "not found " + subpath;
         mrb_raise(mrb, E_ARGUMENT_ERROR, message.c_str());
     }
 
@@ -50,7 +50,7 @@ mrb_value load(mrb_state *mrb, mrb_value self)
     // DOCUMENTS/image/path/to/test.png
     string filename([[[FCFileManager pathForDocumentsDirectoryWithPath: @"image"] stringByAppendingPathComponent: npath] UTF8String]);
 
-    return loadIN(mrb, self, filename);
+    return loadIN(mrb, self, filename, [npath UTF8String]);
 }
 
 mrb_value sample(mrb_state *mrb, mrb_value self)
@@ -63,7 +63,7 @@ mrb_value sample(mrb_state *mrb, mrb_value self)
     // RESOURCES/sample/image/path/to/test.png
     string filename([[[FCFileManager pathForMainBundleDirectoryWithPath: @"sample/image"] stringByAppendingPathComponent: npath] UTF8String]);
 
-    return loadIN(mrb, self, filename);
+    return loadIN(mrb, self, filename, [npath UTF8String]);
 }
 
 mrb_value grab_screen(mrb_state *mrb, mrb_value self)
