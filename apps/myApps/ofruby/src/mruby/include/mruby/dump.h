@@ -12,38 +12,38 @@ extern "C" {
 #endif
 
 #include "mruby.h"
+#include "mruby/irep.h"
 
+int mrb_dump_irep(mrb_state *mrb, mrb_irep *irep, int debug_info, uint8_t **bin, size_t *bin_size);
 #ifdef ENABLE_STDIO
-int mrb_dump_irep_binary(mrb_state*, size_t, int, FILE*);
-int mrb_dump_irep_cfunc(mrb_state *mrb, size_t n, int, FILE *f, const char *initname);
-int32_t mrb_read_irep_file(mrb_state*, FILE*);
+int mrb_dump_irep_binary(mrb_state*, mrb_irep*, int, FILE*);
+int mrb_dump_irep_cfunc(mrb_state *mrb, mrb_irep*, int, FILE *f, const char *initname);
+mrb_irep *mrb_read_irep_file(mrb_state*, FILE*);
+MRB_API mrb_value mrb_load_irep_file(mrb_state*,FILE*);
+MRB_API mrb_value mrb_load_irep_file_cxt(mrb_state*, FILE*, mrbc_context*);
 #endif
-int32_t mrb_read_irep(mrb_state*, const uint8_t*);
-
-#ifdef ENABLE_STDIO
-mrb_value mrb_load_irep_file(mrb_state*,FILE*);
-#endif
+MRB_API mrb_irep *mrb_read_irep(mrb_state*, const uint8_t*);
 
 /* dump/load error code
  *
  * NOTE: MRB_DUMP_GENERAL_FAILURE is caused by
  * unspecified issues like malloc failed.
  */
-#define MRB_DUMP_OK                   0
-#define MRB_DUMP_GENERAL_FAILURE      -1
-#define MRB_DUMP_WRITE_FAULT          -2
-#define MRB_DUMP_READ_FAULT           -3
-#define MRB_DUMP_CRC_ERROR            -4
-#define MRB_DUMP_INVALID_FILE_HEADER  -5
-#define MRB_DUMP_INVALID_IREP         -6
-#define MRB_DUMP_INVALID_ARGUMENT     -7
+#define MRB_DUMP_OK                     0
+#define MRB_DUMP_GENERAL_FAILURE      (-1)
+#define MRB_DUMP_WRITE_FAULT          (-2)
+#define MRB_DUMP_READ_FAULT           (-3)
+#define MRB_DUMP_CRC_ERROR            (-4)
+#define MRB_DUMP_INVALID_FILE_HEADER  (-5)
+#define MRB_DUMP_INVALID_IREP         (-6)
+#define MRB_DUMP_INVALID_ARGUMENT     (-7)
 
 /* null symbol length */
 #define MRB_DUMP_NULL_SYM_LEN         0xFFFF
 
 /* Rite Binary File header */
 #define RITE_BINARY_IDENTIFIER         "RITE"
-#define RITE_BINARY_FORMAT_VER         "0001"
+#define RITE_BINARY_FORMAT_VER         "0003"
 #define RITE_COMPILER_NAME             "MATZ"
 #define RITE_COMPILER_VERSION          "0000"
 
@@ -53,20 +53,22 @@ mrb_value mrb_load_irep_file(mrb_state*,FILE*);
 #define RITE_SECTION_IREP_IDENTIFIER   "IREP"
 #define RITE_SECTION_LINENO_IDENTIFIER "LINE"
 #define RITE_SECTION_DEBUG_IDENTIFIER  "DBG\0"
+#define RITE_SECTION_LV_IDENTIFIER     "LVAR"
 
 #define MRB_DUMP_DEFAULT_STR_LEN      128
+#define MRB_DUMP_ALIGNMENT            sizeof(uint32_t)
 
-// binary header
+/* binary header */
 struct rite_binary_header {
-  uint8_t binary_identify[4]; // Binary Identifier
-  uint8_t binary_version[4];  // Binary Format Version
-  uint8_t binary_crc[2];      // Binary CRC
-  uint8_t binary_size[4];     // Binary Size
-  uint8_t compiler_name[4];   // Compiler name
+  uint8_t binary_identify[4]; /* Binary Identifier */
+  uint8_t binary_version[4];  /* Binary Format Version */
+  uint8_t binary_crc[2];      /* Binary CRC */
+  uint8_t binary_size[4];     /* Binary Size */
+  uint8_t compiler_name[4];   /* Compiler name */
   uint8_t compiler_version[4];
 };
 
-// section header
+/* section header */
 #define RITE_SECTION_HEADER \
   uint8_t section_identify[4]; \
   uint8_t section_size[4]
@@ -78,37 +80,35 @@ struct rite_section_header {
 struct rite_section_irep_header {
   RITE_SECTION_HEADER;
 
-  uint8_t rite_version[4];    // Rite Instruction Specification Version
-  uint8_t nirep[2];           // Number of ireps
-  uint8_t sirep[2];           // Start index
+  uint8_t rite_version[4];    /* Rite Instruction Specification Version */
 };
 
 struct rite_section_lineno_header {
   RITE_SECTION_HEADER;
-
-  uint8_t nirep[2];           // Number of ireps
-  uint8_t sirep[2];           // Start index
 };
 
 struct rite_section_debug_header {
   RITE_SECTION_HEADER;
-
-  uint8_t nirep[2];           // Number of ireps
-  uint8_t sirep[2];           // Start index
 };
+
+struct rite_section_lv_header {
+  RITE_SECTION_HEADER;
+};
+
+#define RITE_LV_NULL_MARK              UINT16_MAX
 
 struct rite_binary_footer {
   RITE_SECTION_HEADER;
 };
 
-static inline int
+static inline size_t
 uint8_to_bin(uint8_t s, uint8_t *bin)
 {
   *bin = s;
   return sizeof(uint8_t);
 }
 
-static inline int
+static inline size_t
 uint16_to_bin(uint16_t s, uint8_t *bin)
 {
   *bin++ = (s >> 8) & 0xff;
@@ -116,7 +116,7 @@ uint16_to_bin(uint16_t s, uint8_t *bin)
   return sizeof(uint16_t);
 }
 
-static inline int
+static inline size_t
 uint32_to_bin(uint32_t l, uint8_t *bin)
 {
   *bin++ = (l >> 24) & 0xff;

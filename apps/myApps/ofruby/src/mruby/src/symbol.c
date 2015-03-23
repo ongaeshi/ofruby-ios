@@ -10,127 +10,164 @@
 #include "mruby.h"
 #include "mruby/khash.h"
 #include "mruby/string.h"
+#include "mruby/dump.h"
 
 /* ------------------------------------------------------ */
 typedef struct symbol_name {
-  size_t len;
+  mrb_bool lit : 1;
+  uint16_t len;
   const char *name;
 } symbol_name;
 
 static inline khint_t
-sym_hash_func(mrb_state *mrb, const symbol_name s)
+sym_hash_func(mrb_state *mrb, mrb_sym s)
 {
   khint_t h = 0;
-  size_t i;
-  const char *p = s.name;
+  size_t i, len = mrb->symtbl[s].len;
+  const char *p = mrb->symtbl[s].name;
 
-  for (i=0; i<s.len; i++) {
+  for (i=0; i<len; i++) {
     h = (h << 5) - h + *p++;
   }
   return h;
 }
-#define sym_hash_equal(mrb,a, b) (a.len == b.len && memcmp(a.name, b.name, a.len) == 0)
+#define sym_hash_equal(mrb,a, b) (mrb->symtbl[a].len == mrb->symtbl[b].len && memcmp(mrb->symtbl[a].name, mrb->symtbl[b].name, mrb->symtbl[a].len) == 0)
 
-KHASH_DECLARE(n2s, symbol_name, mrb_sym, 1)
-KHASH_DEFINE (n2s, symbol_name, mrb_sym, 1, sym_hash_func, sym_hash_equal)
+KHASH_DECLARE(n2s, mrb_sym, mrb_sym, FALSE)
+KHASH_DEFINE (n2s, mrb_sym, mrb_sym, FALSE, sym_hash_func, sym_hash_equal)
 /* ------------------------------------------------------ */
-mrb_sym
-mrb_intern2(mrb_state *mrb, const char *name, size_t len)
+
+static void
+sym_validate_len(mrb_state *mrb, size_t len)
+{
+  if (len >= RITE_LV_NULL_MARK) {
+    mrb_raise(mrb, E_ARGUMENT_ERROR, "symbol length too long");
+  }
+}
+
+static mrb_sym
+sym_intern(mrb_state *mrb, const char *name, size_t len, mrb_bool lit)
 {
   khash_t(n2s) *h = mrb->name2sym;
-  symbol_name sname;
+  symbol_name *sname = mrb->symtbl; /* symtbl[0] for working memory */
   khiter_t k;
   mrb_sym sym;
   char *p;
 
-  sname.len = len;
-  sname.name = name;
-  k = kh_get(n2s, h, sname);
-  if (k != kh_end(h))
-    return kh_value(h, k);
+  sym_validate_len(mrb, len);
+  if (sname) {
+    sname->lit = lit;
+    sname->len = (uint16_t)len;
+    sname->name = name;
+    k = kh_get(n2s, mrb, h, 0);
+    if (k != kh_end(h))
+      return kh_key(h, k);
+  }
 
+  /* registering a new symbol */
   sym = ++mrb->symidx;
-  p = (char *)mrb_malloc(mrb, len+1);
-  memcpy(p, name, len);
-  p[len] = 0;
-  sname.name = (const char*)p;
-  k = kh_put(n2s, h, sname);
-  kh_value(h, k) = sym;
+  if (mrb->symcapa < sym) {
+    if (mrb->symcapa == 0) mrb->symcapa = 100;
+    else mrb->symcapa = (size_t)(mrb->symcapa * 1.2);
+    mrb->symtbl = (symbol_name*)mrb_realloc(mrb, mrb->symtbl, sizeof(symbol_name)*(mrb->symcapa+1));
+  }
+  sname = &mrb->symtbl[sym];
+  sname->len = (uint16_t)len;
+  if (lit || mrb_ro_data_p(name)) {
+    sname->name = name;
+    sname->lit = TRUE;
+  }
+  else {
+    p = (char *)mrb_malloc(mrb, len+1);
+    memcpy(p, name, len);
+    p[len] = 0;
+    sname->name = (const char*)p;
+    sname->lit = FALSE;
+  }
+  kh_put(n2s, mrb, h, sym);
 
   return sym;
 }
 
-mrb_sym
+MRB_API mrb_sym
+mrb_intern(mrb_state *mrb, const char *name, size_t len)
+{
+  return sym_intern(mrb, name, len, FALSE);
+}
+
+MRB_API mrb_sym
+mrb_intern_static(mrb_state *mrb, const char *name, size_t len)
+{
+  return sym_intern(mrb, name, len, TRUE);
+}
+
+MRB_API mrb_sym
 mrb_intern_cstr(mrb_state *mrb, const char *name)
 {
-  return mrb_intern2(mrb, name, strlen(name));
+  return mrb_intern(mrb, name, strlen(name));
 }
 
-mrb_sym
+MRB_API mrb_sym
 mrb_intern_str(mrb_state *mrb, mrb_value str)
 {
-  return mrb_intern2(mrb, RSTRING_PTR(str), RSTRING_LEN(str));
+  return mrb_intern(mrb, RSTRING_PTR(str), RSTRING_LEN(str));
 }
 
-mrb_value
+MRB_API mrb_value
 mrb_check_intern(mrb_state *mrb, const char *name, size_t len)
 {
   khash_t(n2s) *h = mrb->name2sym;
-  symbol_name sname;
+  symbol_name *sname = mrb->symtbl;
   khiter_t k;
 
-  sname.len = len;
-  sname.name = name;
+  sym_validate_len(mrb, len);
+  sname->len = (uint16_t)len;
+  sname->name = name;
 
-  k = kh_get(n2s, h, sname);
+  k = kh_get(n2s, mrb, h, 0);
   if (k != kh_end(h)) {
-    return mrb_symbol_value(kh_value(h, k));
+    return mrb_symbol_value(kh_key(h, k));
   }
   return mrb_nil_value();
 }
 
-mrb_value
+MRB_API mrb_value
 mrb_check_intern_cstr(mrb_state *mrb, const char *name)
 {
-  return mrb_check_intern(mrb, name, strlen(name));
+  return mrb_check_intern(mrb, name, (mrb_int)strlen(name));
 }
 
-mrb_value
+MRB_API mrb_value
 mrb_check_intern_str(mrb_state *mrb, mrb_value str)
 {
   return mrb_check_intern(mrb, RSTRING_PTR(str), RSTRING_LEN(str));
 }
 
 /* lenp must be a pointer to a size_t variable */
-const char*
-mrb_sym2name_len(mrb_state *mrb, mrb_sym sym, size_t *lenp)
+MRB_API const char*
+mrb_sym2name_len(mrb_state *mrb, mrb_sym sym, mrb_int *lenp)
 {
-  khash_t(n2s) *h = mrb->name2sym;
-  khiter_t k;
-  symbol_name sname;
-
-  for (k = kh_begin(h); k != kh_end(h); k++) {
-    if (kh_exist(h, k)) {
-      if (kh_value(h, k) == sym) {
-        sname = kh_key(h, k);
-        *lenp = sname.len;
-        return sname.name;
-      }
-    }
+  if (sym == 0 || mrb->symidx < sym) {
+    if (lenp) *lenp = 0;
+    return NULL;
   }
-  *lenp = 0;
-  return NULL;  /* missing */
+
+  if (lenp) *lenp = mrb->symtbl[sym].len;
+  return mrb->symtbl[sym].name;
 }
 
 void
 mrb_free_symtbl(mrb_state *mrb)
 {
-  khash_t(n2s) *h = mrb->name2sym;
-  khiter_t k;
+  mrb_sym i, lim;
 
-  for (k = kh_begin(h); k != kh_end(h); k++)
-    if (kh_exist(h, k)) mrb_free(mrb, (char*)kh_key(h, k).name);
-  kh_destroy(n2s,mrb->name2sym);
+  for (i=1, lim=mrb->symidx+1; i<lim; i++) {
+    if (!mrb->symtbl[i].lit) {
+      mrb_free(mrb, (char*)mrb->symtbl[i].name);
+    }
+  }
+  mrb_free(mrb, mrb->symtbl);
+  kh_destroy(n2s, mrb, mrb->name2sym);
 }
 
 void
@@ -186,12 +223,10 @@ static mrb_value
 sym_equal(mrb_state *mrb, mrb_value sym1)
 {
   mrb_value sym2;
-  mrb_bool equal_p;
 
   mrb_get_args(mrb, "o", &sym2);
-  equal_p = mrb_obj_equal(mrb, sym1, sym2);
 
-  return mrb_bool_value(equal_p);
+  return mrb_bool_value(mrb_obj_equal(mrb, sym1, sym2));
 }
 
 /* 15.2.11.3.2  */
@@ -205,12 +240,12 @@ sym_equal(mrb_state *mrb, mrb_value sym1)
  *
  *     :fred.id2name   #=> "fred"
  */
-mrb_value
+static mrb_value
 mrb_sym_to_s(mrb_state *mrb, mrb_value sym)
 {
   mrb_sym id = mrb_symbol(sym);
   const char *p;
-  size_t len;
+  mrb_int len;
 
   p = mrb_sym2name_len(mrb, id, &len);
   return mrb_str_new_static(mrb, p, len);
@@ -278,7 +313,7 @@ static mrb_bool
 symname_p(const char *name)
 {
   const char *m = name;
-  int localid = FALSE;
+  mrb_bool localid = FALSE;
 
   if (!m) return FALSE;
   switch (*m) {
@@ -362,48 +397,48 @@ sym_inspect(mrb_state *mrb, mrb_value sym)
 {
   mrb_value str;
   const char *name;
-  size_t len;
+  mrb_int len;
   mrb_sym id = mrb_symbol(sym);
+  char *sp;
 
   name = mrb_sym2name_len(mrb, id, &len);
   str = mrb_str_new(mrb, 0, len+1);
-  RSTRING(str)->ptr[0] = ':';
-  memcpy(RSTRING(str)->ptr+1, name, len);
-  if (!symname_p(name) || strlen(name) != len) {
+  sp = RSTRING_PTR(str);
+  RSTRING_PTR(str)[0] = ':';
+  memcpy(sp+1, name, len);
+  mrb_assert_int_fit(mrb_int, len, size_t, SIZE_MAX);
+  if (!symname_p(name) || strlen(name) != (size_t)len) {
     str = mrb_str_dump(mrb, str);
-    memcpy(RSTRING(str)->ptr, ":\"", 2);
+    sp = RSTRING_PTR(str);
+    sp[0] = ':';
+    sp[1] = '"';
   }
   return str;
 }
 
-mrb_value
+MRB_API mrb_value
 mrb_sym2str(mrb_state *mrb, mrb_sym sym)
 {
-  size_t len;
+  mrb_int len;
   const char *name = mrb_sym2name_len(mrb, sym, &len);
-  mrb_value str;
 
   if (!name) return mrb_undef_value(); /* can't happen */
-  str = mrb_str_new_static(mrb, name, len);
-  if (symname_p(name) && strlen(name) == len) {
-    return str;
-  }
-  return mrb_str_dump(mrb, str);
+  return mrb_str_new_static(mrb, name, len);
 }
 
-const char*
+MRB_API const char*
 mrb_sym2name(mrb_state *mrb, mrb_sym sym)
 {
-  size_t len;
+  mrb_int len;
   const char *name = mrb_sym2name_len(mrb, sym, &len);
 
   if (!name) return NULL;
-  if (symname_p(name) && strlen(name) == len) {
+  if (symname_p(name) && strlen(name) == (size_t)len) {
     return name;
   }
   else {
     mrb_value str = mrb_str_dump(mrb, mrb_str_new_static(mrb, name, len));
-    return RSTRING(str)->ptr;
+    return RSTRING_PTR(str);
   }
 }
 
@@ -423,7 +458,7 @@ sym_cmp(mrb_state *mrb, mrb_value s1)
   else {
     const char *p1, *p2;
     int retval;
-    size_t len, len1, len2;
+    mrb_int len, len1, len2;
 
     p1 = mrb_sym2name_len(mrb, sym1, &len1);
     p2 = mrb_sym2name_len(mrb, sym2, &len2);
@@ -444,7 +479,7 @@ mrb_init_symbol(mrb_state *mrb)
 {
   struct RClass *sym;
 
-  sym = mrb->symbol_class = mrb_define_class(mrb, "Symbol", mrb->object_class);
+  sym = mrb->symbol_class = mrb_define_class(mrb, "Symbol", mrb->object_class);                 /* 15.2.11 */
 
   mrb_define_method(mrb, sym, "===",             sym_equal,      MRB_ARGS_REQ(1));              /* 15.2.11.3.1  */
   mrb_define_method(mrb, sym, "id2name",         mrb_sym_to_s,   MRB_ARGS_NONE());              /* 15.2.11.3.2  */

@@ -7,28 +7,29 @@
 #include <errno.h>
 #include <stdarg.h>
 #include <stdlib.h>
-#include <string.h>
 #include "mruby.h"
 #include "mruby/array.h"
-#include "mruby/class.h"
 #include "mruby/irep.h"
 #include "mruby/proc.h"
 #include "mruby/string.h"
 #include "mruby/variable.h"
 #include "mruby/debug.h"
-#include "error.h"
+#include "mruby/error.h"
+#include "mruby/class.h"
+#include "mrb_throw.h"
 
-mrb_value
+MRB_API mrb_value
 mrb_exc_new(mrb_state *mrb, struct RClass *c, const char *ptr, long len)
 {
-  return mrb_funcall(mrb, mrb_obj_value(c), "new", 1, mrb_str_new(mrb, ptr, len));
+  mrb_value arg = mrb_str_new(mrb, ptr, len);
+  return mrb_obj_new(mrb, c, 1, &arg);
 }
 
-mrb_value
-mrb_exc_new3(mrb_state *mrb, struct RClass* c, mrb_value str)
+MRB_API mrb_value
+mrb_exc_new_str(mrb_state *mrb, struct RClass* c, mrb_value str)
 {
   str = mrb_str_to_str(mrb, str);
-  return mrb_funcall(mrb, mrb_obj_value(c), "new", 1, str);
+  return mrb_obj_new(mrb, c, 1, &str);
 }
 
 /*
@@ -45,7 +46,7 @@ exc_initialize(mrb_state *mrb, mrb_value exc)
   mrb_value mesg;
 
   if (mrb_get_args(mrb, "|o", &mesg) == 1) {
-    mrb_iv_set(mrb, exc, mrb_intern2(mrb, "mesg", 4), mesg);
+    mrb_iv_set(mrb, exc, mrb_intern_lit(mrb, "mesg"), mesg);
   }
   return exc;
 }
@@ -74,7 +75,7 @@ exc_exception(mrb_state *mrb, mrb_value self)
   if (argc == 0) return self;
   if (mrb_obj_equal(mrb, self, a)) return self;
   exc = mrb_obj_clone(mrb, self);
-  mrb_iv_set(mrb, exc, mrb_intern2(mrb, "mesg", 4), a);
+  mrb_iv_set(mrb, exc, mrb_intern_lit(mrb, "mesg"), a);
 
   return exc;
 }
@@ -90,9 +91,16 @@ exc_exception(mrb_state *mrb, mrb_value self)
 static mrb_value
 exc_to_s(mrb_state *mrb, mrb_value exc)
 {
-  mrb_value mesg = mrb_attr_get(mrb, exc, mrb_intern2(mrb, "mesg", 4));
+  mrb_value mesg = mrb_attr_get(mrb, exc, mrb_intern_lit(mrb, "mesg"));
+  struct RObject *p;
 
-  if (mrb_nil_p(mesg)) return mrb_str_new_cstr(mrb, mrb_obj_classname(mrb, exc));
+  if (!mrb_string_p(mesg)) {
+    return mrb_str_new_cstr(mrb, mrb_obj_classname(mrb, exc));
+  }
+  p = mrb_obj_ptr(mesg);
+  if (!p->c) {
+    p->c = mrb->string_class;
+  }
   return mesg;
 }
 
@@ -116,76 +124,56 @@ exc_message(mrb_state *mrb, mrb_value exc)
  * call-seq:
  *   exception.inspect   -> string
  *
- * Return this exception's class name an message
+ * Returns this exception's file name, line number,
+ * message and class name.
+ * If file name or line number is not set,
+ * returns message and class name.
  */
 
 static mrb_value
 exc_inspect(mrb_state *mrb, mrb_value exc)
 {
   mrb_value str, mesg, file, line;
+  mrb_bool append_mesg;
 
-  mesg = mrb_attr_get(mrb, exc, mrb_intern2(mrb, "mesg", 4));
-  file = mrb_attr_get(mrb, exc, mrb_intern2(mrb, "file", 4));
-  line = mrb_attr_get(mrb, exc, mrb_intern2(mrb, "line", 4));
+  mesg = mrb_attr_get(mrb, exc, mrb_intern_lit(mrb, "mesg"));
+  file = mrb_attr_get(mrb, exc, mrb_intern_lit(mrb, "file"));
+  line = mrb_attr_get(mrb, exc, mrb_intern_lit(mrb, "line"));
+
+  append_mesg = !mrb_nil_p(mesg);
+  if (append_mesg) {
+    mesg = mrb_obj_as_string(mrb, mesg);
+    append_mesg = RSTRING_LEN(mesg) > 0;
+  }
 
   if (!mrb_nil_p(file) && !mrb_nil_p(line)) {
-    str = file;
-    mrb_str_cat(mrb, str, ":", 1);
+    str = mrb_str_dup(mrb, file);
+    mrb_str_cat_lit(mrb, str, ":");
     mrb_str_append(mrb, str, line);
-    mrb_str_cat(mrb, str, ": ", 2);
-    if (!mrb_nil_p(mesg) && RSTRING_LEN(mesg) > 0) {
+    mrb_str_cat_lit(mrb, str, ": ");
+    if (append_mesg) {
       mrb_str_append(mrb, str, mesg);
-      mrb_str_cat(mrb, str, " (", 2);
+      mrb_str_cat_lit(mrb, str, " (");
     }
     mrb_str_cat_cstr(mrb, str, mrb_obj_classname(mrb, exc));
-    if (!mrb_nil_p(mesg) && RSTRING_LEN(mesg) > 0) {
-      mrb_str_cat(mrb, str, ")", 1);
+    if (append_mesg) {
+      mrb_str_cat_lit(mrb, str, ")");
     }
   }
   else {
-    str = mrb_str_new_cstr(mrb, mrb_obj_classname(mrb, exc));
-    if (!mrb_nil_p(mesg) && RSTRING_LEN(mesg) > 0) {
-      mrb_str_cat(mrb, str, ": ", 2);
+    const char *cname = mrb_obj_classname(mrb, exc);
+    str = mrb_str_new_cstr(mrb, cname);
+    mrb_str_cat_lit(mrb, str, ": ");
+    if (append_mesg) {
       mrb_str_append(mrb, str, mesg);
     }
     else {
-      mrb_str_cat(mrb, str, ": ", 2);
-      mrb_str_cat_cstr(mrb, str, mrb_obj_classname(mrb, exc));
+      mrb_str_cat_cstr(mrb, str, cname);
     }
   }
   return str;
 }
 
-
-static mrb_value
-exc_equal(mrb_state *mrb, mrb_value exc)
-{
-  mrb_value obj;
-  mrb_value mesg;
-  mrb_bool equal_p;
-  mrb_sym id_mesg = mrb_intern2(mrb, "mesg", 4);
-
-  mrb_get_args(mrb, "o", &obj);
-  if (mrb_obj_equal(mrb, exc, obj)) {
-    equal_p = 1;
-  }
-  else {
-    if (mrb_obj_class(mrb, exc) != mrb_obj_class(mrb, obj)) {
-      if (mrb_respond_to(mrb, obj, mrb_intern2(mrb, "message", 7))) {
-        mesg = mrb_funcall(mrb, obj, "message", 0);
-      }
-      else
-        return mrb_false_value();
-    }
-    else {
-      mesg = mrb_attr_get(mrb, obj, id_mesg);
-    }
-
-    equal_p = mrb_equal(mrb, mrb_attr_get(mrb, exc, id_mesg), mesg);
-  }
-
-  return mrb_bool_value(equal_p);
-}
 
 static void
 exc_debug_info(mrb_state *mrb, struct RObject *exc)
@@ -193,17 +181,19 @@ exc_debug_info(mrb_state *mrb, struct RObject *exc)
   mrb_callinfo *ci = mrb->c->ci;
   mrb_code *pc = ci->pc;
 
-  mrb_obj_iv_set(mrb, exc, mrb_intern2(mrb, "ciidx", 5), mrb_fixnum_value(ci - mrb->c->cibase));
-  ci--;
+  mrb_obj_iv_set(mrb, exc, mrb_intern_lit(mrb, "ciidx"), mrb_fixnum_value((mrb_int)(ci - mrb->c->cibase)));
   while (ci >= mrb->c->cibase) {
-    if (ci->proc && !MRB_PROC_CFUNC_P(ci->proc)) {
+    mrb_code *err = ci->err;
+
+    if (!err && pc) err = pc - 1;
+    if (err && ci->proc && !MRB_PROC_CFUNC_P(ci->proc)) {
       mrb_irep *irep = ci->proc->body.irep;
 
-      int32_t const line = mrb_debug_get_line(irep, pc - irep->iseq - 1);
-      char const* file = mrb_debug_get_filename(irep, pc - irep->iseq - 1);
-      if(line != -1 && file) {
-        mrb_obj_iv_set(mrb, exc, mrb_intern2(mrb, "file", 4), mrb_str_new_cstr(mrb, file));
-        mrb_obj_iv_set(mrb, exc, mrb_intern2(mrb, "line", 4), mrb_fixnum_value(line));
+      int32_t const line = mrb_debug_get_line(irep, (uint32_t)(err - irep->iseq));
+      char const* file = mrb_debug_get_filename(irep, (uint32_t)(err - irep->iseq));
+      if (line != -1 && file) {
+        mrb_obj_iv_set(mrb, exc, mrb_intern_lit(mrb, "file"), mrb_str_new_cstr(mrb, file));
+        mrb_obj_iv_set(mrb, exc, mrb_intern_lit(mrb, "line"), mrb_fixnum_value(line));
         return;
       }
     }
@@ -212,27 +202,29 @@ exc_debug_info(mrb_state *mrb, struct RObject *exc)
   }
 }
 
-void
+MRB_API mrb_noreturn void
 mrb_exc_raise(mrb_state *mrb, mrb_value exc)
 {
   mrb->exc = mrb_obj_ptr(exc);
-  exc_debug_info(mrb, mrb->exc);
+  if (!mrb->out_of_memory) {
+    exc_debug_info(mrb, mrb->exc);
+  }
   if (!mrb->jmp) {
     mrb_p(mrb, exc);
     abort();
   }
-  mrb_longjmp(mrb);
+  MRB_THROW(mrb->jmp);
 }
 
-void
+MRB_API mrb_noreturn void
 mrb_raise(mrb_state *mrb, struct RClass *c, const char *msg)
 {
   mrb_value mesg;
   mesg = mrb_str_new_cstr(mrb, msg);
-  mrb_exc_raise(mrb, mrb_exc_new3(mrb, c, mesg));
+  mrb_exc_raise(mrb, mrb_exc_new_str(mrb, c, mesg));
 }
 
-mrb_value
+MRB_API mrb_value
 mrb_vformat(mrb_state *mrb, const char *format, va_list ap)
 {
   const char *p = format;
@@ -269,11 +261,11 @@ mrb_vformat(mrb_state *mrb, const char *format, va_list ap)
   else {
     size = p - b;
     mrb_ary_push(mrb, ary, mrb_str_new(mrb, b, size));
-    return mrb_ary_join(mrb, ary, mrb_str_new(mrb,NULL,0));
+    return mrb_ary_join(mrb, ary, mrb_str_new(mrb, NULL, 0));
   }
 }
 
-mrb_value
+MRB_API mrb_value
 mrb_format(mrb_state *mrb, const char *format, ...)
 {
   va_list ap;
@@ -286,7 +278,7 @@ mrb_format(mrb_state *mrb, const char *format, ...)
   return str;
 }
 
-void
+MRB_API mrb_noreturn void
 mrb_raisef(mrb_state *mrb, struct RClass *c, const char *fmt, ...)
 {
   va_list args;
@@ -295,10 +287,10 @@ mrb_raisef(mrb_state *mrb, struct RClass *c, const char *fmt, ...)
   va_start(args, fmt);
   mesg = mrb_vformat(mrb, fmt, args);
   va_end(args);
-  mrb_exc_raise(mrb, mrb_exc_new3(mrb, c, mesg));
+  mrb_exc_raise(mrb, mrb_exc_new_str(mrb, c, mesg));
 }
 
-void
+MRB_API mrb_noreturn void
 mrb_name_error(mrb_state *mrb, mrb_sym id, const char *fmt, ...)
 {
   mrb_value exc;
@@ -314,7 +306,7 @@ mrb_name_error(mrb_state *mrb, mrb_sym id, const char *fmt, ...)
   mrb_exc_raise(mrb, exc);
 }
 
-void
+MRB_API void
 mrb_warn(mrb_state *mrb, const char *fmt, ...)
 {
 #ifdef ENABLE_STDIO
@@ -329,7 +321,7 @@ mrb_warn(mrb_state *mrb, const char *fmt, ...)
 #endif
 }
 
-void
+MRB_API mrb_noreturn void
 mrb_bug(mrb_state *mrb, const char *fmt, ...)
 {
 #ifdef ENABLE_STDIO
@@ -345,21 +337,14 @@ mrb_bug(mrb_state *mrb, const char *fmt, ...)
   exit(EXIT_FAILURE);
 }
 
-int
-sysexit_status(mrb_state *mrb, mrb_value err)
-{
-  mrb_value st = mrb_iv_get(mrb, err, mrb_intern2(mrb, "status", 6));
-  return mrb_fixnum(st);
-}
-
 static void
 set_backtrace(mrb_state *mrb, mrb_value info, mrb_value bt)
 {
   mrb_funcall(mrb, info, "set_backtrace", 1, bt);
 }
 
-mrb_value
-make_exception(mrb_state *mrb, int argc, mrb_value *argv, int isstr)
+static mrb_value
+make_exception(mrb_state *mrb, int argc, const mrb_value *argv, mrb_bool isstr)
 {
   mrb_value mesg;
   int n;
@@ -374,7 +359,7 @@ make_exception(mrb_state *mrb, int argc, mrb_value *argv, int isstr)
       if (isstr) {
         mesg = mrb_check_string_type(mrb, argv[0]);
         if (!mrb_nil_p(mesg)) {
-          mesg = mrb_exc_new3(mrb, E_RUNTIME_ERROR, mesg);
+          mesg = mrb_exc_new_str(mrb, E_RUNTIME_ERROR, mesg);
           break;
         }
       }
@@ -386,7 +371,7 @@ make_exception(mrb_state *mrb, int argc, mrb_value *argv, int isstr)
       n = 1;
 exception_call:
       {
-        mrb_sym exc = mrb_intern2(mrb, "exception", 9);
+        mrb_sym exc = mrb_intern_lit(mrb, "exception");
         if (mrb_respond_to(mrb, argv[0], exc)) {
           mesg = mrb_funcall_argv(mrb, argv[0], exc, n, argv+1);
         }
@@ -411,13 +396,13 @@ exception_call:
   return mesg;
 }
 
-mrb_value
-mrb_make_exception(mrb_state *mrb, int argc, mrb_value *argv)
+MRB_API mrb_value
+mrb_make_exception(mrb_state *mrb, int argc, const mrb_value *argv)
 {
   return make_exception(mrb, argc, argv, TRUE);
 }
 
-void
+MRB_API void
 mrb_sys_fail(mrb_state *mrb, const char *mesg)
 {
   struct RClass *sce;
@@ -438,25 +423,39 @@ mrb_sys_fail(mrb_state *mrb, const char *mesg)
   }
 }
 
-mrb_value mrb_get_backtrace(mrb_state*, mrb_value);
+MRB_API mrb_noreturn void
+mrb_no_method_error(mrb_state *mrb, mrb_sym id, mrb_int argc, const mrb_value *argv, char const* fmt, ...)
+{
+  mrb_value exc;
+  va_list ap;
+
+  va_start(ap, fmt);
+  exc = mrb_funcall(mrb, mrb_obj_value(E_NOMETHOD_ERROR), "new", 3,
+                    mrb_vformat(mrb, fmt, ap), mrb_symbol_value(id),
+                    mrb_ary_new_from_values(mrb, argc, argv));
+  va_end(ap);
+  mrb_exc_raise(mrb, exc);
+}
 
 void
 mrb_init_exception(mrb_state *mrb)
 {
-  struct RClass *e;
+  struct RClass *exception, *runtime_error, *script_error;
 
-  mrb->eException_class = e = mrb_define_class(mrb, "Exception",           mrb->object_class);         /* 15.2.22 */
-  mrb_define_class_method(mrb, e, "exception", mrb_instance_new, MRB_ARGS_ANY());
-  mrb_define_method(mrb, e, "exception", exc_exception, MRB_ARGS_ANY());
-  mrb_define_method(mrb, e, "initialize", exc_initialize, MRB_ARGS_ANY());
-  mrb_define_method(mrb, e, "==", exc_equal, MRB_ARGS_REQ(1));
-  mrb_define_method(mrb, e, "to_s", exc_to_s, MRB_ARGS_NONE());
-  mrb_define_method(mrb, e, "message", exc_message, MRB_ARGS_NONE());
-  mrb_define_method(mrb, e, "inspect", exc_inspect, MRB_ARGS_NONE());
-  mrb_define_method(mrb, e, "backtrace", mrb_get_backtrace, MRB_ARGS_NONE());
+  mrb->eException_class = exception = mrb_define_class(mrb, "Exception", mrb->object_class); /* 15.2.22 */
+  MRB_SET_INSTANCE_TT(exception, MRB_TT_EXCEPTION);
+  mrb_define_class_method(mrb, exception, "exception", mrb_instance_new,  MRB_ARGS_ANY());
+  mrb_define_method(mrb, exception, "exception",       exc_exception,     MRB_ARGS_ANY());
+  mrb_define_method(mrb, exception, "initialize",      exc_initialize,    MRB_ARGS_ANY());
+  mrb_define_method(mrb, exception, "to_s",            exc_to_s,          MRB_ARGS_NONE());
+  mrb_define_method(mrb, exception, "message",         exc_message,       MRB_ARGS_NONE());
+  mrb_define_method(mrb, exception, "inspect",         exc_inspect,       MRB_ARGS_NONE());
+  mrb_define_method(mrb, exception, "backtrace",       mrb_exc_backtrace, MRB_ARGS_NONE());
 
-  mrb->eStandardError_class     = mrb_define_class(mrb, "StandardError",       mrb->eException_class); /* 15.2.23 */
-  mrb_define_class(mrb, "RuntimeError", mrb->eStandardError_class);                                    /* 15.2.28 */
-  e = mrb_define_class(mrb, "ScriptError",  mrb->eException_class);                                    /* 15.2.37 */
-  mrb_define_class(mrb, "SyntaxError",  e);                                                            /* 15.2.38 */
+  mrb->eStandardError_class = mrb_define_class(mrb, "StandardError", mrb->eException_class); /* 15.2.23 */
+  runtime_error = mrb_define_class(mrb, "RuntimeError", mrb->eStandardError_class);          /* 15.2.28 */
+  mrb->nomem_err = mrb_obj_ptr(mrb_exc_new_str(mrb, runtime_error, mrb_str_new_lit(mrb, "Out of memory")));
+  script_error = mrb_define_class(mrb, "ScriptError", mrb->eException_class);                /* 15.2.37 */
+  mrb_define_class(mrb, "SyntaxError", script_error);                                        /* 15.2.38 */
+  mrb_define_class(mrb, "SystemStackError", exception);
 }

@@ -5,6 +5,7 @@
 */
 
 #include <stddef.h>
+#include <stdint.h>
 #include <string.h>
 #include "mruby.h"
 
@@ -36,20 +37,20 @@ struct mrb_pool {
 #undef TEST_POOL
 #ifdef TEST_POOL
 
-#define mrb_malloc(m,s) malloc(s)
+#define mrb_malloc_simple(m,s) malloc(s)
 #define mrb_free(m,p) free(p)
 #endif
 
 #ifdef POOL_ALIGNMENT
-#  define ALIGN_PADDING(x) ((-x) & (POOL_ALIGNMENT - 1))
+#  define ALIGN_PADDING(x) ((SIZE_MAX - (x) + 1) & (POOL_ALIGNMENT - 1))
 #else
 #  define ALIGN_PADDING(x) (0)
 #endif
 
-mrb_pool*
+MRB_API mrb_pool*
 mrb_pool_open(mrb_state *mrb)
 {
-  mrb_pool *pool = (mrb_pool *)mrb_malloc(mrb, sizeof(mrb_pool));
+  mrb_pool *pool = (mrb_pool *)mrb_malloc_simple(mrb, sizeof(mrb_pool));
 
   if (pool) {
     pool->mrb = mrb;
@@ -59,7 +60,7 @@ mrb_pool_open(mrb_state *mrb)
   return pool;
 }
 
-void
+MRB_API void
 mrb_pool_close(mrb_pool *pool)
 {
   struct mrb_pool_page *page, *tmp;
@@ -81,7 +82,7 @@ page_alloc(mrb_pool *pool, size_t len)
 
   if (len < POOL_PAGE_SIZE)
     len = POOL_PAGE_SIZE;
-  page = (struct mrb_pool_page *)mrb_malloc(pool->mrb, sizeof(struct mrb_pool_page)+len);
+  page = (struct mrb_pool_page *)mrb_malloc_simple(pool->mrb, sizeof(struct mrb_pool_page)+len);
   if (page) {
     page->offset = 0;
     page->len = len;
@@ -90,7 +91,7 @@ page_alloc(mrb_pool *pool, size_t len)
   return page;
 }
 
-void*
+MRB_API void*
 mrb_pool_alloc(mrb_pool *pool, size_t len)
 {
   struct mrb_pool_page *page;
@@ -118,7 +119,7 @@ mrb_pool_alloc(mrb_pool *pool, size_t len)
   return page->last;
 }
 
-mrb_bool
+MRB_API mrb_bool
 mrb_pool_can_realloc(mrb_pool *pool, void *p, size_t len)
 {
   struct mrb_pool_page *page;
@@ -139,7 +140,7 @@ mrb_pool_can_realloc(mrb_pool *pool, void *p, size_t len)
   return FALSE;
 }
 
-void*
+MRB_API void*
 mrb_pool_realloc(mrb_pool *pool, void *p, size_t oldlen, size_t newlen)
 {
   struct mrb_pool_page *page;
@@ -165,6 +166,9 @@ mrb_pool_realloc(mrb_pool *pool, void *p, size_t oldlen, size_t newlen)
     page = page->next;
   }
   np = mrb_pool_alloc(pool, newlen);
+  if (np == NULL) {
+    return NULL;
+  }
   memcpy(np, p, oldlen);
   return np;
 }
