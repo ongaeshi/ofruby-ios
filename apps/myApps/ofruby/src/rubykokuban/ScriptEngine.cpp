@@ -340,7 +340,7 @@ void ScriptEngine::close()
 bool ScriptEngine::isExistFunction(mrb_value aSelf, const char* aFuncName)
 {
     struct RClass *c = mrb_class(mMrb, aSelf);
-    struct RProc *p = mrb_method_search_vm(mMrb, &c, mrb_intern(mMrb, aFuncName));
+    struct RProc *p = mrb_method_search_vm(mMrb, &c, mrb_intern_cstr(mMrb, aFuncName));
     return p != NULL;
 }
 

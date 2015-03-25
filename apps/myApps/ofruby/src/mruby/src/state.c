@@ -114,10 +114,10 @@ mrb_open_allocf(mrb_allocf f, void *ud)
     return NULL;
   }
 
-#ifndef DISABLE_GEMS
-  mrb_init_mrbgems(mrb);
-  mrb_gc_arena_restore(mrb, 0);
-#endif
+/* #ifndef DISABLE_GEMS */
+/*   mrb_init_mrbgems(mrb); */
+/*   mrb_gc_arena_restore(mrb, 0); */
+/* #endif */
   return mrb;
 }
 

@@ -1,7 +1,7 @@
 #include "rubykokuban/Bind.hpp"
 
 #include "mruby.h"
-#include "mrubybind.h"
+// #include "mrubybind.h"
 #include "ofAppRunner.h"
 
 namespace rubykokuban {
@@ -25,19 +25,19 @@ namespace {
 //----------------------------------------------------------
 void BindApplication(mrb_state* mrb)
 {
-    mrubybind::MrubyBind b(mrb);
+    // mrubybind::MrubyBind b(mrb);
 
-    b.bind("frame_rate", frame_rate);
-    b.bind("set_window_pos", set_window_pos);
-    b.bind("set_window_size", set_window_size);
-    b.bind("window_pos_x", window_pos_x);
-    b.bind("window_pos_y", window_pos_y);
-    b.bind("window_width", window_width);
-    b.bind("window_height", window_height);
-    b.bind("screen_width", screen_width);
-    b.bind("screen_height", screen_height);
-    b.bind("width", width);
-    b.bind("height", height);
+    // b.bind("frame_rate", frame_rate);
+    // b.bind("set_window_pos", set_window_pos);
+    // b.bind("set_window_size", set_window_size);
+    // b.bind("window_pos_x", window_pos_x);
+    // b.bind("window_pos_y", window_pos_y);
+    // b.bind("window_width", window_width);
+    // b.bind("window_height", window_height);
+    // b.bind("screen_width", screen_width);
+    // b.bind("screen_height", screen_height);
+    // b.bind("width", width);
+    // b.bind("height", height);
 }
 
 }

@@ -1,7 +1,8 @@
 #include "rubykokuban/Bind.hpp"
 
 #include "mruby.h"
-#include "mrubybind.h"
+#include "mruby/string.h"
+// #include "mrubybind.h"
 #include "ofGraphics.h"
 #include "rubykokuban/BindColor.hpp"
 
@@ -258,29 +259,29 @@ mrb_value text(mrb_state *mrb, mrb_value self)
 void BindGraphics(mrb_state* mrb)
 {
     struct RClass *cc = mrb->kernel_module;
-    mrubybind::MrubyBind b(mrb);
+    // mrubybind::MrubyBind b(mrb);
 
     mrb_define_method(mrb, cc, "push_matrix"       , push_matrix         , MRB_ARGS_OPT(1));
     mrb_define_method(mrb, cc, "pop_matrix"        , pop_matrix          , MRB_ARGS_NONE());
     mrb_define_method(mrb, cc, "translate"         , translate           , MRB_ARGS_REQ(2));
     mrb_define_method(mrb, cc, "scale"             , scale               , MRB_ARGS_REQ(2));
     mrb_define_method(mrb, cc, "rotate"            , rotate              , MRB_ARGS_REQ(1));
-    b.bind(                    "set_circle_resolution", set_circle_resolution);
+    // b.bind(                    "set_circle_resolution", set_circle_resolution);
     mrb_define_method(mrb, cc, "set_fill",            set_fill          , MRB_ARGS_OPT(1));
-    b.bind(                    "set_no_fill",         set_no_fill       );
-    b.bind(                    "is_fill",             is_fill           );
-    b.bind(                    "set_line_width",      set_line_width    );
+    // b.bind(                    "set_no_fill",         set_no_fill       );
+    // b.bind(                    "is_fill",             is_fill           );
+    // b.bind(                    "set_line_width",      set_line_width    );
     mrb_define_method(mrb, cc, "set_color",           set_color         , MRB_ARGS_ARG(1, 3));
     mrb_define_method(mrb, cc, "set_color_hex",       set_color_hex     , MRB_ARGS_ARG(1, 1));
     mrb_define_method(mrb, cc, "set_background",      set_background    , MRB_ARGS_ARG(1, 3));
     mrb_define_method(mrb, cc, "set_background_hex",  set_background_hex, MRB_ARGS_ARG(1, 1));
-    b.bind(                    "set_background_auto", set_background_auto);
-    b.bind(                    "triangle",            triangle          );
-    b.bind(                    "circle",              circle            );
-    b.bind(                    "ellipse",             ellipse           );
-    b.bind(                    "line",                line              );
-    b.bind(                    "rect",                rect              );
-    b.bind(                    "rect_rounded",        rect_rounded      );
+    // b.bind(                    "set_background_auto", set_background_auto);
+    // b.bind(                    "triangle",            triangle          );
+    // b.bind(                    "circle",              circle            );
+    // b.bind(                    "ellipse",             ellipse           );
+    // b.bind(                    "line",                line              );
+    // b.bind(                    "rect",                rect              );
+    // b.bind(                    "rect_rounded",        rect_rounded      );
     mrb_define_method(mrb, cc, "text",                text              , MRB_ARGS_REQ(3));
 }
 
