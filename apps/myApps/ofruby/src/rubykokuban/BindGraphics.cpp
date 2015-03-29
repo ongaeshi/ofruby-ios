@@ -261,7 +261,9 @@ mrb_value line(mrb_state *mrb, mrb_value self)
 
 mrb_value rect(mrb_state *mrb, mrb_value self)
 {
-    // return self;
+    mrb_float x, y, w, h;
+    mrb_get_args(mrb, "ffff", &x, &y, &w, &h);
+    ofRect(x, y, w, h);
     return mrb_nil_value();
 }
 
@@ -289,11 +291,6 @@ mrb_value rect_rounded(mrb_state *mrb, mrb_value self)
 // void line(float x1, float y1, float x2, float y2)
 // {
 //     ofLine(x1, y1, x2, y2);
-// }
-
-// void rect(float x, float y, float w, float h)
-// {
-//     ofRect(x, y, w, h);
 // }
 
 // void rect_rounded(float x, float y, float w, float h, float r)
