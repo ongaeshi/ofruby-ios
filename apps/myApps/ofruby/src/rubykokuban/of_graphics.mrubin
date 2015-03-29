@@ -1,17 +1,53 @@
 class OfGraphic
-  def self.push_matrix
+  def push_matrix
   end
 
-  def self.pop_matrix
+  def pop_matrix
   end
 
-  def self.translate(x, y)
+  def translate(x, y)
   end
 
-  def self.scale(x, y)
+  def scale(x, y)
   end
 
-  def self.rotate(degrees)
+  def rotate(degrees)
+  end
+
+  def set_circle_resolution(res)
+  end
+
+  def set_no_fill
+  end
+
+  def is_fill
+  end
+
+  def set_line_width(width)
+  end
+
+  def set_background_auto(flag)
+  end
+
+  def triangle(x1, y1, x2, y2, x3, y3)
+  end
+
+  def circle(x, y, radius)
+  end
+
+  def ellipse(x, y, width, height)
+  end
+
+  def line(x1, y1, x2, y2)
+  end
+
+  def rect(x, y, w, h)
+  end
+
+  def rect_rounded(x, y, w, h, r)
+  end
+
+  def text(x, y, str)
   end
 end
 
