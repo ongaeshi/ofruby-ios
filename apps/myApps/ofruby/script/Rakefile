@@ -1,0 +1,6 @@
+task :default => :all
+
+desc "Build builtin.c"
+task :all do
+  sh './mrbc -BBuiltIn builtin.rb'
+end
