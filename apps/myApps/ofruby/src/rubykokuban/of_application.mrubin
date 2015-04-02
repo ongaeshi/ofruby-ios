@@ -1,0 +1,35 @@
+class OfApplication
+  def frame_rate
+  end
+
+  def set_window_pos(x, y)
+  end
+
+  def set_window_size(width, height)
+  end
+
+  def window_pos_x
+  end
+
+  def window_pos_y
+  end
+
+  def window_width
+  end
+
+  def window_height
+  end
+
+  def screen_width
+  end
+
+  def screen_height
+  end
+
+  def width
+  end
+
+  def height
+  end
+end
+
