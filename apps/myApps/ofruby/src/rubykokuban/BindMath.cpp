@@ -1,7 +1,6 @@
 #include "rubykokuban/Bind.hpp"
 
 #include "mruby.h"
-#include "mrubybind.h"
 #include "ofMath.h"
 
 namespace rubykokuban {

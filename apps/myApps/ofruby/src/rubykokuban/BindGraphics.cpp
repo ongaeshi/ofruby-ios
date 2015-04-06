@@ -1,7 +1,7 @@
 #include "rubykokuban/Bind.hpp"
 
 #include "mruby.h"
-#include "mrubybind.h"
+#include "mruby/string.h"
 #include "ofGraphics.h"
 #include "rubykokuban/BindColor.hpp"
 
@@ -55,9 +55,14 @@ mrb_value rotate(mrb_state *mrb, mrb_value self)
     return mrb_nil_value();
 }
 
-void set_circle_resolution(int res)
+mrb_value set_circle_resolution(mrb_state *mrb, mrb_value self)
 {
+    mrb_int res;
+    mrb_get_args(mrb, "i", &res);
+
     ofSetCircleResolution(res);
+
+    return mrb_nil_value();
 }
 
 mrb_value set_fill(mrb_state *mrb, mrb_value self)
@@ -76,19 +81,25 @@ mrb_value set_fill(mrb_state *mrb, mrb_value self)
     }
 }
 
-void set_no_fill()
+mrb_value set_no_fill(mrb_state *mrb, mrb_value self)
 {
     ofNoFill();
+    return mrb_nil_value();
 }
 
-bool is_fill()
+mrb_value is_fill(mrb_state *mrb, mrb_value self)
 {
-    return ofGetFill() == OF_FILLED;
+    return mrb_bool_value(ofGetFill() == OF_FILLED);
 }
 
-void set_line_width(float width)
+mrb_value set_line_width(mrb_state *mrb, mrb_value self)
 {
+    mrb_float width;
+    mrb_get_args(mrb, "f", &width);
+
     ofSetLineWidth(width);
+
+    return mrb_nil_value();
 }
 
 mrb_value set_color(mrb_state *mrb, mrb_value self)
@@ -200,39 +211,74 @@ mrb_value set_background_hex(mrb_state *mrb, mrb_value self)
     return mrb_nil_value();
 }
 
-void set_background_auto(bool flag)
+mrb_value set_background_auto(mrb_state *mrb, mrb_value self)
 {
+    mrb_bool flag;
+    mrb_get_args(mrb, "b", &flag);
+    
     ofSetBackgroundAuto(flag);
+
+    return mrb_bool_value(flag);
 }
 
-void triangle(float x1, float y1, float x2, float y2, float x3, float y3)
+mrb_value triangle(mrb_state *mrb, mrb_value self)
 {
+    mrb_float x1, y1, x2, y2, x3, y3;
+    mrb_get_args(mrb, "ffffff", &x1, &y1, &x2, &y2, &x3, &y3);
+
     ofTriangle(x1, y1, x2, y2, x3, y3);
+
+    return mrb_nil_value();
 }
 
-void circle(float x, float y, float radius)
+mrb_value circle(mrb_state *mrb, mrb_value self)
 {
+    mrb_float x, y, radius;
+    mrb_get_args(mrb, "fff", &x, &y, &radius);
+
     ofCircle(x, y, radius);
+
+    return mrb_nil_value();
 }
 
-void ellipse(float x, float y, float width, float height)
+mrb_value ellipse(mrb_state *mrb, mrb_value self)
 {
+    mrb_float x, y, width, height;
+    mrb_get_args(mrb, "ffff", &x, &y, &width, &height);
+
     ofEllipse(x, y, width, height);
+
+    return mrb_nil_value();
 }
 
-void line(float x1, float y1, float x2, float y2)
+mrb_value line(mrb_state *mrb, mrb_value self)
 {
+    mrb_float x1, y1, x2, y2;
+    mrb_get_args(mrb, "ffff", &x1, &y1, &x2, &y2);
+
     ofLine(x1, y1, x2, y2);
+
+    return mrb_nil_value();
 }
 
-void rect(float x, float y, float w, float h)
+mrb_value rect(mrb_state *mrb, mrb_value self)
 {
+    mrb_float x, y, w, h;
+    mrb_get_args(mrb, "ffff", &x, &y, &w, &h);
+
     ofRect(x, y, w, h);
+    
+    return mrb_nil_value();
 }
 
-void rect_rounded(float x, float y, float w, float h, float r)
+mrb_value rect_rounded(mrb_state *mrb, mrb_value self)
 {
+    mrb_float x, y, w, h, r;
+    mrb_get_args(mrb, "fffff", &x, &y, &w, &h, &r);
+
     ofRectRounded(x, y, w, h, r);
+    
+    return mrb_nil_value();
 }
 
 mrb_value text(mrb_state *mrb, mrb_value self)
@@ -258,30 +304,29 @@ mrb_value text(mrb_state *mrb, mrb_value self)
 void BindGraphics(mrb_state* mrb)
 {
     struct RClass *cc = mrb->kernel_module;
-    mrubybind::MrubyBind b(mrb);
 
-    mrb_define_method(mrb, cc, "push_matrix"       , push_matrix         , MRB_ARGS_OPT(1));
-    mrb_define_method(mrb, cc, "pop_matrix"        , pop_matrix          , MRB_ARGS_NONE());
-    mrb_define_method(mrb, cc, "translate"         , translate           , MRB_ARGS_REQ(2));
-    mrb_define_method(mrb, cc, "scale"             , scale               , MRB_ARGS_REQ(2));
-    mrb_define_method(mrb, cc, "rotate"            , rotate              , MRB_ARGS_REQ(1));
-    b.bind(                    "set_circle_resolution", set_circle_resolution);
-    mrb_define_method(mrb, cc, "set_fill",            set_fill          , MRB_ARGS_OPT(1));
-    b.bind(                    "set_no_fill",         set_no_fill       );
-    b.bind(                    "is_fill",             is_fill           );
-    b.bind(                    "set_line_width",      set_line_width    );
-    mrb_define_method(mrb, cc, "set_color",           set_color         , MRB_ARGS_ARG(1, 3));
-    mrb_define_method(mrb, cc, "set_color_hex",       set_color_hex     , MRB_ARGS_ARG(1, 1));
-    mrb_define_method(mrb, cc, "set_background",      set_background    , MRB_ARGS_ARG(1, 3));
-    mrb_define_method(mrb, cc, "set_background_hex",  set_background_hex, MRB_ARGS_ARG(1, 1));
-    b.bind(                    "set_background_auto", set_background_auto);
-    b.bind(                    "triangle",            triangle          );
-    b.bind(                    "circle",              circle            );
-    b.bind(                    "ellipse",             ellipse           );
-    b.bind(                    "line",                line              );
-    b.bind(                    "rect",                rect              );
-    b.bind(                    "rect_rounded",        rect_rounded      );
-    mrb_define_method(mrb, cc, "text",                text              , MRB_ARGS_REQ(3));
+    mrb_define_method(mrb, cc,       "push_matrix"          , push_matrix         , MRB_ARGS_OPT(1));
+    mrb_define_method(mrb, cc,       "pop_matrix"           , pop_matrix          , MRB_ARGS_NONE());
+    mrb_define_method(mrb, cc,       "translate"            , translate           , MRB_ARGS_REQ(2));
+    mrb_define_method(mrb, cc,       "scale"                , scale               , MRB_ARGS_REQ(2));
+    mrb_define_method(mrb, cc,       "rotate"               , rotate              , MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cc,       "set_circle_resolution", set_circle_resolution, MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cc,       "set_fill"             , set_fill            , MRB_ARGS_OPT(1));
+    mrb_define_method(mrb, cc,       "set_no_fill"          , set_no_fill         , MRB_ARGS_NONE());
+    mrb_define_method(mrb, cc,       "is_fill"              , is_fill             , MRB_ARGS_NONE());
+    mrb_define_method(mrb, cc,       "set_line_width"       , set_line_width      , MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cc,       "set_color"            , set_color           , MRB_ARGS_ARG(1, 3));
+    mrb_define_method(mrb, cc,       "set_color_hex"        , set_color_hex       , MRB_ARGS_ARG(1, 1));
+    mrb_define_method(mrb, cc,       "set_background"       , set_background      , MRB_ARGS_ARG(1, 3));
+    mrb_define_method(mrb, cc,       "set_background_hex"   , set_background_hex  , MRB_ARGS_ARG(1, 1));
+    mrb_define_method(mrb, cc,       "set_background_auto"  , set_background_auto , MRB_ARGS_REQ(1));
+    mrb_define_method(mrb, cc,       "triangle"             , triangle            , MRB_ARGS_REQ(6));
+    mrb_define_method(mrb, cc,       "circle"               , circle              , MRB_ARGS_REQ(3));
+    mrb_define_method(mrb, cc,       "ellipse"              , ellipse             , MRB_ARGS_REQ(4));
+    mrb_define_method(mrb, cc,       "line"                 , line                , MRB_ARGS_REQ(4));
+    mrb_define_method(mrb, cc,       "rect"                 , rect                , MRB_ARGS_REQ(4));
+    mrb_define_method(mrb, cc,       "rect_rounded"         , rect_rounded        , MRB_ARGS_REQ(5));
+    mrb_define_method(mrb, cc,       "text"                 , text                , MRB_ARGS_REQ(3));
 }
 
 }

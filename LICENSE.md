@@ -1,4 +1,3 @@
-
 =================
 ofruby-ios
 =================
@@ -107,3 +106,12 @@ ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <http://unlicense.org>
+
+=================
+Twemoji
+=================
+
+Copyright 2014 Twitter, Inc and other contributors
+
+CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/)
+
