@@ -1,46 +1,46 @@
+X = 4
+MOVABLE_RANGE = 200
+PAGE = 13
+
 def setup
   set_background 255, 255, 255
 
   @emojis = []
-  @emojis.push Emoji.new(0, 0)
-  @emojis.push Emoji.new(0, 60)
-  @emojis.push Emoji.new(0, 120)
-  @emojis.push Emoji.new(0, 180)
-  @emojis.push Emoji.new(0, 240)
-  @emojis.push Emoji.new(0, 300)
-  @emojis.push Emoji.new(0, 360)
-  @emojis.push Emoji.new(0, 420)
+  EMOJI.each_with_index do |e, i|
+    @emojis.push Emoji.new(i, 60 * (i % X) + 10 , (i / X).to_i * 60 + 10)
+  end
 
-  @emojis.push Emoji.new(100, 0)
-  @emojis.push Emoji.new(100, 60)
-  @emojis.push Emoji.new(100, 120)
-  @emojis.push Emoji.new(100, 180)
-  @emojis.push Emoji.new(100, 240)
-  @emojis.push Emoji.new(100, 300)
-  @emojis.push Emoji.new(100, 360)
-  @emojis.push Emoji.new(100, 420)
+  @screen_y = 0
+end
 
-  @emojis.push Emoji.new(200, 0)
-  @emojis.push Emoji.new(200, 60)
-  @emojis.push Emoji.new(200, 120)
-  @emojis.push Emoji.new(200, 180)
-  @emojis.push Emoji.new(200, 240)
-  @emojis.push Emoji.new(200, 300)
-  @emojis.push Emoji.new(200, 360)
-  @emojis.push Emoji.new(200, 420)
-
-
+def update
+  t = Input.touch(0)
+  
+  if t.valid? && t.press?
+    if t.y > (height - MOVABLE_RANGE)
+      if @screen_y > height * -(PAGE - 1)
+        @screen_y -= height
+      end
+    elsif t.y < MOVABLE_RANGE
+      if @screen_y < 0
+        @screen_y += height
+      end
+    end
+  end
 end
 
 def draw
-  @emojis.each { |e| e.draw }
+  push_matrix do |x|
+    translate 0, @screen_y
+    @emojis.each { |e| e.draw }
+  end
 end
 
 class Emoji
-  def initialize(x, y)
+  def initialize(i, x, y)
     @x = x
     @y = y
-    @emoji, @name = Image.rand_emoji    
+    @emoji, @name = Image.emoji_index(i)
   end
 
   def draw
@@ -51,7 +51,7 @@ class Emoji
       translate @x, @y + 50
       scale(1, 1)
       set_color_hex 0x000000
-      text "#{@name.to_s}", 0, 0
+      # text "#{@name.to_s}", 0, 0
     end
   end
 end
@@ -60,6 +60,12 @@ class Image
   def self.rand_emoji
     array = EMOJI.to_a
     v = array[rand(array.length)]
+    return emoji(v[0]), v[0]
+  end
+
+  def self.emoji_index(i)
+    array = EMOJI.to_a
+    v = array[i]
     return emoji(v[0]), v[0]
   end
 end
