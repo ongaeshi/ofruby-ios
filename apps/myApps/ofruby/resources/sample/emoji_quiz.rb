@@ -1,10 +1,12 @@
+HIGH_LEVEL = 20
+
 def setup
   set_background_hex 0xffffff
 
-  new_question
-
   @score = 0
   @gameover = false
+
+  new_question
 end
 
 def update
@@ -16,8 +18,8 @@ def update
     touched = @emojis.detect { |e| e.touch?(t) }
     unless touched.nil?
       if touched == @right_emoji
-        new_question
         @score += 1
+        new_question
       else
         @gameover = true
       end
@@ -40,6 +42,10 @@ def new_question
   @emojis.push Emoji.new(20, 100)
   @emojis.push Emoji.new(120, 100)
   @emojis.push Emoji.new(220, 100)
+  if @score >= HIGH_LEVEL
+    @emojis.push Emoji.new(70, 200)
+    @emojis.push Emoji.new(170, 200)
+  end
   
   @right_emoji = @emojis[rand @emojis.length]
 end
