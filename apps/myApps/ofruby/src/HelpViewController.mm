@@ -76,6 +76,10 @@
         "  press?\n"
         "  down?\n"
         "  release?\n"
+        "\n"
+        "Twemoji\n"
+        "Copyright 2014 Twitter, Inc and other contributors\n"
+        "CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/)\n"
         ;
 
     [self.view addSubview:textView];
