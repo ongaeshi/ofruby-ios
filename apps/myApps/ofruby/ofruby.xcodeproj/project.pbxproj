@@ -10,7 +10,7 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
-		5205E7E219A1A73F00C09DC5 /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5205E7E119A1A73F00C09DC5 /* Images-2.xcassets */; };
+		5205E7E219A1A73F00C09DC5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5205E7E119A1A73F00C09DC5 /* Images.xcassets */; };
 		525E0DFE1995EF0C00C18947 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 525E0DFD1995EF0C00C18947 /* AppDelegate.m */; };
 		525E0E021995EF7B00C18947 /* SelectViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 525E0E011995EF7B00C18947 /* SelectViewController.mm */; };
 		525E0E09199614A000C18947 /* ScriptController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 525E0E08199614A000C18947 /* ScriptController.mm */; };
@@ -109,7 +109,7 @@
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		32CA4F630368D1EE00C91783 /* ofxiOS_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxiOS_Prefix.pch; sourceTree = "<group>"; };
-		5205E7E119A1A73F00C09DC5 /* Images-2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "Images-2.xcassets"; path = "ofruby/Images-2.xcassets"; sourceTree = "<group>"; };
+		5205E7E119A1A73F00C09DC5 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ofruby/Images.xcassets; sourceTree = "<group>"; };
 		525E0DFC1995EF0C00C18947 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		525E0DFD1995EF0C00C18947 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		525E0E001995EF7B00C18947 /* SelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectViewController.h; sourceTree = "<group>"; };
@@ -272,7 +272,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				5205E7E119A1A73F00C09DC5 /* Images-2.xcassets */,
+				5205E7E119A1A73F00C09DC5 /* Images.xcassets */,
 				E4D8936A11527B74007E1F53 /* src */,
 				525E0DF61995D05C00C18947 /* resources */,
 				BB24E1F710DAA51900E9C588 /* openFrameworks */,
@@ -634,7 +634,7 @@
 				52BBFAAA1A4DB6F500D31C5E /* tabbar_samples.png in Resources */,
 				52CD2DF91AC089CD006A0A68 /* keywords in Resources */,
 				52CD2DE81AC089CD006A0A68 /* lex.def in Resources */,
-				5205E7E219A1A73F00C09DC5 /* Images-2.xcassets in Resources */,
+				5205E7E219A1A73F00C09DC5 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
