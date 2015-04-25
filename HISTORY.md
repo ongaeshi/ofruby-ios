@@ -1,5 +1,15 @@
 # HISTORY - ofruby-ios
 
+## 0.7 - 2015/04/26
+
+* Load image
+* Laod emoji
+* Update mruby-1.1
+* Add sample
+  * emoji.rb
+  * emoji_quiz.rb
+* Add the iPad icon
+
 ## 0.5 - 2015/02/22
 
 * Add sample tab
