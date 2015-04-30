@@ -77,6 +77,7 @@
     [notificationCenter addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [notificationCenter addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     [notificationCenter addObserver:self selector:@selector(applicationDidEnterBackground) name:@"applicationDidEnterBackground" object:nil];
+    [notificationCenter addObserver:self selector:@selector(textDidChanged:) name:UITextViewTextDidChangeNotification object:nil];
 }
  
 - (void)viewDidDisappear:(BOOL)animated
@@ -161,6 +162,13 @@
 - (void)applicationDidEnterBackground
 {
     [self saveFileIfTouched];
+}
+
+- (void)textDidChanged:(NSNotification *)aNotification
+{
+    NSRange range = mTextView.selectedRange;
+    mTextView.attributedText = [SyntaxHighlighter convertAttributedText:mTextView.text];
+    mTextView.selectedRange = range;
 }
 
 @end
