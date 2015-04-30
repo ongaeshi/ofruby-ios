@@ -50,7 +50,15 @@
     //mTextView.backgroundColor = [UIColor whiteColor];
     mTextView.autocapitalizationType = UITextAutocapitalizationTypeNone;
     mTextView.delegate = self;
-    mTextView.text = [FCFileManager readFileAtPath:mFileName];
+
+    // Syntax Highlight
+    NSString* text = [FCFileManager readFileAtPath:mFileName];
+    NSMutableAttributedString *attrText = [[NSMutableAttributedString alloc] initWithString:text];
+    [attrText addAttribute:NSForegroundColorAttributeName
+                    value:[UIColor colorWithRed:.0 green:1. blue:.0 alpha:1.]
+                    range:NSMakeRange(0, 10)];
+    mTextView.attributedText = attrText;
+    
     [self.view addSubview:mTextView];
 
     // Tap title
