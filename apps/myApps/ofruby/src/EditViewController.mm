@@ -166,6 +166,10 @@
 
 - (void)textDidChanged:(NSNotification *)aNotification
 {
+    if (mTextView.markedTextRange) {
+        return;
+    }
+
     NSRange range = mTextView.selectedRange;
     mTextView.attributedText = [SyntaxHighlighter convertAttributedText:mTextView.text];
     mTextView.selectedRange = range;
