@@ -55,7 +55,7 @@
     NSString* text = [FCFileManager readFileAtPath:mFileName];
     NSMutableAttributedString *attrText = [[NSMutableAttributedString alloc] initWithString:text];
     [attrText addAttribute:NSForegroundColorAttributeName
-                    value:[UIColor colorWithRed:.0 green:1. blue:.0 alpha:1.]
+                    value:[UIColor colorWithRed:0.00 green:0.50 blue:0.00 alpha:1.0]
                     range:NSMakeRange(0, 10)];
     mTextView.attributedText = attrText;
     
