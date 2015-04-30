@@ -9,8 +9,9 @@
 #import "EditViewController.h"
 
 #import "FCFileManager.h"
-#import "ScriptController.h"
 #import "HelpViewController.h"
+#import "ScriptController.h"
+#import "SyntaxHighlighter.h"
 
 @implementation EditViewController
 
@@ -53,11 +54,7 @@
 
     // Syntax Highlight
     NSString* text = [FCFileManager readFileAtPath:mFileName];
-    NSMutableAttributedString *attrText = [[NSMutableAttributedString alloc] initWithString:text];
-    [attrText addAttribute:NSForegroundColorAttributeName
-                    value:[UIColor colorWithRed:0.00 green:0.50 blue:0.00 alpha:1.0]
-                    range:NSMakeRange(0, 10)];
-    mTextView.attributedText = attrText;
+    mTextView.attributedText = [SyntaxHighlighter convertAttributedText:text];
     
     [self.view addSubview:mTextView];
 

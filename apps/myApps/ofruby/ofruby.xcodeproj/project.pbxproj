@@ -11,6 +11,7 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		5205E7E219A1A73F00C09DC5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5205E7E119A1A73F00C09DC5 /* Images.xcassets */; };
+		5238A7581AF1C5BD008520F7 /* SyntaxHighlighter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5238A7571AF1C5BD008520F7 /* SyntaxHighlighter.m */; };
 		525E0DFE1995EF0C00C18947 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 525E0DFD1995EF0C00C18947 /* AppDelegate.m */; };
 		525E0E021995EF7B00C18947 /* SelectViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 525E0E011995EF7B00C18947 /* SelectViewController.mm */; };
 		525E0E09199614A000C18947 /* ScriptController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 525E0E08199614A000C18947 /* ScriptController.mm */; };
@@ -110,6 +111,8 @@
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		32CA4F630368D1EE00C91783 /* ofxiOS_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxiOS_Prefix.pch; sourceTree = "<group>"; };
 		5205E7E119A1A73F00C09DC5 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ofruby/Images.xcassets; sourceTree = "<group>"; };
+		5238A7561AF1C5BD008520F7 /* SyntaxHighlighter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyntaxHighlighter.h; sourceTree = "<group>"; };
+		5238A7571AF1C5BD008520F7 /* SyntaxHighlighter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyntaxHighlighter.m; sourceTree = "<group>"; };
 		525E0DFC1995EF0C00C18947 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		525E0DFD1995EF0C00C18947 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		525E0E001995EF7B00C18947 /* SelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectViewController.h; sourceTree = "<group>"; };
@@ -522,6 +525,8 @@
 		E4D8936A11527B74007E1F53 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				5238A7561AF1C5BD008520F7 /* SyntaxHighlighter.h */,
+				5238A7571AF1C5BD008520F7 /* SyntaxHighlighter.m */,
 				52DB1C0019A3C06500D43F2A /* Touch.cpp */,
 				52DB1C0119A3C06500D43F2A /* Touch.hpp */,
 				52DB1C0219A3C06500D43F2A /* TouchPoint.hpp */,
@@ -699,6 +704,7 @@
 				52C285D11995C60B00A6BF47 /* BindApplication.cpp in Sources */,
 				52C285D71995C60B00A6BF47 /* Input.cpp in Sources */,
 				52CD2DFD1AC089CD006A0A68 /* object.c in Sources */,
+				5238A7581AF1C5BD008520F7 /* SyntaxHighlighter.m in Sources */,
 				52C285D81995C60B00A6BF47 /* Mouse.cpp in Sources */,
 				52CD2DF61AC089CD006A0A68 /* hash.c in Sources */,
 				52CD2E051AC089CD006A0A68 /* variable.c in Sources */,
