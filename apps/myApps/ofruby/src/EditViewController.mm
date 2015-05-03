@@ -10,10 +10,14 @@
 
 #import "FCFileManager.h"
 #import "HelpViewController.h"
+#import "RubyHighlightingTextStorage.h"
 #import "ScriptController.h"
 #import "SyntaxHighlighter.h"
 
 @implementation EditViewController
+{
+	RubyHighlightingTextStorage* mTextStorage;
+}
 
 - (id) initWithFileName:(NSString*)aFileName edit:(BOOL)aEditable;
 {
@@ -52,10 +56,11 @@
     mTextView.autocapitalizationType = UITextAutocapitalizationTypeNone;
     mTextView.delegate = self;
 
-    // Syntax Highlight
-    NSString* text = [FCFileManager readFileAtPath:mFileName];
-    mTextView.attributedText = [SyntaxHighlighter convertAttributedText:text];
-    
+    // TextStorage
+    mTextStorage = [RubyHighlightingTextStorage new];
+	[mTextStorage addLayoutManager: mTextView.layoutManager];
+	[mTextStorage replaceCharactersInRange:NSMakeRange(0, 0) withString:[FCFileManager readFileAtPath:mFileName]];
+
     [self.view addSubview:mTextView];
 
     // Tap title
@@ -77,7 +82,6 @@
     [notificationCenter addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [notificationCenter addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     [notificationCenter addObserver:self selector:@selector(applicationDidEnterBackground) name:@"applicationDidEnterBackground" object:nil];
-    [notificationCenter addObserver:self selector:@selector(textDidChanged:) name:UITextViewTextDidChangeNotification object:nil];
 }
  
 - (void)viewDidDisappear:(BOOL)animated
@@ -162,17 +166,6 @@
 - (void)applicationDidEnterBackground
 {
     [self saveFileIfTouched];
-}
-
-- (void)textDidChanged:(NSNotification *)aNotification
-{
-    if (mTextView.markedTextRange) {
-        return;
-    }
-
-    NSRange range = mTextView.selectedRange;
-    mTextView.attributedText = [SyntaxHighlighter convertAttributedText:mTextView.text];
-    mTextView.selectedRange = range;
 }
 
 @end
