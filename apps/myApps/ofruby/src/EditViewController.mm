@@ -158,7 +158,7 @@
 - (void)saveFileIfTouched
 {
     if (mTouched) {
-        [FCFileManager writeFileAtPath:mFileName content:mTextView.text];
+        [FCFileManager writeFileAtPath:mFileName content:mTextStorage.string];
         mTouched = NO;
     }
 }
