@@ -55,10 +55,14 @@
     mTextView.autocapitalizationType = UITextAutocapitalizationTypeNone;
     mTextView.delegate = self;
 
-    // TextStorage
-    mTextStorage = [RubyHighlightingTextStorage new];
-	[mTextStorage addLayoutManager: mTextView.layoutManager];
-	[mTextStorage replaceCharactersInRange:NSMakeRange(0, 0) withString:[FCFileManager readFileAtPath:mFileName]];
+    if (floor(NSFoundationVersionNumber) >= NSFoundationVersionNumber_iOS_7_0) {
+        // TextStorage
+        mTextStorage = [RubyHighlightingTextStorage new];
+        [mTextStorage addLayoutManager: mTextView.layoutManager];
+        [mTextStorage replaceCharactersInRange:NSMakeRange(0, 0) withString:[FCFileManager readFileAtPath:mFileName]];
+    } else {
+        mTextView.text = [FCFileManager readFileAtPath:mFileName];
+    }
 
     [self.view addSubview:mTextView];
 
@@ -157,7 +161,11 @@
 - (void)saveFileIfTouched
 {
     if (mTouched) {
-        [FCFileManager writeFileAtPath:mFileName content:mTextStorage.string];
+        if (floor(NSFoundationVersionNumber) >= NSFoundationVersionNumber_iOS_7_0) {
+            [FCFileManager writeFileAtPath:mFileName content:mTextStorage.string];
+        } else {
+            [FCFileManager writeFileAtPath:mFileName content:mTextView.text];
+        }
         mTouched = NO;
     }
 }
