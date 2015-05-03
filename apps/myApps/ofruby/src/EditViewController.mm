@@ -12,7 +12,6 @@
 #import "HelpViewController.h"
 #import "RubyHighlightingTextStorage.h"
 #import "ScriptController.h"
-#import "SyntaxHighlighter.h"
 
 @implementation EditViewController
 {

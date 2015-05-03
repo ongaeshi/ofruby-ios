@@ -40,15 +40,27 @@
 
 - (void)processEditing
 {
-	static NSRegularExpression *iExpression;
-	iExpression = iExpression ?: [NSRegularExpression regularExpressionWithPattern:@"#[^\r\n]*[\r\n]" options:0 error:NULL];
+    NSArray* syntaxArray = [[NSArray alloc] initWithObjects:
+        //                                pattern,            color
+        [[NSArray alloc] initWithObjects: @"#[^\r\n]*[\r\n]", [UIColor colorWithRed:0.00 green:0.50 blue:0.00 alpha:1.0], nil],
+        [[NSArray alloc] initWithObjects: @"(?<!\\w)(BEGIN|END|__ENCODING__|__END__|__FILE__|__LINE__|alias|and|begin|break|case|class|def|defined\\?|do|else|elsif|end|ensure|false|for|if|in|module|next|nil|not|or|redo|rescue|retry|return|self|super|then|true|undef|unless|until|when|while|yield)(?!\\w)", [UIColor colorWithRed:0.08 green:0.09 blue:1.00 alpha:1.0], nil],
+        nil
+        ];
+
+    NSRange paragaphRange = [self.string paragraphRangeForRange: self.editedRange];
+    [self removeAttribute:NSForegroundColorAttributeName range:paragaphRange];
 	
-	NSRange paragaphRange = [self.string paragraphRangeForRange: self.editedRange];
-	[self removeAttribute:NSForegroundColorAttributeName range:paragaphRange];
+    for (NSArray* highlightRule in syntaxArray) {
+        NSRegularExpression* regex = [NSRegularExpression regularExpressionWithPattern:highlightRule[0]
+                                                                               options:NSRegularExpressionDotMatchesLineSeparators
+                                                                                 error:nil];
 	
-	[iExpression enumerateMatchesInString:self.string options:0 range:paragaphRange usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
-            [self addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:0.00 green:0.50 blue:0.00 alpha:1.0] range:result.range];
-        }];
+        [regex enumerateMatchesInString:self.string options:0 range:paragaphRange usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
+                [self addAttribute:NSForegroundColorAttributeName
+                             value:highlightRule[1]
+                             range:result.range];
+            }];
+    }
   
     [super processEditing];
 }
