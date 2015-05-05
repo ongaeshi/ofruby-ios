@@ -16,7 +16,7 @@
 
 @implementation EditViewController
 {
-    ICTextView* mTextView;
+    UITextView* mTextView;
 	RubyHighlightingTextStorage* mTextStorage;
 }
 
@@ -46,9 +46,28 @@
                                                                  action:@selector(tapHelpButton)];
     self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:runButton, helpButton, nil];
 
-    // TextView
-    CGRect rect = self.view.bounds;
-    mTextView = [[ICTextView alloc]initWithFrame:rect];
+    if (floor(NSFoundationVersionNumber) >= NSFoundationVersionNumber_iOS_7_0) {
+        // TextStorage
+        mTextStorage = [RubyHighlightingTextStorage new];
+        [mTextStorage replaceCharactersInRange:NSMakeRange(0, 0) withString:[FCFileManager readFileAtPath:mFileName]];
+
+        // LayoutManager
+        NSLayoutManager *textLayout = [[NSLayoutManager alloc] init];
+        [mTextStorage addLayoutManager:textLayout]; 
+
+        // TextContainer
+        NSTextContainer *textContainer = [[NSTextContainer alloc] initWithSize:self.view.bounds.size];
+        [textLayout addTextContainer:textContainer];
+
+        // TextView
+        mTextView = [[ICTextView alloc] initWithFrame:self.view.bounds textContainer:textContainer];
+    } else {
+        // TextView
+        mTextView = [[UITextView alloc] initWithFrame:self.view.bounds];
+        mTextView.text = [FCFileManager readFileAtPath:mFileName];
+    }
+
+    // TextView (Common)
     mTextView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     mTextView.editable = mEditable;
     mTextView.textAlignment = UITextAlignmentLeft;
@@ -56,15 +75,6 @@
     //mTextView.backgroundColor = [UIColor whiteColor];
     mTextView.autocapitalizationType = UITextAutocapitalizationTypeNone;
     mTextView.delegate = self;
-
-    if (floor(NSFoundationVersionNumber) >= NSFoundationVersionNumber_iOS_7_0) {
-        // TextStorage
-        mTextStorage = [RubyHighlightingTextStorage new];
-        [mTextStorage addLayoutManager: mTextView.layoutManager];
-        [mTextStorage replaceCharactersInRange:NSMakeRange(0, 0) withString:[FCFileManager readFileAtPath:mFileName]];
-    } else {
-        mTextView.text = [FCFileManager readFileAtPath:mFileName];
-    }
 
     [self.view addSubview:mTextView];
 
