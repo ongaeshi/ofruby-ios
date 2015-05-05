@@ -189,7 +189,7 @@
 
 -(BOOL)isSyntaxHighlight
 {
-    return floor(NSFoundationVersionNumber) >= NSFoundationVersionNumber_iOS_7_0;
+    return NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1; // 7.0 and above
 }
 
 @end
