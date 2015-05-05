@@ -63,7 +63,7 @@
         mTextView = [[ICTextView alloc] initWithFrame:self.view.bounds textContainer:textContainer];
     } else {
         // TextView
-        mTextView = [[UITextView alloc] initWithFrame:self.view.bounds];
+        mTextView = [[ICTextView alloc] initWithFrame:self.view.bounds];
         mTextView.text = [FCFileManager readFileAtPath:mFileName];
     }
 
