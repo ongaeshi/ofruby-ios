@@ -46,7 +46,7 @@
                                                                  action:@selector(tapHelpButton)];
     self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:runButton, helpButton, nil];
 
-    if (floor(NSFoundationVersionNumber) >= NSFoundationVersionNumber_iOS_7_0) {
+    if ([self isSyntaxHighlight]) {
         // TextStorage
         mTextStorage = [RubyHighlightingTextStorage new];
         [mTextStorage replaceCharactersInRange:NSMakeRange(0, 0) withString:[FCFileManager readFileAtPath:mFileName]];
@@ -173,7 +173,7 @@
 - (void)saveFileIfTouched
 {
     if (mTouched) {
-        if (floor(NSFoundationVersionNumber) >= NSFoundationVersionNumber_iOS_7_0) {
+        if ([self isSyntaxHighlight]) {
             [FCFileManager writeFileAtPath:mFileName content:mTextStorage.string];
         } else {
             [FCFileManager writeFileAtPath:mFileName content:mTextView.text];
@@ -185,6 +185,12 @@
 - (void)applicationDidEnterBackground
 {
     [self saveFileIfTouched];
+}
+
+-(BOOL)isSyntaxHighlight
+{
+    return NO;
+    // return floor(NSFoundationVersionNumber) >= NSFoundationVersionNumber_iOS_7_0;
 }
 
 @end
