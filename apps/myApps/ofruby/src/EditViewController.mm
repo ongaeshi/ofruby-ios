@@ -12,9 +12,11 @@
 #import "HelpViewController.h"
 #import "RubyHighlightingTextStorage.h"
 #import "ScriptController.h"
+#import "ICTextView.h"
 
 @implementation EditViewController
 {
+    ICTextView* mTextView;
 	RubyHighlightingTextStorage* mTextStorage;
 }
 
@@ -46,7 +48,7 @@
 
     // TextView
     CGRect rect = self.view.bounds;
-    mTextView = [[UITextView alloc]initWithFrame:rect];
+    mTextView = [[ICTextView alloc]initWithFrame:rect];
     mTextView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     mTextView.editable = mEditable;
     mTextView.textAlignment = UITextAlignmentLeft;

@@ -13,7 +13,6 @@
     BOOL mEditable;
 @private
     NSString* mFileName;
-    UITextView* mTextView;
     BOOL mTouched;
 }
 
