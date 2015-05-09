@@ -44,6 +44,7 @@
     fSyntaxArray = fSyntaxArray ?: [[NSArray alloc] initWithObjects:
         //                                pattern,            color
         [[NSArray alloc] initWithObjects: @"(?<!\\w)(BEGIN|END|__ENCODING__|__END__|__FILE__|__LINE__|alias|and|begin|break|case|class|def|defined\\?|do|else|elsif|end|ensure|false|for|if|in|module|next|nil|not|or|redo|rescue|retry|return|self|super|then|true|undef|unless|until|when|while|yield)(?!\\w)", [UIColor colorWithRed:0.08 green:0.09 blue:1.00 alpha:1.0], nil],
+        [[NSArray alloc] initWithObjects: @"\".*?\"", [UIColor colorWithRed:0.64 green:0.08 blue:0.08 alpha:1.0], nil],
         [[NSArray alloc] initWithObjects: @"#[^\r\n]*[\r\n]", [UIColor colorWithRed:0.00 green:0.50 blue:0.00 alpha:1.0], nil],
         nil
         ];
