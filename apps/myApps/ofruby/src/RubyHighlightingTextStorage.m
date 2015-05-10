@@ -43,6 +43,7 @@
     static NSArray* fSyntaxArray;
     fSyntaxArray = fSyntaxArray ?: [[NSArray alloc] initWithObjects:
         //                                pattern,            color
+        [[NSArray alloc] initWithObjects: @"(?<!\\w)[A-Z][A-Za-z0-9_]*(?!\\w)", [UIColor colorWithRed:0.00 green:0.50 blue:0.50 alpha:1.0], nil], // constant
         [[NSArray alloc] initWithObjects: @"(?<!\\w)(BEGIN|END|__ENCODING__|__END__|__FILE__|__LINE__|alias|and|begin|break|case|class|def|defined\\?|do|else|elsif|end|ensure|false|for|if|in|module|next|nil|not|or|redo|rescue|retry|return|self|super|then|true|undef|unless|until|when|while|yield)(?!\\w)", [UIColor colorWithRed:0.08 green:0.09 blue:1.00 alpha:1.0], nil], // keyword
         [[NSArray alloc] initWithObjects: @"#[^\"\\n\\r]*(?:\"[^\"\\n\\r]*\"[^\"\\n\\r]*)*[\\r\\n]", [UIColor colorWithRed:0.00 green:0.50 blue:0.00 alpha:1.0], nil], // comment
         [[NSArray alloc] initWithObjects: @"\"(?:[^\"\\\\]|\\\\.)*\"", [UIColor colorWithRed:0.64 green:0.08 blue:0.08 alpha:1.0], nil], // string(double-quoted)
