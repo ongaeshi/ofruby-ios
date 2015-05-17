@@ -9,10 +9,16 @@
 #import "EditViewController.h"
 
 #import "FCFileManager.h"
-#import "ScriptController.h"
 #import "HelpViewController.h"
+#import "RubyHighlightingTextStorage.h"
+#import "ScriptController.h"
+#import "ICTextView.h"
 
 @implementation EditViewController
+{
+    UITextView* mTextView;
+	RubyHighlightingTextStorage* mTextStorage;
+}
 
 - (id) initWithFileName:(NSString*)aFileName edit:(BOOL)aEditable;
 {
@@ -40,9 +46,28 @@
                                                                  action:@selector(tapHelpButton)];
     self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:runButton, helpButton, nil];
 
-    // TextView
-    CGRect rect = self.view.bounds;
-    mTextView = [[UITextView alloc]initWithFrame:rect];
+    if ([self isSyntaxHighlight]) {
+        // TextStorage
+        mTextStorage = [RubyHighlightingTextStorage new];
+        [mTextStorage replaceCharactersInRange:NSMakeRange(0, 0) withString:[FCFileManager readFileAtPath:mFileName]];
+
+        // LayoutManager
+        NSLayoutManager *textLayout = [[NSLayoutManager alloc] init];
+        [mTextStorage addLayoutManager:textLayout]; 
+
+        // TextContainer
+        NSTextContainer *textContainer = [[NSTextContainer alloc] initWithSize:self.view.bounds.size];
+        [textLayout addTextContainer:textContainer];
+
+        // TextView
+        mTextView = [[ICTextView alloc] initWithFrame:self.view.bounds textContainer:textContainer];
+    } else {
+        // TextView
+        mTextView = [[ICTextView alloc] initWithFrame:self.view.bounds];
+        mTextView.text = [FCFileManager readFileAtPath:mFileName];
+    }
+
+    // TextView (Common)
     mTextView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     mTextView.editable = mEditable;
     mTextView.textAlignment = UITextAlignmentLeft;
@@ -50,7 +75,7 @@
     //mTextView.backgroundColor = [UIColor whiteColor];
     mTextView.autocapitalizationType = UITextAutocapitalizationTypeNone;
     mTextView.delegate = self;
-    mTextView.text = [FCFileManager readFileAtPath:mFileName];
+
     [self.view addSubview:mTextView];
 
     // Tap title
@@ -148,7 +173,11 @@
 - (void)saveFileIfTouched
 {
     if (mTouched) {
-        [FCFileManager writeFileAtPath:mFileName content:mTextView.text];
+        if ([self isSyntaxHighlight]) {
+            [FCFileManager writeFileAtPath:mFileName content:mTextStorage.string];
+        } else {
+            [FCFileManager writeFileAtPath:mFileName content:mTextView.text];
+        }
         mTouched = NO;
     }
 }
@@ -156,6 +185,11 @@
 - (void)applicationDidEnterBackground
 {
     [self saveFileIfTouched];
+}
+
+-(BOOL)isSyntaxHighlight
+{
+    return NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1; // 7.0 and above
 }
 
 @end

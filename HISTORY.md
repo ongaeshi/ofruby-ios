@@ -3,7 +3,7 @@
 ## 0.7 - 2015/04/26
 
 * Load image
-* Laod emoji
+* Load emoji
 * Update mruby-1.1
 * Add sample
   * emoji.rb
