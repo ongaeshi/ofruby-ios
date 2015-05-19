@@ -192,4 +192,28 @@
     return NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1; // 7.0 and above
 }
 
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text 
+{
+    if ([text isEqualToString:@"\n"]) {
+        UITextPosition *start = [textView positionFromPosition:textView.beginningOfDocument offset:range.location];
+        UITextPosition *end = [textView positionFromPosition:start offset:range.length];
+        UITextRange *textRange = [textView textRangeFromPosition:start toPosition:end];
+
+        int indent = 1;
+        NSString* returnAndIndent = @"\n";
+        for (int i = 0; i < indent; i++) {
+            returnAndIndent = [returnAndIndent stringByAppendingString: @"  "];
+        }
+
+        [textView replaceRange:textRange withText:returnAndIndent];
+
+        NSRange cursor = NSMakeRange(range.location + returnAndIndent.length, 0);
+        textView.selectedRange = cursor;
+
+        return NO;
+    }
+
+    return YES;
+}
+
 @end
