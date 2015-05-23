@@ -214,6 +214,21 @@ const int PREV_LINE_MAX = 240;
         textView.selectedRange = cursor;
 
         return NO;
+    } else if ([text isEqualToString:@"\t"]) {
+        UITextPosition *start = [textView positionFromPosition:textView.beginningOfDocument offset:range.location];
+        UITextPosition *end = [textView positionFromPosition:start offset:range.length];
+        UITextRange *textRange = [textView textRangeFromPosition:start toPosition:end];
+
+        NSString* output = @"";
+        for (int i = 0; i < INDENT_WIDTH; i++) {
+            output = [output stringByAppendingString: @" "];
+        }
+        [textView replaceRange:textRange withText:output];
+
+        NSRange cursor = NSMakeRange(range.location + output.length, 0);
+        textView.selectedRange = cursor;
+
+        return NO;
     }
 
     return YES;
