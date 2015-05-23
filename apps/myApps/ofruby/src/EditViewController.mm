@@ -223,21 +223,21 @@
         return 0;
     }
 
-    NSRange range = [prevLine rangeOfString:@"^[ ]+"
+    NSRange range = [prevLine rangeOfString:@"^ *"
                                           options:NSRegularExpressionSearch];
-    if (range.location == NSNotFound) {
-        return 0;
+    int begginigOfBlank = (range.location != NSNotFound) ? range.length : 0;
+
+    // TODO
+    // ".*(do|\|) *\|.+|$" --> +1
+    // end, }              --> -1? (Need to match of prev block start)
+    range = [prevLine rangeOfString:@"^ *(begin|case|class|def|ensure|module|if|else|elsif|for|module|rescue|unless|until|when|while)"
+                            options:NSRegularExpressionSearch];
+
+    if (range.location != NSNotFound) {
+        return begginigOfBlank + 2;
+    } else {
+        return begginigOfBlank;
     }
-    int begginigOfBlank = range.length;
-
-    // インデントの増減
-    // indent + 1
-    //   "  (begin|case|class|def|ensure|module|if|else|elsif|for|module|rescue|unless|until|when|while)" (空白の直後のみ有効)
-    //   "  ... do|{" (改行の直前のみ有効)
-    // indent - 1
-    //   "  end|}" (空白の直後のみ有効)
-
-    return begginigOfBlank;
 }
 
 - (NSString*)prevLine:(UITextView*)textView withPos:(UITextPosition*)pos
