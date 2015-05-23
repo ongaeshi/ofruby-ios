@@ -14,6 +14,9 @@
 #import "ScriptController.h"
 #import "ICTextView.h"
 
+const int INDENT_WIDTH = 2;
+const int PREV_LINE_MAX = 240;
+
 @implementation EditViewController
 {
     UITextView* mTextView;
@@ -234,7 +237,7 @@
                             options:NSRegularExpressionSearch];
 
     if (range.location != NSNotFound) {
-        return begginigOfBlank + 2;
+        return begginigOfBlank + INDENT_WIDTH;
     } else {
         return begginigOfBlank;
     }
@@ -242,7 +245,7 @@
 
 - (NSString*)prevLine:(UITextView*)textView withPos:(UITextPosition*)pos
 {
-    UITextPosition* next = [textView positionFromPosition:pos offset:-80]; // TODO: To Constant, Long line
+    UITextPosition* next = [textView positionFromPosition:pos offset:-PREV_LINE_MAX];
     UITextRange* textRange = [textView textRangeFromPosition:next toPosition:pos];
     NSString* str = [textView textInRange:textRange];
     // NSLog(@"str: '%@'", str);
