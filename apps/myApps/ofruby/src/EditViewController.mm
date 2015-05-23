@@ -202,7 +202,7 @@
         int indent = [self calcNextIndent:textView withPos:start];
         NSString* returnAndIndent = @"\n";
         for (int i = 0; i < indent; i++) {
-            returnAndIndent = [returnAndIndent stringByAppendingString: @"  "];
+            returnAndIndent = [returnAndIndent stringByAppendingString: @" "];
         }
 
         [textView replaceRange:textRange withText:returnAndIndent];
@@ -219,9 +219,17 @@
 - (int)calcNextIndent:(UITextView*)textView withPos:(UITextPosition*)pos
 {
     NSString* prevLine = [self prevLine:textView withPos:pos];
+    if (prevLine == NULL) {
+        return 0;
+    }
 
-    // prevWhiteSpace = prevLineの最初の文字までの空白
-    // indent = prevWhiteSpace.length / 2
+    NSRange range = [prevLine rangeOfString:@"^[ ]+"
+                                          options:NSRegularExpressionSearch];
+    if (range.location == NSNotFound) {
+        return 0;
+    }
+    int begginigOfBlank = range.length;
+
     // インデントの増減
     // indent + 1
     //   "  (begin|case|class|def|ensure|module|if|else|elsif|for|module|rescue|unless|until|when|while)" (空白の直後のみ有効)
@@ -229,18 +237,23 @@
     // indent - 1
     //   "  end|}" (空白の直後のみ有効)
 
-    return 1;
+    return begginigOfBlank;
 }
 
 - (NSString*)prevLine:(UITextView*)textView withPos:(UITextPosition*)pos
 {
-    UITextPosition* next = [textView positionFromPosition:pos offset:-80];
+    UITextPosition* next = [textView positionFromPosition:pos offset:-80]; // TODO: To Constant, Long line
     UITextRange* textRange = [textView textRangeFromPosition:next toPosition:pos];
     NSString* str = [textView textInRange:textRange];
-
+    // NSLog(@"str: '%@'", str);
+    
     NSRange prevRange = [str rangeOfString:@"(?>[^\n]).*?$"
                                    options:NSRegularExpressionSearch];
+    if (prevRange.location == NSNotFound) {
+        return NULL;
+    }
 
+    // NSLog(@"prevLine: '%@'", [str substringWithRange: prevRange]);
     return [str substringWithRange: prevRange];
 }
 
