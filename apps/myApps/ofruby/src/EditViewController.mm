@@ -199,34 +199,23 @@ const int PREV_LINE_MAX = 240;
 {
     if ([text isEqualToString:@"\n"]) {
         UITextPosition *start = [textView positionFromPosition:textView.beginningOfDocument offset:range.location];
-        UITextPosition *end = [textView positionFromPosition:start offset:range.length];
-        UITextRange *textRange = [textView textRangeFromPosition:start toPosition:end];
-
         int indent = [self calcNextSpace:textView withPos:start];
-        NSString* returnAndIndent = @"\n";
+
+        NSString* output = @"\n";
         for (int i = 0; i < indent; i++) {
-            returnAndIndent = [returnAndIndent stringByAppendingString: @" "];
+            output = [output stringByAppendingString: @" "];
         }
 
-        [textView replaceRange:textRange withText:returnAndIndent];
-
-        NSRange cursor = NSMakeRange(range.location + returnAndIndent.length, 0);
-        textView.selectedRange = cursor;
+        [self insertText:textView text:output range:range];
 
         return NO;
     } else if ([text isEqualToString:@"\t"]) {
-        UITextPosition *start = [textView positionFromPosition:textView.beginningOfDocument offset:range.location];
-        UITextPosition *end = [textView positionFromPosition:start offset:range.length];
-        UITextRange *textRange = [textView textRangeFromPosition:start toPosition:end];
-
         NSString* output = @"";
         for (int i = 0; i < INDENT_WIDTH; i++) {
             output = [output stringByAppendingString: @" "];
         }
-        [textView replaceRange:textRange withText:output];
 
-        NSRange cursor = NSMakeRange(range.location + output.length, 0);
-        textView.selectedRange = cursor;
+        [self insertText:textView text:output range:range];
 
         return NO;
     }
@@ -273,6 +262,18 @@ const int PREV_LINE_MAX = 240;
 
     // NSLog(@"prevLine: '%@'", [str substringWithRange: prevRange]);
     return [str substringWithRange: prevRange];
+}
+
+- (void)insertText:(UITextView*)textView text:(NSString*)text range:(NSRange)range
+{
+    UITextPosition *start = [textView positionFromPosition:textView.beginningOfDocument offset:range.location];
+    UITextPosition *end = [textView positionFromPosition:start offset:range.length];
+    UITextRange *textRange = [textView textRangeFromPosition:start toPosition:end];
+
+    [textView replaceRange:textRange withText:text];
+
+    NSRange cursor = NSMakeRange(range.location + text.length, 0);
+    textView.selectedRange = cursor;
 }
 
 @end
