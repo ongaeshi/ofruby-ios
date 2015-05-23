@@ -247,8 +247,8 @@
     NSString* str = [textView textInRange:textRange];
     // NSLog(@"str: '%@'", str);
     
-    NSRange prevRange = [str rangeOfString:@"(?>[^\n]).*?$"
-                                   options:NSRegularExpressionSearch];
+    NSInteger location = [str length] > 0 ? [str length] - 1 : 0;
+    NSRange prevRange = [str lineRangeForRange:NSMakeRange(location, 0)];
     if (prevRange.location == NSNotFound) {
         return NULL;
     }
