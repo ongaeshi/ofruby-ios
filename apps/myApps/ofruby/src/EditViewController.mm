@@ -218,12 +218,10 @@
 
 - (int)calcNextIndent:(UITextView*)textView withPos:(UITextPosition*)pos
 {
-    // 前行のインデントに合わせる
-    // 前に戻りながら@"\n"を探す
-    // 見つかったら、そこからposまでが「prevLine」になる
+    NSString* prevLine = [self prevLine:textView withPos:pos];
+
     // prevWhiteSpace = prevLineの最初の文字までの空白
     // indent = prevWhiteSpace.length / 2
-
     // インデントの増減
     // indent + 1
     //   "  (begin|case|class|def|ensure|module|if|else|elsif|for|module|rescue|unless|until|when|while)" (空白の直後のみ有効)
@@ -232,6 +230,18 @@
     //   "  end|}" (空白の直後のみ有効)
 
     return 1;
+}
+
+- (NSString*)prevLine:(UITextView*)textView withPos:(UITextPosition*)pos
+{
+    UITextPosition* next = [textView positionFromPosition:pos offset:-80];
+    UITextRange* textRange = [textView textRangeFromPosition:next toPosition:pos];
+    NSString* str = [textView textInRange:textRange];
+
+    NSRange prevRange = [str rangeOfString:@"(?>[^\n]).*?$"
+                                   options:NSRegularExpressionSearch];
+
+    return [str substringWithRange: prevRange];
 }
 
 @end
