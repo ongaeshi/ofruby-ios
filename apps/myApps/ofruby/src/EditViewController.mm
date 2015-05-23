@@ -199,7 +199,7 @@
         UITextPosition *end = [textView positionFromPosition:start offset:range.length];
         UITextRange *textRange = [textView textRangeFromPosition:start toPosition:end];
 
-        int indent = [self calcNextIndent:textView withPos:start];
+        int indent = [self calcNextSpace:textView withPos:start];
         NSString* returnAndIndent = @"\n";
         for (int i = 0; i < indent; i++) {
             returnAndIndent = [returnAndIndent stringByAppendingString: @" "];
@@ -216,7 +216,7 @@
     return YES;
 }
 
-- (int)calcNextIndent:(UITextView*)textView withPos:(UITextPosition*)pos
+- (int)calcNextSpace:(UITextView*)textView withPos:(UITextPosition*)pos
 {
     NSString* prevLine = [self prevLine:textView withPos:pos];
     if (prevLine == NULL) {
