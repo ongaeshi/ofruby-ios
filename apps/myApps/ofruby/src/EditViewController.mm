@@ -197,6 +197,11 @@ const int PREV_LINE_MAX = 240;
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text 
 {
+    // Auto indent is supported by >=7.0
+    if (![self isSyntaxHighlight]) {
+        return YES;
+    }
+
     if ([text isEqualToString:@"\n"]) {
         UITextPosition *start = [textView positionFromPosition:textView.beginningOfDocument offset:range.location];
         int indent = [self calcNextSpace:textView withPos:start];
