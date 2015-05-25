@@ -14,6 +14,9 @@
 #import "ScriptController.h"
 #import "ICTextView.h"
 
+const int INDENT_WIDTH = 2;
+const int PREV_LINE_MAX = 240;
+
 @implementation EditViewController
 {
     UITextView* mTextView;
@@ -190,6 +193,92 @@
 -(BOOL)isSyntaxHighlight
 {
     return NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_6_1; // 7.0 and above
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text 
+{
+    // Auto indent is supported by >=7.0
+    if (![self isSyntaxHighlight]) {
+        return YES;
+    }
+
+    if ([text isEqualToString:@"\n"]) {
+        UITextPosition *start = [textView positionFromPosition:textView.beginningOfDocument offset:range.location];
+        int indent = [self calcNextSpace:textView withPos:start];
+
+        NSString* output = @"\n";
+        for (int i = 0; i < indent; i++) {
+            output = [output stringByAppendingString: @" "];
+        }
+
+        [self insertText:textView text:output range:range];
+
+        return NO;
+    } else if ([text isEqualToString:@"\t"]) {
+        NSString* output = @"";
+        for (int i = 0; i < INDENT_WIDTH; i++) {
+            output = [output stringByAppendingString: @" "];
+        }
+
+        [self insertText:textView text:output range:range];
+
+        return NO;
+    }
+
+    return YES;
+}
+
+- (int)calcNextSpace:(UITextView*)textView withPos:(UITextPosition*)pos
+{
+    NSString* prevLine = [self prevLine:textView withPos:pos];
+    if (prevLine == NULL) {
+        return 0;
+    }
+
+    NSRange range = [prevLine rangeOfString:@"^ *"
+                                          options:NSRegularExpressionSearch];
+    int begginigOfBlank = (range.location != NSNotFound) ? range.length : 0;
+
+    // TODO
+    // ".*(do|\|) *\|.+|$" --> +1
+    // end, }              --> -1? (Need to match of prev block start)
+    range = [prevLine rangeOfString:@"^ *(begin|case|class|def|ensure|module|if|else|elsif|for|module|rescue|unless|until|when|while)"
+                            options:NSRegularExpressionSearch];
+
+    if (range.location != NSNotFound) {
+        return begginigOfBlank + INDENT_WIDTH;
+    } else {
+        return begginigOfBlank;
+    }
+}
+
+- (NSString*)prevLine:(UITextView*)textView withPos:(UITextPosition*)pos
+{
+    UITextPosition* next = [textView positionFromPosition:pos offset:-PREV_LINE_MAX];
+    UITextRange* textRange = [textView textRangeFromPosition:next toPosition:pos];
+    NSString* str = [textView textInRange:textRange];
+    // NSLog(@"str: '%@'", str);
+    
+    NSInteger location = [str length] > 0 ? [str length] - 1 : 0;
+    NSRange prevRange = [str lineRangeForRange:NSMakeRange(location, 0)];
+    if (prevRange.location == NSNotFound) {
+        return NULL;
+    }
+
+    // NSLog(@"prevLine: '%@'", [str substringWithRange: prevRange]);
+    return [str substringWithRange: prevRange];
+}
+
+- (void)insertText:(UITextView*)textView text:(NSString*)text range:(NSRange)range
+{
+    UITextPosition *start = [textView positionFromPosition:textView.beginningOfDocument offset:range.location];
+    UITextPosition *end = [textView positionFromPosition:start offset:range.length];
+    UITextRange *textRange = [textView textRangeFromPosition:start toPosition:end];
+
+    [textView replaceRange:textRange withText:text];
+
+    NSRange cursor = NSMakeRange(range.location + text.length, 0);
+    textView.selectedRange = cursor;
 }
 
 @end
