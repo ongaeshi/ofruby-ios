@@ -12,6 +12,7 @@
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		5205E7E219A1A73F00C09DC5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5205E7E119A1A73F00C09DC5 /* Images.xcassets */; };
 		520781841AF66A550047A0D1 /* RubyHighlightingTextStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 520781831AF66A550047A0D1 /* RubyHighlightingTextStorage.m */; };
+		525B9BFA1B1341BD00191254 /* fiber.c in Sources */ = {isa = PBXBuildFile; fileRef = 525B9BF91B1341BD00191254 /* fiber.c */; };
 		525E0DFE1995EF0C00C18947 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 525E0DFD1995EF0C00C18947 /* AppDelegate.m */; };
 		525E0E021995EF7B00C18947 /* SelectViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 525E0E011995EF7B00C18947 /* SelectViewController.mm */; };
 		525E0E09199614A000C18947 /* ScriptController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 525E0E08199614A000C18947 /* ScriptController.mm */; };
@@ -116,6 +117,7 @@
 		5205E7E119A1A73F00C09DC5 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Images.xcassets; path = ofruby/Images.xcassets; sourceTree = "<group>"; };
 		520781821AF66A550047A0D1 /* RubyHighlightingTextStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RubyHighlightingTextStorage.h; sourceTree = "<group>"; };
 		520781831AF66A550047A0D1 /* RubyHighlightingTextStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RubyHighlightingTextStorage.m; sourceTree = "<group>"; };
+		525B9BF91B1341BD00191254 /* fiber.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fiber.c; sourceTree = "<group>"; };
 		525E0DFC1995EF0C00C18947 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		525E0DFD1995EF0C00C18947 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		525E0E001995EF7B00C18947 /* SelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectViewController.h; sourceTree = "<group>"; };
@@ -388,6 +390,7 @@
 		52CD2D9C1AC089CD006A0A68 /* gem */ = {
 			isa = PBXGroup;
 			children = (
+				525B9BF91B1341BD00191254 /* fiber.c */,
 				52CD2D9D1AC089CD006A0A68 /* math.c */,
 			);
 			path = gem;
@@ -693,6 +696,7 @@
 			files = (
 				52CD2DF01AC089CD006A0A68 /* dump.c in Sources */,
 				52B87B121A7C92590067183F /* SampleViewController.mm in Sources */,
+				525B9BFA1B1341BD00191254 /* fiber.c in Sources */,
 				52CD2E061AC089CD006A0A68 /* version.c in Sources */,
 				52DB1C0319A3C06500D43F2A /* Touch.cpp in Sources */,
 				52CD2DF11AC089CD006A0A68 /* enum.c in Sources */,
