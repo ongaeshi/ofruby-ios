@@ -103,6 +103,17 @@ mrb_value pick_from_library(mrb_state *mrb, mrb_value self)
     return mrb_nil_value();
 }
 
+mrb_value receive_picked(mrb_state *mrb, mrb_value self)
+{
+    if (sImagePicker) {
+        if (sImagePicker->getImageUpdated()) {
+            sImagePicker->close();
+        }
+    }
+    
+    return mrb_nil_value();
+}
+
 mrb_value clone(mrb_state *mrb, mrb_value self)
 {
     ofImage* newObj = new ofImage();
@@ -359,6 +370,7 @@ void BindImage::Bind(mrb_state* mrb)
     mrb_define_class_method(mrb , cc, "sample",             sample,             MRB_ARGS_REQ(1));
     mrb_define_class_method(mrb , cc, "grab_screen",        grab_screen,        MRB_ARGS_OPT(4));
     mrb_define_class_method(mrb , cc, "pick_from_library",  pick_from_library,  MRB_ARGS_NONE());
+    mrb_define_class_method(mrb , cc, "receive_picked",     receive_picked,     MRB_ARGS_NONE());
 
     mrb_define_method(mrb, cc,        "clone",              clone,              MRB_ARGS_NONE());
     // mrb_define_method(mrb, cc,        "save",               save,               MRB_ARGS_ARG(2, 1));
