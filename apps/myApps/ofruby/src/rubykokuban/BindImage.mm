@@ -91,6 +91,18 @@ mrb_value grab_screen(mrb_state *mrb, mrb_value self)
     return BindImage::ToMrb(mrb, mrb_class_ptr(self), obj);
 }
 
+mrb_value pick_from_camera(mrb_state *mrb, mrb_value self)
+{
+    if (sImagePicker == NULL) {
+        sImagePicker = new ofxiOSImagePicker();
+        // sImagePicker->setMaxDimension(480);
+    }
+
+    sImagePicker->openCamera();
+
+    return mrb_nil_value();
+}
+
 mrb_value pick_from_library(mrb_state *mrb, mrb_value self)
 {
     if (sImagePicker == NULL) {
@@ -377,6 +389,7 @@ void BindImage::Bind(mrb_state* mrb)
     mrb_define_class_method(mrb , cc, "load",               load,               MRB_ARGS_REQ(1));
     mrb_define_class_method(mrb , cc, "sample",             sample,             MRB_ARGS_REQ(1));
     mrb_define_class_method(mrb , cc, "grab_screen",        grab_screen,        MRB_ARGS_OPT(4));
+    mrb_define_class_method(mrb , cc, "pick_from_camera",   pick_from_camera,  MRB_ARGS_NONE());
     mrb_define_class_method(mrb , cc, "pick_from_library",  pick_from_library,  MRB_ARGS_NONE());
     mrb_define_class_method(mrb , cc, "receive_picked",     receive_picked,     MRB_ARGS_NONE());
 
