@@ -107,7 +107,15 @@ mrb_value receive_picked(mrb_state *mrb, mrb_value self)
 {
     if (sImagePicker) {
         if (sImagePicker->getImageUpdated()) {
+            ofImage* obj = new ofImage();
+            obj->setFromPixels(sImagePicker->getPixelsRef());
+
+            // Deleted it is be good?
+            // delete sImagePicker;
+            // sImagePicker = NULL;
             sImagePicker->close();
+            
+            return BindImage::ToMrb(mrb, mrb_class_ptr(self), obj);
         }
     }
     
