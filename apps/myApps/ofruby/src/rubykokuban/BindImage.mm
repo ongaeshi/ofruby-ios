@@ -6,12 +6,16 @@
 #include "mruby/string.h"
 #include "ofAppRunner.h"
 #include "ofImage.h"
+#include "ofxiOSExtras.h"
 #include "rubykokuban/BindColor.hpp"
 #import "FCFileManager.h"
 
 namespace rubykokuban {
 
 namespace {
+
+ofxiOSImagePicker* sImagePicker = NULL;
+    
 ofImage& obj(mrb_value self)
 {
     return *((ofImage*)DATA_PTR(self));
@@ -85,6 +89,18 @@ mrb_value grab_screen(mrb_state *mrb, mrb_value self)
     }
 
     return BindImage::ToMrb(mrb, mrb_class_ptr(self), obj);
+}
+
+mrb_value pick_from_library(mrb_state *mrb, mrb_value self)
+{
+    if (sImagePicker == NULL) {
+        sImagePicker = new ofxiOSImagePicker();
+        // sImagePicker->setMaxDimension(480);
+    }
+
+    sImagePicker->openLibrary();
+
+    return mrb_nil_value();
 }
 
 mrb_value clone(mrb_state *mrb, mrb_value self)
@@ -342,7 +358,8 @@ void BindImage::Bind(mrb_state* mrb)
     mrb_define_class_method(mrb , cc, "load",               load,               MRB_ARGS_REQ(1));
     mrb_define_class_method(mrb , cc, "sample",             sample,             MRB_ARGS_REQ(1));
     mrb_define_class_method(mrb , cc, "grab_screen",        grab_screen,        MRB_ARGS_OPT(4));
-                                                             
+    mrb_define_class_method(mrb , cc, "pick_from_library",  pick_from_library,  MRB_ARGS_NONE());
+
     mrb_define_method(mrb, cc,        "clone",              clone,              MRB_ARGS_NONE());
     // mrb_define_method(mrb, cc,        "save",               save,               MRB_ARGS_ARG(2, 1));
     mrb_define_method(mrb, cc,        "color",              color,              MRB_ARGS_REQ(2));
@@ -363,6 +380,8 @@ void BindImage::Bind(mrb_state* mrb)
     mrb_define_method(mrb, cc,        "width",              width,              MRB_ARGS_NONE());
     mrb_define_method(mrb, cc,        "each_pixels",        each_pixels,        MRB_ARGS_OPT(2));
     mrb_define_method(mrb, cc,        "map_pixels",         map_pixels,         MRB_ARGS_OPT(2));
+
+    
 }
 
 }
