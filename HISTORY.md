@@ -1,5 +1,12 @@
 # HISTORY - ofruby-ios
 
+## 0.8 - 2015/05/02
+
+* Improve code editor (iOS >= 7)
+  * Code highlight
+  * Auto indent
+* Add Fiber
+ 
 ## 0.7 - 2015/04/26
 
 * Load image
