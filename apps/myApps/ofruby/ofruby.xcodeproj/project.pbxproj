@@ -10,7 +10,6 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
-		5205E7E219A1A73F00C09DC5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5205E7E119A1A73F00C09DC5 /* Images.xcassets */; };
 		520781841AF66A550047A0D1 /* RubyHighlightingTextStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 520781831AF66A550047A0D1 /* RubyHighlightingTextStorage.m */; };
 		5250DEE91B1DF3AE0063CFA5 /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5250DEE81B1DF3AE0063CFA5 /* Images-2.xcassets */; };
 		525B9BFA1B1341BD00191254 /* fiber.c in Sources */ = {isa = PBXBuildFile; fileRef = 525B9BF91B1341BD00191254 /* fiber.c */; };
@@ -115,7 +114,6 @@
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		32CA4F630368D1EE00C91783 /* ofxiOS_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxiOS_Prefix.pch; sourceTree = "<group>"; };
-		5205E7E119A1A73F00C09DC5 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Images.xcassets; path = ofruby/Images.xcassets; sourceTree = "<group>"; };
 		520781821AF66A550047A0D1 /* RubyHighlightingTextStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RubyHighlightingTextStorage.h; sourceTree = "<group>"; };
 		520781831AF66A550047A0D1 /* RubyHighlightingTextStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RubyHighlightingTextStorage.m; sourceTree = "<group>"; };
 		5250DEE81B1DF3AE0063CFA5 /* Images-2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = "Images-2.xcassets"; path = "ofruby/Images-2.xcassets"; sourceTree = "<group>"; };
@@ -290,7 +288,6 @@
 			isa = PBXGroup;
 			children = (
 				5250DEE81B1DF3AE0063CFA5 /* Images-2.xcassets */,
-				5205E7E119A1A73F00C09DC5 /* Images.xcassets */,
 				E4D8936A11527B74007E1F53 /* src */,
 				525E0DF61995D05C00C18947 /* resources */,
 				BB24E1F710DAA51900E9C588 /* openFrameworks */,
@@ -671,7 +668,6 @@
 				52BBFAAA1A4DB6F500D31C5E /* tabbar_samples.png in Resources */,
 				52CD2DF91AC089CD006A0A68 /* keywords in Resources */,
 				52CD2DE81AC089CD006A0A68 /* lex.def in Resources */,
-				5205E7E219A1A73F00C09DC5 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
