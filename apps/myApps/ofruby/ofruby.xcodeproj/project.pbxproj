@@ -54,9 +54,6 @@
 		520F53A91B23F6D20037190F /* variable.c in Sources */ = {isa = PBXBuildFile; fileRef = 520F53521B23F6D20037190F /* variable.c */; };
 		520F53AA1B23F6D20037190F /* version.c in Sources */ = {isa = PBXBuildFile; fileRef = 520F53531B23F6D20037190F /* version.c */; };
 		520F53AB1B23F6D20037190F /* vm.c in Sources */ = {isa = PBXBuildFile; fileRef = 520F53541B23F6D20037190F /* vm.c */; };
-		520F53AC1B23F6D20037190F /* mrubybind.cc in Sources */ = {isa = PBXBuildFile; fileRef = 520F53561B23F6D20037190F /* mrubybind.cc */; };
-		520F53AD1B23F6D20037190F /* mrubybind.dat in Resources */ = {isa = PBXBuildFile; fileRef = 520F53571B23F6D20037190F /* mrubybind.dat */; };
-		520F53AE1B23F6D20037190F /* mrubybind.inc in Sources */ = {isa = PBXBuildFile; fileRef = 520F53591B23F6D20037190F /* mrubybind.inc */; };
 		520F53AF1B23F6D20037190F /* RubyHighlightingTextStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 520F535C1B23F6D20037190F /* RubyHighlightingTextStorage.m */; };
 		520F53B01B23F6D20037190F /* Bind.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 520F535E1B23F6D20037190F /* Bind.cpp */; };
 		520F53B11B23F6D20037190F /* BindApplication.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 520F53601B23F6D20037190F /* BindApplication.cpp */; };
@@ -78,6 +75,7 @@
 		520F53C11B23F6D20037190F /* ScriptApp.mm in Sources */ = {isa = PBXBuildFile; fileRef = 520F537B1B23F6D20037190F /* ScriptApp.mm */; };
 		520F53C21B23F6D20037190F /* ScriptController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 520F537D1B23F6D20037190F /* ScriptController.mm */; };
 		520F53C31B23F6D20037190F /* SelectViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 520F537F1B23F6D20037190F /* SelectViewController.mm */; };
+		520F53C61B2405800037190F /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 520F53C51B2405800037190F /* main.mm */; };
 		5326AEA810A23A0500278DE6 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5326AEA710A23A0500278DE6 /* CoreLocation.framework */; };
 		53F323EB10A20EDB00E0DAE4 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53F323EA10A20EDB00E0DAE4 /* OpenAL.framework */; };
 		678E130817951530005B6D19 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 678E130717951530005B6D19 /* Icon@2x.png */; };
@@ -203,11 +201,6 @@
 		520F53521B23F6D20037190F /* variable.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = variable.c; sourceTree = "<group>"; };
 		520F53531B23F6D20037190F /* version.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = version.c; sourceTree = "<group>"; };
 		520F53541B23F6D20037190F /* vm.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = vm.c; sourceTree = "<group>"; };
-		520F53561B23F6D20037190F /* mrubybind.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mrubybind.cc; sourceTree = "<group>"; };
-		520F53571B23F6D20037190F /* mrubybind.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mrubybind.dat; sourceTree = "<group>"; };
-		520F53581B23F6D20037190F /* mrubybind.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mrubybind.h; sourceTree = "<group>"; };
-		520F53591B23F6D20037190F /* mrubybind.inc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.pascal; path = mrubybind.inc; sourceTree = "<group>"; };
-		520F535A1B23F6D20037190F /* mrubybind_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mrubybind_types.h; sourceTree = "<group>"; };
 		520F535B1B23F6D20037190F /* RubyHighlightingTextStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RubyHighlightingTextStorage.h; sourceTree = "<group>"; };
 		520F535C1B23F6D20037190F /* RubyHighlightingTextStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RubyHighlightingTextStorage.m; sourceTree = "<group>"; };
 		520F535E1B23F6D20037190F /* Bind.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Bind.cpp; sourceTree = "<group>"; };
@@ -244,6 +237,7 @@
 		520F537D1B23F6D20037190F /* ScriptController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ScriptController.mm; sourceTree = "<group>"; };
 		520F537E1B23F6D20037190F /* SelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectViewController.h; sourceTree = "<group>"; };
 		520F537F1B23F6D20037190F /* SelectViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SelectViewController.mm; sourceTree = "<group>"; };
+		520F53C51B2405800037190F /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		5326AEA710A23A0500278DE6 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		53F323EA10A20EDB00E0DAE4 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		678E130717951530005B6D19 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "bin/data/Icon@2x.png"; sourceTree = "<group>"; };
@@ -481,18 +475,6 @@
 			path = ext;
 			sourceTree = "<group>";
 		};
-		520F53551B23F6D20037190F /* mrubybind */ = {
-			isa = PBXGroup;
-			children = (
-				520F53561B23F6D20037190F /* mrubybind.cc */,
-				520F53571B23F6D20037190F /* mrubybind.dat */,
-				520F53581B23F6D20037190F /* mrubybind.h */,
-				520F53591B23F6D20037190F /* mrubybind.inc */,
-				520F535A1B23F6D20037190F /* mrubybind_types.h */,
-			);
-			path = mrubybind;
-			sourceTree = "<group>";
-		};
 		520F535D1B23F6D20037190F /* rubykokuban */ = {
 			isa = PBXGroup;
 			children = (
@@ -572,6 +554,7 @@
 		E4D8936A11527B74007E1F53 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				520F53C51B2405800037190F /* main.mm */,
 				520F52F81B23F6D10037190F /* AppDelegate.h */,
 				520F52F91B23F6D10037190F /* AppDelegate.m */,
 				520F52FA1B23F6D10037190F /* EditViewController.h */,
@@ -584,7 +567,6 @@
 				520F53011B23F6D20037190F /* HelpViewController.mm */,
 				520F53021B23F6D20037190F /* ICTextView */,
 				520F530A1B23F6D20037190F /* mruby */,
-				520F53551B23F6D20037190F /* mrubybind */,
 				520F535B1B23F6D20037190F /* RubyHighlightingTextStorage.h */,
 				520F535C1B23F6D20037190F /* RubyHighlightingTextStorage.m */,
 				520F535D1B23F6D20037190F /* rubykokuban */,
@@ -675,7 +657,6 @@
 				678E130A17951536005B6D19 /* Icon.png in Resources */,
 				520F53BF1B23F6D20037190F /* touch_point.mrubin in Resources */,
 				678E130C1795153C005B6D19 /* Default.png in Resources */,
-				520F53AD1B23F6D20037190F /* mrubybind.dat in Resources */,
 				520F538C1B23F6D20037190F /* lex.def in Resources */,
 				520F53BA1B23F6D20037190F /* of_application.mrubin in Resources */,
 				678E130E17951540005B6D19 /* Default@2x.png in Resources */,
@@ -716,8 +697,8 @@
 				520F53A81B23F6D20037190F /* symbol.c in Sources */,
 				520F53811B23F6D20037190F /* EditViewController.mm in Sources */,
 				520F53A01B23F6D20037190F /* numeric.c in Sources */,
+				520F53C61B2405800037190F /* main.mm in Sources */,
 				520F53A31B23F6D20037190F /* print.c in Sources */,
-				520F53AE1B23F6D20037190F /* mrubybind.inc in Sources */,
 				520F53C01B23F6D20037190F /* SampleViewController.mm in Sources */,
 				520F53931B23F6D20037190F /* debug.c in Sources */,
 				520F539A1B23F6D20037190F /* hash.c in Sources */,
@@ -766,7 +747,6 @@
 				520F538A1B23F6D20037190F /* mrblib.c in Sources */,
 				520F53901B23F6D20037190F /* codegen.c in Sources */,
 				520F53991B23F6D20037190F /* gc.c in Sources */,
-				520F53AC1B23F6D20037190F /* mrubybind.cc in Sources */,
 				520F539E1B23F6D20037190F /* load.c in Sources */,
 				520F53A41B23F6D20037190F /* proc.c in Sources */,
 			);
