@@ -1111,5 +1111,5 @@ void ofDrawBitmapString(const T & textString, float x, float y){
 //--------------------------------------------------
 template<typename T>
 void ofDrawBitmapString(const T & textString, float x, float y, float z){
-	ofDrawBitmapString(ofToString(textString),x,y,z);
+	//DIFF ofDrawBitmapString(ofToString(textString),x,y,z);
 }

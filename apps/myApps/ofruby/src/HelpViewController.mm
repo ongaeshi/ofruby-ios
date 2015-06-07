@@ -14,7 +14,7 @@
     CGRect rect = self.view.bounds;
     UITextView* textView = [[UITextView alloc]initWithFrame:rect];
     textView.editable = NO;
-    textView.textAlignment = UITextAlignmentLeft;
+    //DIFF textView.textAlignment = UITextAlignmentLeft;
     //textView.font = [UIFont fontWithName:@"Helvetica" size:14];
     //textView.backgroundColor = [UIColor whiteColor];
     textView.autocapitalizationType = UITextAutocapitalizationTypeNone;

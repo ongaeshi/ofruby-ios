@@ -40,11 +40,11 @@ const int PREV_LINE_MAX = 240;
 
     // NavButton
     UIBarButtonItem* runButton = [[UIBarButtonItem alloc] initWithTitle:@"Run"
-                                                                  style: UIBarButtonSystemItemDone
+                                                                  style: UIBarButtonItemStyleBordered //DIFF UIBarButtonSystemItemDone
                                                                  target:self
                                                                  action:@selector(tapRunButton)];
     UIBarButtonItem* helpButton = [[UIBarButtonItem alloc] initWithTitle:@"[?]"
-                                                                  style: UIBarButtonSystemItemDone
+                                                                  style: UIBarButtonItemStyleBordered //DIFF UIBarButtonSystemItemDone
                                                                  target:self
                                                                  action:@selector(tapHelpButton)];
     self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:runButton, helpButton, nil];
@@ -73,7 +73,7 @@ const int PREV_LINE_MAX = 240;
     // TextView (Common)
     mTextView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     mTextView.editable = mEditable;
-    mTextView.textAlignment = UITextAlignmentLeft;
+    //DIFF mTextView.textAlignment = UITextAlignmentLeft;
     //textView.font = [UIFont fontWithName:@"Helvetica" size:14];
     //mTextView.backgroundColor = [UIColor whiteColor];
     mTextView.autocapitalizationType = UITextAutocapitalizationTypeNone;
