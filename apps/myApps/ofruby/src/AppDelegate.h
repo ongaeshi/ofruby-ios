@@ -1,6 +1,6 @@
-#import <Foundation/Foundation.h>
+#import "ofxiOSAppDelegate.h"
 
-@interface AppDelegate : NSObject <UIApplicationDelegate> {
+@interface AppDelegate : ofxiOSAppDelegate {
     UITabBarController *tabBarController;
 }
 
