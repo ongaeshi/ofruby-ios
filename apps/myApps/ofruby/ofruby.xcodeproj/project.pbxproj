@@ -79,6 +79,7 @@
 		520F573E1B241D190037190F /* tabbar_files.png in Resources */ = {isa = PBXBuildFile; fileRef = 520F53C91B241D120037190F /* tabbar_files.png */; };
 		520F573F1B241D190037190F /* tabbar_samples.png in Resources */ = {isa = PBXBuildFile; fileRef = 520F53CA1B241D120037190F /* tabbar_samples.png */; };
 		520F5AB11B241D2F0037190F /* sample in Resources */ = {isa = PBXBuildFile; fileRef = 520F5AB01B241D2F0037190F /* sample */; };
+		520F5AB31B2420690037190F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 520F5AB21B2420690037190F /* Images.xcassets */; };
 		5326AEA810A23A0500278DE6 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5326AEA710A23A0500278DE6 /* CoreLocation.framework */; };
 		53F323EB10A20EDB00E0DAE4 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53F323EA10A20EDB00E0DAE4 /* OpenAL.framework */; };
 		678E130817951530005B6D19 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 678E130717951530005B6D19 /* Icon@2x.png */; };
@@ -244,6 +245,7 @@
 		520F53C91B241D120037190F /* tabbar_files.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar_files.png; sourceTree = "<group>"; };
 		520F53CA1B241D120037190F /* tabbar_samples.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabbar_samples.png; sourceTree = "<group>"; };
 		520F5AB01B241D2F0037190F /* sample */ = {isa = PBXFileReference; lastKnownFileType = folder; path = sample; sourceTree = "<group>"; };
+		520F5AB21B2420690037190F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ofruby/Images.xcassets; sourceTree = "<group>"; };
 		5326AEA710A23A0500278DE6 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		53F323EA10A20EDB00E0DAE4 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		678E130717951530005B6D19 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "bin/data/Icon@2x.png"; sourceTree = "<group>"; };
@@ -302,6 +304,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				520F5AB21B2420690037190F /* Images.xcassets */,
 				520F53C71B241D120037190F /* resources */,
 				678E130917951536005B6D19 /* Icon.png */,
 				678E130717951530005B6D19 /* Icon@2x.png */,
@@ -693,6 +696,7 @@
 				520F5AB11B241D2F0037190F /* sample in Resources */,
 				678E130E17951540005B6D19 /* Default@2x.png in Resources */,
 				520F539F1B23F6D20037190F /* mruby_core.rake in Resources */,
+				520F5AB31B2420690037190F /* Images.xcassets in Resources */,
 				520F53BC1B23F6D20037190F /* of_math.mrubin in Resources */,
 				678E131017951549005B6D19 /* Default-568h@2x~iphone.png in Resources */,
 				520F53BB1B23F6D20037190F /* of_graphics.mrubin in Resources */,
@@ -800,6 +804,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -819,6 +825,8 @@
 		1D6058950D05DD3E006BFB54 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
