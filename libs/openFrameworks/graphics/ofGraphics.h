@@ -6,6 +6,7 @@
 #include "ofMatrix4x4.h"
 #include "ofRectangle.h"
 #include "ofTypes.h"
+#include "ofUtils.h"
 
 /// \cond INTERNAL
 #define  	CIRC_RESOLUTION		    22
@@ -1111,5 +1112,5 @@ void ofDrawBitmapString(const T & textString, float x, float y){
 //--------------------------------------------------
 template<typename T>
 void ofDrawBitmapString(const T & textString, float x, float y, float z){
-	//DIFF ofDrawBitmapString(ofToString(textString),x,y,z);
+	ofDrawBitmapString(ofToString(textString),x,y,z);
 }
