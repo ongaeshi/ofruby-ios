@@ -40,11 +40,11 @@ const int PREV_LINE_MAX = 240;
 
     // NavButton
     UIBarButtonItem* runButton = [[UIBarButtonItem alloc] initWithTitle:@"Run"
-                                                                  style:UIBarButtonSystemItemDone
+                                                                  style: UIBarButtonSystemItemDone
                                                                  target:self
                                                                  action:@selector(tapRunButton)];
     UIBarButtonItem* helpButton = [[UIBarButtonItem alloc] initWithTitle:@"[?]"
-                                                                  style:UIBarButtonSystemItemDone
+                                                                  style: UIBarButtonSystemItemDone
                                                                  target:self
                                                                  action:@selector(tapHelpButton)];
     self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:runButton, helpButton, nil];
