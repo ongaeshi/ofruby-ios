@@ -105,6 +105,8 @@ mrb_open(void)
   return mrb;
 }
 
+extern void mrb_mruby_fiber_gem_init(mrb_state* mrb);
+
 MRB_API mrb_state*
 mrb_open_allocf(mrb_allocf f, void *ud)
 {
